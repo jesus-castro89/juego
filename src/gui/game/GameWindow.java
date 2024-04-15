@@ -56,7 +56,7 @@ public class GameWindow extends JFrame {
 //		} catch (FileNotFoundException e) {
 //			JOptionPane.showMessageDialog(this, "No se encontró el archivo");
 //		}
-		player = new Player("Miguel");
+		player = Player.getInstance();
 		player.gainExperience(18);
 		//enemy = EnemyFactory.generateRegularEnemy(player);
 		enemy = new RookieGoblin(player);
@@ -69,6 +69,7 @@ public class GameWindow extends JFrame {
 		bottomPanel = ActionsPanel.getInstance();
 		StatusPanel.getInstance(ActionsPanel.getInstance(), 0, player);
 		new BattlePanel(ActionsPanel.getInstance(), this, 1, player, enemy);
+		InventoryPanel.getInstance(ActionsPanel.getInstance(), 2, player.getInventory());
 	}
 
 	public Player getPlayer() {

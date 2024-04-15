@@ -29,7 +29,7 @@ public class AloneWolf extends Enemy {
 	 */
 	public AloneWolf(Player player) {
 
-		super(player, "Lobo solitario", 10, 10, 5, 4);
+		super(player, "Lobo Solitario", 10, 10, 5, 4);
 		image = imageManager.getImage("aloneWolf",
 				new ImageIcon("img\\enemies\\wolfs\\aloneWolf.png").getImage());
 		stats.put(Stats.ATTACK, 8);

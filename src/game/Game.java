@@ -62,7 +62,7 @@ public class Game {
 						player = FileManager.loadGame(new File("files\\game" + slot + ".dat"));
 						Interactive.printDialog("¡Bienvenido de nuevo!");
 					} catch (Exception e) {
-						player = new Player(JOptionPane.showInputDialog("Ingresa el nombre del jugador:"));
+						player = Player.getInstance();
 					}
 					printPlayerMenu();
 				}

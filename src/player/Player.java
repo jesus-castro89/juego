@@ -32,6 +32,11 @@ import java.util.Map;
  * @autor jesus
  */
 public class Player extends BasicCharacter implements Serializable {
+
+	/**
+	 * La instancia de la clase jugador
+	 */
+	private static Player instance;
 	/**
 	 * La fuerza del jugador.
 	 */
@@ -62,11 +67,26 @@ public class Player extends BasicCharacter implements Serializable {
 	private Map<String, Skill> skillMap;
 
 	/**
+	 * Devuelve la instancia de la clase jugador.
+	 *
+	 * @return la instancia de la clase jugador
+	 */
+	public static Player getInstance() {
+
+		if (instance == null) {
+
+			instance = new Player("Juanito");
+			// instance = new Player(JOptionPane.showInputDialog("Ingresa el Nombre del Jugador"));
+		}
+		return instance;
+	}
+
+	/**
 	 * Construye un nuevo jugador con un nombre.
 	 *
 	 * @param name el nombre del jugador
 	 */
-	public Player(String name) {
+	private Player(String name) {
 
 		super(name, 30, 10);
 		experience = 0;

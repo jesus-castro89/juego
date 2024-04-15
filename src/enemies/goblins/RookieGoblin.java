@@ -31,7 +31,7 @@ public class RookieGoblin extends Enemy {
 	 */
 	public RookieGoblin(Player player) {
 
-		super(player, "Duende novato", 5, 5, 5, 2);
+		super(player, "D. Novato", 5, 5, 5, 2);
 		image = imageManager.getImage("rookieGoblin",
 				new ImageIcon("img\\enemies\\goblins\\rookieGoblin.png").getImage());
 		stats.put(Stats.ATTACK, 7);

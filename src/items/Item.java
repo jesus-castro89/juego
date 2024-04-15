@@ -3,6 +3,7 @@ package items;
 import player.Stats;
 import util.interfaces.Interactive;
 
+import javax.swing.*;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Random;

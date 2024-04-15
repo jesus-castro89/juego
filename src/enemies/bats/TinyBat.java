@@ -19,7 +19,7 @@ public class TinyBat extends Enemy {
 
 	public TinyBat(Player player) {
 
-		super(player, "Murciélago diminuto", 5, 5, 5, 3);
+		super(player, "Mur. Diminuto", 5, 5, 5, 3);
 		image = imageManager.getImage("tinyBat",
 				new ImageIcon("img\\enemies\\bats\\tinyBat.png").getImage());
 		stats.put(Stats.ATTACK, 7);

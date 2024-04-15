@@ -67,9 +67,9 @@ public class ImageManager {
 				new ImageIcon("img\\ui\\tabs\\battleTabActive.png").getImage());
 		imageCache.addImage("battleTabInactive",
 				new ImageIcon("img\\ui\\tabs\\battleTabInactive.png").getImage());
-		imageCache.addImage("InventoryTabActive",
+		imageCache.addImage("inventoryTabActive",
 				new ImageIcon("img\\ui\\tabs\\inventoryTabActive.png").getImage());
-		imageCache.addImage("InventoryTabInactive",
+		imageCache.addImage("inventoryTabInactive",
 				new ImageIcon("img\\ui\\tabs\\inventoryTabInactive.png").getImage());
 		imageCache.addImage("statusTabActive",
 				new ImageIcon("img\\ui\\tabs\\statusTabActive.png").getImage());
@@ -113,6 +113,8 @@ public class ImageManager {
 				new ImageIcon("img\\ui\\holders\\textHolder.png").getImage());
 		imageCache.addImage("jobHolder",
 				new ImageIcon("img\\ui\\holders\\jobHolder.png").getImage());
+		imageCache.addImage("itemHolder",
+				new ImageIcon("img\\ui\\holders\\itemHolder.png").getImage());
 	}
 
 	private void addPanels() {
@@ -133,6 +135,10 @@ public class ImageManager {
 				new ImageIcon("img\\ui\\panels\\dialogPanel.png").getImage());
 		imageCache.addImage("skillDetailPanel",
 				new ImageIcon("img\\ui\\panels\\skillDetailPanel.png").getImage());
+		imageCache.addImage("inventoryPanel",
+				new ImageIcon("img\\ui\\panels\\inventoryPanel.png").getImage());
+		imageCache.addImage("shopPanel",
+				new ImageIcon("img\\ui\\panels\\shopPanel.png").getImage());
 	}
 
 	public static ImageManager getInstance() {

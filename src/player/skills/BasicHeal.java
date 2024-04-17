@@ -29,6 +29,7 @@ public class BasicHeal extends Skill {
 	public String effect(Player player) {
 
 		player.heal(8);
+		player.useMp(manaCost);
 		return String.format("¡%s ha sido curado por 8 puntos de vida!", player.getName());
 	}
 

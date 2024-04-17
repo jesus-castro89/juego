@@ -1,9 +1,6 @@
 package gui.labels;
 
 import characters.BasicCharacter;
-import enemies.Enemy;
-import player.Player;
-import util.managers.FontManager;
 import util.managers.ImageManager;
 
 import javax.swing.*;
@@ -13,27 +10,14 @@ public class HpLabel extends JLabel {
 
 	private BasicCharacter character;
 	private Image image;
-	private String text;
+	private String displayText;
 
-	public HpLabel(Player character) {
+	public HpLabel(BasicCharacter character) {
 
+		super(character.getName());
 		this.character = character;
 		init();
-		Font font = FontManager.getInstance().getFont("Player");
-		Dimension size = new Dimension(image.getWidth(null), image.getHeight(null) + 10);
-		setPreferredSize(size);
-		setMinimumSize(size);
-		setMaximumSize(size);
-		setSize(size);
-		setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-		setFont(font);
-	}
-
-	public HpLabel(Enemy enemy) {
-
-		this.character = enemy;
-		init();
-		Font font = FontManager.getInstance().getFont("Player");
+		Font font = new Font("Arial", Font.BOLD, 15);
 		Dimension size = new Dimension(image.getWidth(null), image.getHeight(null) + 10);
 		setPreferredSize(size);
 		setMinimumSize(size);
@@ -45,9 +29,9 @@ public class HpLabel extends JLabel {
 
 	private void init() {
 
-		ImageManager imageManager = ImageManager.getInstance();
-		text = String.format("%d/%d", character.getHp(), character.getMaxHp());
+		displayText = String.format("%d/%d", character.getHp(), character.getMaxHp());
 		double hpPercentage = (double) character.getHp() / character.getMaxHp();
+		ImageManager imageManager = ImageManager.getInstance();
 		Color color;
 		if (hpPercentage >= .8) {
 			image = imageManager.getImage("hp100");
@@ -56,16 +40,16 @@ public class HpLabel extends JLabel {
 			image = imageManager.getImage("hp80");
 			color = new Color(0, 0, 0, 255);
 		} else if (hpPercentage > 0.4) {
-			image = imageManager.getImage("hp60");
+			imageManager.getImage("h60");
 			color = new Color(109, 109, 109, 255);
 		} else if (hpPercentage > 0.2) {
-			image = imageManager.getImage("hp40");
+			imageManager.getImage("hp40");
 			color = new Color(109, 109, 109, 255);
 		} else if (hpPercentage > 0) {
-			image = imageManager.getImage("hp20");
+			imageManager.getImage("hp20");
 			color = new Color(109, 109, 109, 255);
 		} else {
-			image = imageManager.getImage("hp0");
+			imageManager.getImage("hp0");
 			color = new Color(255, 255, 255, 255);
 		}
 		setForeground(color);
@@ -83,14 +67,14 @@ public class HpLabel extends JLabel {
 
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2d.drawImage(image, 0, 10, null);
-		int textPositionY = image.getHeight(null) / 2 + 10 + g2d.getFontMetrics().getHeight() / 4;
-		int textPositionX = ((image.getWidth(null) - 28) / 2) + 28 - (g2d.getFontMetrics().stringWidth(text) / 2);
+		int textPositionY = image.getHeight(null) / 2 + 11 + g2d.getFontMetrics().getHeight() / 4;
+		int textPositionX = ((image.getWidth(null) - 28) / 2) + 28 - (g2d.getFontMetrics().stringWidth(displayText) / 2);
 		g2d.translate(textPositionX, textPositionY);
-		BasicStroke contorno = new BasicStroke(5.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER);
-		g2d.setStroke(contorno);
-		g2d.drawString(text, 0, 0);
+		g2d.drawString(displayText, 0, 0);
 	}
 }

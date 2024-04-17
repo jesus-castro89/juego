@@ -1,26 +1,57 @@
 package gui.panels;
 
+import enemies.Enemy;
+import player.Player;
+import gui.labels.SpriteLabel;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainPanel extends JPanel {
 
-	private final Image img;
+	private static MainPanel instance;
+	private Enemy enemy;
+	private JPanel backgroundPanel;
+	private JPanel spritesPanel;
+	private JPanel dialogPanel;
+	private JLabel enemySprite;
+	private JLabel playerSprite;
 
-	public MainPanel() {
+	public static MainPanel getInstance(Enemy enemy) {
 
-		this.img = new ImageIcon("img\\ui\\actionPanel.png").getImage();
-		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-		setPreferredSize(size);
-		setMinimumSize(size);
-		setMaximumSize(size);
-		setSize(size);
+		if (instance == null) {
+			instance = new MainPanel(enemy);
+		}
+		return instance;
 	}
 
+	private MainPanel(Enemy enemy) {
+
+		this.enemy = enemy;
+		add(backgroundPanel);
+	}
+
+	@Override
 	public void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(img, 0, 0, null);
+		Image image = new ImageIcon("img/ui/panels/charactersPanel.png").getImage();
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.drawImage(image, 0, 0, 512, 384, null);
+	}
+
+	private void createUIComponents() {
+
+		dialogPanel = DialogPanel.getInstance();
+		playerSprite = new SpriteLabel(Player.getInstance().getImage());
+		enemySprite = new SpriteLabel(enemy.getImage());
+	}
+
+	public void updateEnemy(Enemy enemy) {
+
+		this.enemy = enemy;
 	}
 }

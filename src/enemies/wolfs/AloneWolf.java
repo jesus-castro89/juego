@@ -2,14 +2,13 @@ package enemies.wolfs;
 
 import enemies.Enemy;
 import game.exceptions.EnemyDeadException;
-import gui.panels.CharactersPanel;
-import gui.panels.DialogPanel;
+import gui_old.panels.CharactersPanel;
+import gui_old.panels.DialogPanel;
 import items.armors.head.WoodHelmet;
 import items.misc.WolfFur;
 import player.Player;
 import player.Stats;
 import util.annotations.RegularEnemy;
-import util.interfaces.Interactive;
 import util.interfaces.Randomized;
 
 import javax.swing.*;

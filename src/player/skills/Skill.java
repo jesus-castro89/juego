@@ -1,7 +1,7 @@
 package player.skills;
 
 import enemies.Enemy;
-import gui.panels.CharactersPanel;
+import gui_old.panels.CharactersPanel;
 import player.Player;
 
 public abstract class Skill {

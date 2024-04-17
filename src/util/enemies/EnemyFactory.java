@@ -20,22 +20,31 @@ public class EnemyFactory {
 
 	private static final Random random = new Random();
 
+	/**
+	 * Genera un enemigo regular aleatorio
+	 *
+	 * @param player el jugador
+	 *
+	 * @return un enemigo regular
+	 */
 	public static Enemy generateRegularEnemy(Player player) {
 
+		// Reflections es una librería que permite obtener información sobre las clases de un paquete
 		Reflections reflections = new Reflections(new ConfigurationBuilder()
 				.setUrls(ClasspathHelper.forJavaClassPath())
 				.setScanners(new SubTypesScanner(), new TypeAnnotationsScanner()));
-
+		// Obtiene todas las clases que tienen la anotación RegularEnemy
 		Set<Class<?>> classes = reflections.getTypesAnnotatedWith(RegularEnemy.class);
+		// Convierte el conjunto de clases a una lista
 		List<Class<?>> classList = new ArrayList<>(classes);
-
+		// Obtiene una clase aleatoria de la lista
 		Class<?> claseEnemyRegular = classList.get(random.nextInt(classList.size()));
-
+		// Intenta crear una instancia de la clase obtenida
 		try {
 
 			return (Enemy) claseEnemyRegular.getDeclaredConstructor(Player.class).newInstance(player);
 		} catch (Exception e) {
-			e.printStackTrace();
+
 			return new TinyBat(player);
 		}
 	}

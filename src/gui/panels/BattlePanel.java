@@ -1,14 +1,6 @@
 package gui.panels;
 
-import enemies.Enemy;
-import game.exceptions.EnemyDeadException;
-import game.exceptions.PlayerDeathException;
-import gui.events.AttackButtonAction;
-import gui.game.GameWindow;
 import player.Player;
-import player.Stats;
-import util.enemies.EnemyFactory;
-import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,57 +9,70 @@ import java.awt.event.ComponentEvent;
 
 public class BattlePanel extends JPanel {
 
-	private Image img;
+	private static BattlePanel instance;
+	private final Image img;
+	private Player player;
 	private final ActionsPanel actionsPanel;
 	private final int tabIndex;
 	private final ImageIcon activeIcon;
 	private final ImageIcon inactiveIcon;
-	private final Player player;
-	private Enemy enemy;
-	private JPanel mainPanel;
-	private JButton attackButton;
-	private JButton fleeButton;
-	private JScrollPane skillsPanel;
-	private JPanel skillBanner;
-	private GameWindow window;
+	private JPanel backgroundPanel;
 
-	public BattlePanel(ActionsPanel actionsPanel, GameWindow window, int tabIndex, Player player, Enemy enemy) {
+	public static BattlePanel getInstance(int tabIndex) {
 
-		this.window = window;
+		if (instance == null) {
+
+			instance = new BattlePanel(tabIndex, Player.getInstance());
+		}
+		return instance;
+	}
+
+	/**
+	 * Constructor de la clase
+	 *
+	 * @param tabIndex índice de la pestaña
+	 * @param player   jugador
+	 */
+	private BattlePanel(int tabIndex, Player player) {
+
 		this.player = player;
-		this.enemy = enemy;
-		ImageManager imageManager = ImageManager.getInstance();
-		this.img = imageManager.getImage("battlePanel");
+		img = new ImageIcon("img/ui/panels/battlePanel.png").getImage();
 		this.tabIndex = tabIndex;
-		this.activeIcon = new ImageIcon(imageManager.getImage("battleTabActive"));
-		this.inactiveIcon = new ImageIcon(imageManager.getImage("battleTabInactive"));
-		this.actionsPanel = actionsPanel;
-		actionsPanel.addTab("Battle", this);
+		this.activeIcon = new ImageIcon("img/ui/tabs/battleTabActive.png");
+		this.inactiveIcon = new ImageIcon("img/ui/tabs/battleTabInactive.png");
+		this.actionsPanel = ActionsPanel.getInstance();
+		Dimension size = new Dimension(1019, 342);
+		setPreferredSize(size);
+		setMinimumSize(size);
+		setMaximumSize(size);
+		setSize(size);
+		add(backgroundPanel);
+		setOpaque(false);
+		setBackground(null);
 		setMixingCutoutShape(new Rectangle(0, 0, 0, 0));
+		actionsPanel.addTab("Status", this);
 		actionsPanel.setTabIcon(tabIndex, isActive() ? activeIcon : inactiveIcon);
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent e) {
 
-				actionsPanel.setTabIcon(tabIndex, activeIcon);
+				try {
+					actionsPanel.setTabIcon(tabIndex, activeIcon);
+				} catch (Exception ex) {
+
+				}
 			}
 
 			@Override
 			public void componentHidden(ComponentEvent e) {
 
-				actionsPanel.setTabIcon(tabIndex, inactiveIcon);
+				try {
+					actionsPanel.setTabIcon(tabIndex, inactiveIcon);
+				} catch (Exception ex) {
+
+				}
 			}
 		});
-		add(mainPanel);
-		attackButton.addActionListener(new AttackButtonAction(player, enemy, window));
-	}
-
-	@Override
-	protected void paintComponent(Graphics g) {
-
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(img, 0, 0, getWidth(), getHeight(), null);
 	}
 
 	private boolean isActive() {
@@ -75,44 +80,17 @@ public class BattlePanel extends JPanel {
 		return actionsPanel.getSelectedIndex() == tabIndex;
 	}
 
-	private void createUIComponents() {
+	/**
+	 * Método que inicializa el panel
+	 */
+	@Override
+	public void paintComponent(Graphics g) {
 
-		skillBanner = new JPanel() {
-			@Override
-			protected void paintComponent(Graphics g) {
-
-				super.paintComponent(g);
-				g.drawImage(ImageManager.getInstance().getImage("skillBanner"), 0, 0, null);
-			}
-		};
-		skillsPanel = new SkillPanel(player, enemy, window);
-		attackButton = new JButton();
-		attackButton.setIcon(new ImageIcon(ImageManager.getInstance().getImage("attackButtonIdle")));
-		attackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		attackButton.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
-
-				attackButton.setIcon(new ImageIcon(ImageManager.getInstance().getImage("attackButtonHover")));
-			}
-
-			public void mouseExited(java.awt.event.MouseEvent evt) {
-
-				attackButton.setIcon(new ImageIcon(ImageManager.getInstance().getImage("attackButtonIdle")));
-			}
-		});
-		fleeButton = new JButton();
-		fleeButton.setIcon(new ImageIcon(ImageManager.getInstance().getImage("fleeButtonIdle")));
-		fleeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		fleeButton.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
-
-				fleeButton.setIcon(new ImageIcon(ImageManager.getInstance().getImage("fleeButtonHover")));
-			}
-
-			public void mouseExited(java.awt.event.MouseEvent evt) {
-
-				fleeButton.setIcon(new ImageIcon(ImageManager.getInstance().getImage("fleeButtonIdle")));
-			}
-		});
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.drawImage(img, 0, 0, 1019, 342, null);
 	}
 }

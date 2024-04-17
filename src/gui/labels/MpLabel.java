@@ -1,34 +1,22 @@
 package gui.labels;
 
 import characters.BasicCharacter;
-import player.Player;
-import util.managers.FontManager;
-import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MpLabel extends JLabel {
 
-	private static MpLabel instance;
 	private BasicCharacter character;
 	private Image image;
-	private String text;
+	private String displayText;
 
-public static MpLabel getInstance(Player character) {
+	public MpLabel(BasicCharacter character) {
 
-		if (instance == null) {
-
-			instance = new MpLabel(character);
-		}
-		return instance;
-	}
-
-	private MpLabel(Player player) {
-
-		this.character = player;
-		init(player);
-		Font font = FontManager.getInstance().getFont("Player");
+		super(character.getName());
+		this.character = character;
+		init();
+		Font font = new Font("Arial", Font.BOLD, 15);
 		Dimension size = new Dimension(image.getWidth(null), image.getHeight(null) + 10);
 		setPreferredSize(size);
 		setMinimumSize(size);
@@ -38,32 +26,38 @@ public static MpLabel getInstance(Player character) {
 		setFont(font);
 	}
 
-	private void init(Player player) {
+	private void init() {
 
-		ImageManager imageManager = ImageManager.getInstance();
-		text = String.format("%d/%d", player.getMp(), player.getMaxMp());
-		double mpPercentage = (double) player.getMp() / player.getMaxMp();
+		displayText = String.format("%d/%d", character.getMp(), character.getMaxMp());
+		double hpPercentage = (double) character.getMp() / character.getMaxMp();
 		Color color;
-		if (mpPercentage >= .80) {
-			image = imageManager.getImage("mp100");
+		if (hpPercentage >= .8) {
+			image = new ImageIcon("img/player/mp100.png").getImage();
 			color = new Color(0, 0, 0, 255);
-		} else if (mpPercentage > 0.6) {
-			image = imageManager.getImage("mp80");
+		} else if (hpPercentage > 0.6) {
+			image = new ImageIcon("img/player/mp80.png").getImage();
 			color = new Color(0, 0, 0, 255);
-		} else if (mpPercentage > 0.4) {
-			image = imageManager.getImage("mp60");
+		} else if (hpPercentage > 0.4) {
+			image = new ImageIcon("img/player/mp60.png").getImage();
 			color = new Color(109, 109, 109, 255);
-		} else if (mpPercentage > 0.2) {
-			image = imageManager.getImage("mp40");
+		} else if (hpPercentage > 0.2) {
+			image = new ImageIcon("img/player/mp40.png").getImage();
 			color = new Color(109, 109, 109, 255);
-		} else if (mpPercentage > 0) {
-			image = imageManager.getImage("mp20");
+		} else if (hpPercentage > 0) {
+			image = new ImageIcon("img/player/mp20.png").getImage();
 			color = new Color(109, 109, 109, 255);
 		} else {
-			image = imageManager.getImage("mp0");
+			image = new ImageIcon("img/player/mp0.png").getImage();
 			color = new Color(255, 255, 255, 255);
 		}
 		setForeground(color);
+	}
+
+	public void updateCharacter(BasicCharacter character) {
+
+		this.character = character;
+		init();
+		repaint();
 	}
 
 	@Override
@@ -71,21 +65,15 @@ public static MpLabel getInstance(Player character) {
 
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2d.drawImage(image, 0, 10, null);
-		int textPositionY = image.getHeight(null) / 2 + 10 + g2d.getFontMetrics().getHeight() / 4;
-		int textPositionX = ((image.getWidth(null) - 32) / 2) - (g2d.getFontMetrics().stringWidth(text) / 2);
+		int textPositionY = image.getHeight(null) / 2 + 11 + g2d.getFontMetrics().getHeight() / 4;
+		int textPositionX = ((image.getWidth(null) - 28) / 2) -
+		                    (g2d.getFontMetrics().stringWidth(displayText) / 2) - 7;
 		g2d.translate(textPositionX, textPositionY);
-		BasicStroke contorno = new BasicStroke(5.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER);
-		g2d.setStroke(contorno);
-		g2d.drawString(text, 0, 0);
-	}
-
-	public void updateCharacter(BasicCharacter character) {
-
-		this.character = character;
-		init((Player) this.character);
-		repaint();
+		g2d.drawString(displayText, 0, 0);
 	}
 }

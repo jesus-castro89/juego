@@ -2,8 +2,7 @@ package player.skills;
 
 import enemies.Enemy;
 import game.exceptions.EnemyDeadException;
-import gui.panels.CharactersPanel;
-import gui.panels.DialogPanel;
+import gui_old.panels.DialogPanel;
 import player.Player;
 
 public class BasicHeal extends Skill {

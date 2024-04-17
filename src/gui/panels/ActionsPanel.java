@@ -1,11 +1,8 @@
 package gui.panels;
 
-import enemies.Enemy;
-import gui.tabs.GameTab;
-import player.Player;
+import gui_old.tabs.GameTab;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import java.awt.*;
 
 public class ActionsPanel extends JTabbedPane {
@@ -24,7 +21,7 @@ public class ActionsPanel extends JTabbedPane {
 	private ActionsPanel() {
 
 		super();
-		Dimension size = new Dimension(1280, 338);
+		Dimension size = new Dimension(1024, 384);
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);

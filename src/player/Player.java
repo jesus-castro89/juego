@@ -3,15 +3,14 @@ package player;
 import characters.BasicCharacter;
 import enemies.Enemy;
 import game.exceptions.PlayerDeathException;
-import gui.game.GameWindow;
-import gui.panels.ActionsPanel;
-import gui.panels.CharactersPanel;
-import gui.panels.DialogPanel;
-import gui.panels.StatusPanel;
+import gui_old.game.GameWindow;
+import gui_old.panels.ActionsPanel;
+import gui_old.panels.CharactersPanel;
+import gui_old.panels.DialogPanel;
+import gui_old.panels.StatusPanel;
 import items.armors.Armor;
 import items.weapons.Weapon;
 import org.jetbrains.annotations.NotNull;
-import player.jobs.Job;
 import player.skills.BasicHeal;
 import player.skills.FuryAttack;
 import player.skills.Skill;
@@ -56,7 +55,6 @@ public class Player extends BasicCharacter implements Serializable {
 	private int experience;
 	private int level;
 	private int gold;
-	private Job job;
 	private Weapon weapon;
 	private Armor headArmor;
 	private Armor chestArmor;
@@ -92,7 +90,6 @@ public class Player extends BasicCharacter implements Serializable {
 		experience = 0;
 		level = 1;
 		gold = 0;
-		job = null;
 		weapon = null;
 		headArmor = null;
 		chestArmor = null;
@@ -588,11 +585,6 @@ public class Player extends BasicCharacter implements Serializable {
 	public int getSpeed() {
 
 		return speed;
-	}
-
-	public Job getJob() {
-
-		return job;
 	}
 
 	public Armor getHeadArmor() {

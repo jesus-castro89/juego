@@ -2,13 +2,11 @@ package enemies;
 
 import characters.BasicCharacter;
 import game.exceptions.EnemyDeadException;
-import gui.panels.CharactersPanel;
-import gui.panels.DialogPanel;
+import gui_old.panels.CharactersPanel;
 import player.Player;
 import player.Stats;
 import util.interfaces.Randomized;
 import util.managers.ImageManager;
-import util.interfaces.Interactive;
 
 import java.awt.*;
 import java.util.HashMap;

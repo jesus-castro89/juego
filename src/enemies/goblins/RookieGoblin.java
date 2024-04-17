@@ -3,15 +3,14 @@ package enemies.goblins;
 import enemies.Enemy;
 import game.exceptions.EnemyDeadException;
 import game.exceptions.ZeroException;
-import gui.panels.CharactersPanel;
-import gui.panels.DialogPanel;
+import gui_old.panels.CharactersPanel;
+import gui_old.panels.DialogPanel;
 import items.misc.GoblinEar;
 import items.weapons.blades.WoodBlade;
 import org.jetbrains.annotations.NotNull;
 import player.Player;
 import player.Stats;
 import util.annotations.RegularEnemy;
-import util.interfaces.Interactive;
 import util.interfaces.Randomized;
 
 import javax.swing.*;

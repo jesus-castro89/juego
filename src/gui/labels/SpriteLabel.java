@@ -5,42 +5,32 @@ import java.awt.*;
 
 public class SpriteLabel extends JLabel {
 
-	private Image img;
+	private Image image;
 
-	public SpriteLabel(Image img) {
+	public SpriteLabel(Image image) {
 
-		this.img = img;
-		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+		this.image = image;
+		Dimension size = new Dimension(256, 185);
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);
 		setSize(size);
-		setAlignmentX(CENTER_ALIGNMENT);
-		setAlignmentY(CENTER_ALIGNMENT);
-		setVerticalAlignment(CENTER);
-		setHorizontalAlignment(CENTER);
-	}
-
-	public void updateImage(Image img) {
-
-		this.img= img;
-		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-		setPreferredSize(size);
-		setMinimumSize(size);
-		setMaximumSize(size);
-		setSize(size);
-		setAlignmentX(CENTER_ALIGNMENT);
-		setAlignmentY(CENTER_ALIGNMENT);
-		setVerticalAlignment(CENTER);
-		setHorizontalAlignment(CENTER);
-		repaint();
+		setOpaque(false);
+		setVisible(true);
 	}
 
 	@Override
-	protected void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(img, 0, 0, null);
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		int w = Math.min(image.getWidth(null), 256);
+		int h = Math.min(image.getHeight(null), 185);
+		int x = (256 - w) / 2;
+		int y = (185 - h) / 2;
+		g2d.drawImage(image, x, y, w, h, null);
 	}
 }

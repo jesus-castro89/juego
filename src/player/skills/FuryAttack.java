@@ -2,9 +2,9 @@ package player.skills;
 
 import enemies.Enemy;
 import game.exceptions.EnemyDeadException;
-import gui.panels.DialogPanel;
-import gui.panels.EnemyPanel;
-import gui.panels.PlayerPanel;
+import gui_old.panels.DialogPanel;
+import gui_old.panels.EnemyPanel;
+import gui_old.panels.PlayerPanel;
 import player.Player;
 import util.enemies.EnemyFactory;
 

@@ -1,28 +1,33 @@
 package gui.panels;
 
+import player.Player;
 import gui.labels.HpLabel;
 import gui.labels.MpLabel;
 import gui.labels.PortraitLabel;
-import gui.labels.TextLabel;
-import player.Player;
-import util.managers.ImageManager;
+import gui.labels.RedTextLabel;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Clase que representa el panel del jugador
+ */
 public class PlayerPanel extends JPanel {
 
 	private static PlayerPanel instance;
-	private final Image background;
-	private Player player;
+	private final Player player;
 	private JPanel backgroundPanel;
 	private JLabel portraitLabel;
-	private JLabel playerName;
-	private JLabel jobLabel;
-	private JLabel hpLabel;
+	private JLabel nameLabel;
 	private JLabel levelLabel;
+	private JLabel hpLabel;
 	private JLabel mpLabel;
 
+	/**
+	 * Método que devuelve la instancia del panel del jugador
+	 *
+	 * @return instancia del panel del jugador
+	 */
 	public static PlayerPanel getInstance(Player player) {
 
 		if (instance == null) {
@@ -32,52 +37,98 @@ public class PlayerPanel extends JPanel {
 		return instance;
 	}
 
+	/**
+	 * Constructor de la clase
+	 *
+	 * @param player jugador
+	 */
 	private PlayerPanel(Player player) {
 
-		this.player = player;
-		background = ImageManager.getInstance().getImage("playerPanel");
-		Dimension size = new Dimension(background.getWidth(null), background.getHeight(null));
-		setPreferredSize(size);
-		setMaximumSize(size);
-		setMinimumSize(size);
-		setOpaque(false);
+		this.player = Player.getInstance();
 		add(backgroundPanel);
 	}
 
-	public void updatePlayer(Player player) {
-
-		this.player = player;
-		((HpLabel) hpLabel).updateCharacter(player);
-		((MpLabel) mpLabel).updateCharacter(player);
-		mpLabel.repaint();
-		((TextLabel)levelLabel).setDisplayText(String.format("Nivel: %d", player.getLevel()));
-		levelLabel.repaint();
-	}
-
+	/**
+	 * Método que inicializa el panel
+	 */
+	@Override
 	public void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		paintBackground(g2d);
+		Image image = new ImageIcon("img/ui/panels/playerPanel.png").getImage();
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.drawImage(image, 0, 0, 256, 384, null);
 	}
 
-	public void paintBackground(Graphics2D g2d) {
-
-		g2d.drawImage(background, 0, 0, null);
-	}
-
+	/**
+	 * Método que inicializa los componentes del panel
+	 */
 	private void createUIComponents() {
 
-		portraitLabel = PortraitLabel.getInstance();
-		playerName = new TextLabel(player.getName(), "textHolder");
-		levelLabel = new TextLabel(String.format("Nivel: %d", player.getLevel()), "textHolder");
-		if (player.getJob() != null) {
+		//Agregamos la etiqueta del retrato
+		portraitLabel = new PortraitLabel();
+		//Agregamos la etiqueta del nombre
+		nameLabel = new RedTextLabel(Player.getInstance().getName());
+		//Agregamos la etiqueta del nivel
+		levelLabel = new RedTextLabel("Nivel: " + Player.getInstance().getLevel());
+		//Agregamos la etiqueta de los puntos de vida
+		hpLabel = new HpLabel(Player.getInstance());
+		//Agregamos la etiqueta de los puntos de maná
+		mpLabel = new MpLabel(Player.getInstance());
+	}
 
-			jobLabel = new TextLabel(player.getJob().getName(), "jobHolder");
-		} else {
-			jobLabel = new TextLabel("Aventurero", "jobHolder");
-		}
-		hpLabel = new HpLabel(player);
-		mpLabel = MpLabel.getInstance(player);
+	//Getters
+
+	/**
+	 * Método que devuelve el jugador
+	 *
+	 * @return jugador
+	 */
+	public Player getPlayer() {
+
+		return player;
+	}
+
+	/**
+	 * Método que devuelve el panel de fondo
+	 *
+	 * @return panel de fondo
+	 */
+	public JPanel getBackgroundPanel() {
+
+		return backgroundPanel;
+	}
+
+	/**
+	 * Método que devuelve la etiqueta del retrato
+	 *
+	 * @return etiqueta del retrato
+	 */
+	public JLabel getPortraitLabel() {
+
+		return portraitLabel;
+	}
+
+	/**
+	 * Método que devuelve la etiqueta del nombre
+	 *
+	 * @return etiqueta del nombre
+	 */
+	public JLabel getNameLabel() {
+
+		return nameLabel;
+	}
+
+	/**
+	 * Método que devuelve la etiqueta del nivel
+	 *
+	 * @return etiqueta del nivel
+	 */
+	public JLabel getLevelLabel() {
+
+		return levelLabel;
 	}
 }

@@ -1,7 +1,6 @@
 package player;
 
-import gui.panels.CharactersPanel;
-import gui.panels.DialogPanel;
+import gui_old.panels.DialogPanel;
 import items.Item;
 import items.armors.Armor;
 import items.weapons.Weapon;

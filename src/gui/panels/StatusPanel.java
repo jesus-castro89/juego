@@ -1,9 +1,7 @@
 package gui.panels;
 
-import gui.labels.StatLabel;
-import gui.labels.TextLabel;
 import player.Player;
-import util.managers.ImageManager;
+import gui.labels.StatLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,39 +10,58 @@ import java.awt.event.ComponentEvent;
 
 public class StatusPanel extends JPanel {
 
-	private final Image img;
-	private Player player;
 	private static StatusPanel instance;
+	private final Image img;
+	private final Player player;
 	private final ActionsPanel actionsPanel;
 	private final int tabIndex;
 	private final ImageIcon activeIcon;
 	private final ImageIcon inactiveIcon;
 	private JPanel backgroundPanel;
-	private JLabel expLabel;
-	private JLabel strLabel;
-	private JLabel defLabel;
+	private JLabel levelLabel;
+	private JLabel attackLabel;
+	private JLabel defenseLabel;
 	private JLabel goldLabel;
 	private JLabel intLabel;
 	private JLabel resLabel;
 	private JLabel luckLabel;
 	private JLabel desLabel;
-	private JLabel velLabel;
+	private JLabel speedLabel;
+	private JLabel weaponLabel;
 	private JLabel headArmorLabel;
 	private JLabel chestArmorLabel;
-	private JLabel legsArmorLabel;
-	private JLabel foodArmorLabel;
-	private JLabel handsArmorLabel;
-	private JLabel weaponArmorLabel;
+	private JLabel feetArmorLabel;
+	private JLabel legArmorLabel;
+	private JLabel handArmorLabel;
 
-	private StatusPanel(ActionsPanel actionsPanel, int tabIndex, Player player) {
+	public static StatusPanel getInstance(int tabIndex) {
+
+		if (instance == null) {
+
+			instance = new StatusPanel(tabIndex, Player.getInstance());
+		}
+		return instance;
+	}
+
+	/**
+	 * Constructor de la clase
+	 *
+	 * @param tabIndex índice de la pestaña
+	 * @param player   jugador
+	 */
+	private StatusPanel(int tabIndex, Player player) {
 
 		this.player = player;
-		ImageManager imageManager = ImageManager.getInstance();
-		img = imageManager.getImage("statusPanel");
+		img = new ImageIcon("img/ui/panels/statusPanel.png").getImage();
 		this.tabIndex = tabIndex;
-		this.activeIcon = new ImageIcon(imageManager.getImage("statusTabActive"));
-		this.inactiveIcon = new ImageIcon(imageManager.getImage("statusTabInactive"));
-		this.actionsPanel = actionsPanel;
+		this.activeIcon = new ImageIcon("img/ui/tabs/statusTabActive.png");
+		this.inactiveIcon = new ImageIcon("img/ui/tabs/statusTabInactive.png");
+		this.actionsPanel = ActionsPanel.getInstance();
+		Dimension size = new Dimension(1019, 342);
+		setPreferredSize(size);
+		setMinimumSize(size);
+		setMaximumSize(size);
+		setSize(size);
 		add(backgroundPanel);
 		setOpaque(false);
 		setBackground(null);
@@ -66,100 +83,56 @@ public class StatusPanel extends JPanel {
 		});
 	}
 
-	public void update(Player player) {
-
-		this.player = player;
-		repaint();
-	}
-
 	private boolean isActive() {
 
 		return actionsPanel.getSelectedIndex() == tabIndex;
 	}
 
-	public static StatusPanel getInstance(ActionsPanel actionsPanel, int tabIndex, Player player) {
-
-		if (instance == null) {
-
-			instance = new StatusPanel(actionsPanel, tabIndex, player);
-		}
-		return instance;
-	}
-
+	/**
+	 * Método que inicializa el panel
+	 */
 	@Override
-	protected void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
-		g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
-	}
-
-	public void update() {
-
-		((StatLabel)expLabel).setDisplayText("EXP: " + player.getExperience());
-		((StatLabel)strLabel).setDisplayText(player.getTotalAttack());
-		((StatLabel)defLabel).setDisplayText(player.getTotalDefense());
-		((StatLabel)goldLabel).setDisplayText("ORO: " + player.getGold());
-		((StatLabel)intLabel).setDisplayText(player.getTotalIntelligence());
-		((StatLabel)resLabel).setDisplayText(player.getTotalResistance());
-		((StatLabel)luckLabel).setDisplayText(player.getTotalLuck());
-		((StatLabel)desLabel).setDisplayText(player.getTotalDexterity());
-		((StatLabel)velLabel).setDisplayText(player.getTotalSpeed());
-		String weaponName = player.getHeadArmor() != null ? player.getHeadArmor().getName() : "Ninguno";
-		String headArmorName = player.getHeadArmor() != null ? player.getHeadArmor().getName() : "Ninguno";
-		String chestArmorName = player.getChestArmor() != null ? player.getChestArmor().getName() : "Ninguno";
-		String legsArmorName = player.getLegArmor() != null ? player.getLegArmor().getName() : "Ninguno";
-		String footArmorName = player.getFootArmor() != null ? player.getFootArmor().getName() : "Ninguno";
-		String handArmorName = player.getHandArmor() != null ? player.getHandArmor().getName() : "Ninguno";
-		((StatLabel)weaponArmorLabel).setDisplayText(weaponName);
-		((StatLabel)headArmorLabel).setDisplayText(headArmorName);
-		((StatLabel)chestArmorLabel).setDisplayText(chestArmorName);
-		((StatLabel)legsArmorLabel).setDisplayText(legsArmorName);
-		((StatLabel)foodArmorLabel).setDisplayText(footArmorName);
-		((StatLabel)handsArmorLabel).setDisplayText(handArmorName);
-		repaint();
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.drawImage(img, 0, 0, 1019, 342, null);
 	}
 
 	private void createUIComponents() {
 
-		backgroundPanel = new JPanel();
-		backgroundPanel.setOpaque(false);
-		backgroundPanel.setBackground(null);
-		backgroundPanel.setMixingCutoutShape(new Rectangle(0, 0, 0, 0));
-		expLabel = new StatLabel("EXP: " + player.getExperience(),
-				ImageManager.getInstance().getImage("expHolder"));
-		strLabel = new StatLabel(player.getTotalAttack(),
-				ImageManager.getInstance().getImage("attackHolder"));
-		defLabel = new StatLabel(player.getTotalDefense(),
-				ImageManager.getInstance().getImage("defenseHolder"));
+		levelLabel = new StatLabel("EXP: " + player.getExperience(),
+				new ImageIcon("img/ui/holders/expHolder.png").getImage());
+		attackLabel = new StatLabel(player.getTotalAttack(),
+				new ImageIcon("img/ui/holders/attackHolder.png").getImage());
+		defenseLabel = new StatLabel(player.getTotalDefense(),
+				new ImageIcon("img/ui/holders/defenseHolder.png").getImage());
 		goldLabel = new StatLabel("ORO: " + player.getGold(),
-				ImageManager.getInstance().getImage("goldHolder"));
+				new ImageIcon("img/ui/holders/goldHolder.png").getImage());
 		intLabel = new StatLabel(player.getTotalIntelligence(),
-				ImageManager.getInstance().getImage("intelligenceHolder"));
+				new ImageIcon("img/ui/holders/intHolder.png").getImage());
 		resLabel = new StatLabel(player.getTotalResistance(),
-				ImageManager.getInstance().getImage("resHolder"));
+				new ImageIcon("img/ui/holders/resHolder.png").getImage());
 		luckLabel = new StatLabel(player.getTotalLuck(),
-				ImageManager.getInstance().getImage("luckHolder"));
+				new ImageIcon("img/ui/holders/lukHolder.png").getImage());
 		desLabel = new StatLabel(player.getTotalDexterity(),
-				ImageManager.getInstance().getImage("dexterityHolder"));
-		velLabel = new StatLabel(player.getTotalSpeed(),
-				ImageManager.getInstance().getImage("velHolder"));
-		String weaponName = player.getHeadArmor() != null ? player.getHeadArmor().getName() : "Ninguno";
-		String headArmorName = player.getHeadArmor() != null ? player.getHeadArmor().getName() : "Ninguno";
-		String chestArmorName = player.getChestArmor() != null ? player.getChestArmor().getName() : "Ninguno";
-		String legsArmorName = player.getLegArmor() != null ? player.getLegArmor().getName() : "Ninguno";
-		String footArmorName = player.getFootArmor() != null ? player.getFootArmor().getName() : "Ninguno";
-		String handArmorName = player.getHandArmor() != null ? player.getHandArmor().getName() : "Ninguno";
-		weaponArmorLabel = new StatLabel("ARMA: " + weaponName,
-				ImageManager.getInstance().getImage("weaponHolder"));
-		headArmorLabel = new StatLabel("CABEZA: " + headArmorName,
-				ImageManager.getInstance().getImage("headArmorHolder"));
-		chestArmorLabel = new StatLabel("PECHO: " + chestArmorName,
-				ImageManager.getInstance().getImage("chestArmorHolder"));
-		legsArmorLabel = new StatLabel("PIERNAS: " + legsArmorName,
-				ImageManager.getInstance().getImage("legArmorHolder"));
-		foodArmorLabel = new StatLabel("PIES: " + footArmorName,
-				ImageManager.getInstance().getImage("feetArmorHolder"));
-		handsArmorLabel = new StatLabel("MANOS: " + handArmorName,
-				ImageManager.getInstance().getImage("handArmorHolder"));
+				new ImageIcon("img/ui/holders/dexterityHolder.png").getImage());
+		speedLabel = new StatLabel(player.getTotalSpeed(),
+				new ImageIcon("img/ui/holders/velHolder.png").getImage());
+		weaponLabel = new StatLabel(player.getWeapon() != null ? player.getWeapon().getName() : "No equipado",
+				new ImageIcon("img/ui/holders/weaponHolder.png").getImage());
+		headArmorLabel = new StatLabel(player.getHeadArmor() != null ? player.getHeadArmor().getName() : "No equipado",
+				new ImageIcon("img/ui/holders/headArmorHolder.png").getImage());
+		chestArmorLabel = new StatLabel(player.getChestArmor() != null ? player.getChestArmor().getName() : "No equipado",
+				new ImageIcon("img/ui/holders/chestArmorHolder.png").getImage());
+		feetArmorLabel = new StatLabel(player.getFootArmor() != null ? player.getFootArmor().getName() : "No equipado",
+				new ImageIcon("img/ui/holders/feetArmorHolder.png").getImage());
+		legArmorLabel = new StatLabel(player.getLegArmor() != null ? player.getLegArmor().getName() : "No equipado",
+				new ImageIcon("img/ui/holders/legArmorHolder.png").getImage());
+		handArmorLabel = new StatLabel(player.getHandArmor() != null ? player.getHandArmor().getName() : "No equipado",
+				new ImageIcon("img/ui/holders/handArmorHolder.png").getImage());
 	}
 }

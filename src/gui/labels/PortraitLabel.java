@@ -1,41 +1,40 @@
 package gui.labels;
 
-import util.managers.ImageManager;
-
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Clase que representa una etiqueta con la imagen de un retrato
+ */
 public class PortraitLabel extends JLabel {
 
-	private static PortraitLabel instance;
-	private final Image portrait;
+	/**
+	 * Constructor de la clase
+	 */
+	public PortraitLabel() {
 
-	public static PortraitLabel getInstance() {
-
-		if (instance == null) {
-
-			instance = new PortraitLabel();
-		}
-		return instance;
-	}
-
-	private PortraitLabel() {
-
-		portrait = ImageManager.getInstance().getImage("portrait");
-		Dimension size = new Dimension(portrait.getWidth(null), portrait.getHeight(null));
+		super();
+		Dimension size = new Dimension(117, 127);
+		setSize(size);
 		setPreferredSize(size);
 		setMaximumSize(size);
 		setMinimumSize(size);
-		setOpaque(false);
 	}
 
+	/**
+	 * Método que pinta el componente
+	 *
+	 * @param g gráficos
+	 */
 	@Override
-	protected void paintComponent(Graphics g) {
+	public void paint(Graphics g) {
 
-		super.paintComponent(g);
+		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
+		Image image = new ImageIcon("img/player/portrait.png").getImage();
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		g2d.drawImage(portrait, 0, 0, null);
+		g2d.drawImage(image, 0, 0, null);
 	}
 }

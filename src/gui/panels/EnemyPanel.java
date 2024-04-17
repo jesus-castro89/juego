@@ -1,12 +1,9 @@
 package gui.panels;
 
 import enemies.Enemy;
-import gui.game.GameWindow;
-import gui.labels.HpLabel;
-import gui.labels.TextLabel;
 import player.Stats;
-import util.managers.FontManager;
-import util.managers.ImageManager;
+import gui.labels.HpLabel;
+import gui.labels.RedTextLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,20 +11,19 @@ import java.awt.*;
 public class EnemyPanel extends JPanel {
 
 	private static EnemyPanel instance;
-	private final Image background;
-	private Enemy enemy;
 	private JPanel backgroundPanel;
 	private JLabel enemyName;
-	private JLabel enemyHp;
+	private JLabel hpLabel;
 	private JLabel attackLabel;
 	private JLabel defenseLabel;
+	private JLabel speedLabel;
 	private JLabel expLabel;
-	private JLabel golldLabel;
+	private JLabel goldLabel;
+	private Enemy enemy;
 
 	public static EnemyPanel getInstance(Enemy enemy) {
 
 		if (instance == null) {
-
 			instance = new EnemyPanel(enemy);
 		}
 		return instance;
@@ -36,66 +32,38 @@ public class EnemyPanel extends JPanel {
 	private EnemyPanel(Enemy enemy) {
 
 		this.enemy = enemy;
-		background = ImageManager.getInstance().getImage("enemyPanel");
-		Font font = FontManager.getInstance().getFont("Player");
-		enemyName.setFont(font);
-		enemyName.setForeground(new Color(95, 0, 0, 255));
-		enemyName.setText(enemy.getName());
 		add(backgroundPanel);
-		setPreferredSize(backgroundPanel.getPreferredSize());
-		Dimension size = new Dimension(background.getWidth(null), background.getHeight(null));
-		setPreferredSize(size);
-		setMaximumSize(size);
-		setMinimumSize(size);
-		setOpaque(false);
 	}
 
-	public void updateEnemy() {
-
-		this.enemy = GameWindow.getInstance().getEnemy();
-		((HpLabel) enemyHp).updateCharacter(this.enemy);
-		enemyName.setText(enemy.getName());
-		attackLabel.repaint();
-		defenseLabel.repaint();
-		expLabel.repaint();
-		golldLabel.repaint();
-		paintComponents(getGraphics());
-	}
-
-	public void updateEnemy(Enemy enemy) {
-
-		this.enemy = enemy;
-		((HpLabel) enemyHp).updateCharacter(this.enemy);
-		enemyName.setText(enemy.getName());
-		((TextLabel) attackLabel).setDisplayText(String.format("FUE: %d", this.enemy.getAdjustedAttack()));
-		((TextLabel) defenseLabel).setDisplayText(String.format("DEF: %d", this.enemy.getAdjustedDefense()));
-		((TextLabel) expLabel).setDisplayText(String.format("EXP: %d", this.enemy.getExperience()));
-		((TextLabel) golldLabel).setDisplayText(String.format("ORO: %d", this.enemy.getGold()));
-		attackLabel.repaint();
-		defenseLabel.repaint();
-		expLabel.repaint();
-		golldLabel.repaint();
-		repaint();
-	}
-
-	private void createUIComponents() {
-
-		enemyHp = new HpLabel(enemy);
-		attackLabel = new TextLabel(String.format("FUE: %d", enemy.getAdjustedAttack()), "textHolder");
-		defenseLabel = new TextLabel(String.format("DEF: %d", enemy.getAdjustedDefense()), "textHolder");
-		expLabel = new TextLabel(String.format("EXP: %d", enemy.getExperience()), "textHolder");
-		golldLabel = new TextLabel(String.format("ORO: %d", enemy.getGold()), "textHolder");
-	}
-
+	@Override
 	public void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		paintBackground(g2d);
+		Image image = new ImageIcon("img/ui/panels/enemyPanel.png").getImage();
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.drawImage(image, 0, 0, 256, 384, null);
 	}
 
-	public void paintBackground(Graphics2D g2d) {
-
-		g2d.drawImage(background, 0, 0, null);
+	private void createUIComponents() {
+		//Agregamos la etiqueta del nombre
+		enemyName = new RedTextLabel(enemy.getName());
+		//Agregamos la etiqueta de los puntos de vida
+		hpLabel = new HpLabel(enemy);
+		//Agregamos la etiqueta del ataque
+		attackLabel = new RedTextLabel(String.format("%s: %d", Stats.ATTACK.getName(),
+				enemy.getStats().get(Stats.ATTACK)));
+		//Agregamos la etiqueta de la defensa
+		defenseLabel = new RedTextLabel(String.format("%s: %d", Stats.DEFENSE.getName(),
+				enemy.getStats().get(Stats.DEFENSE)));
+		//Agregamos la etiqueta de la velocidad
+		speedLabel = new RedTextLabel(String.format("%s: %d", Stats.SPEED.getName(),
+				enemy.getStats().get(Stats.SPEED)));
+		//Agregamos la etiqueta de la experiencia
+		expLabel = new RedTextLabel(String.format("EXP: %d", enemy.getExperience()));
+		//Agregamos la etiqueta del oro
+		goldLabel = new RedTextLabel(String.format("ORO: %d", enemy.getGold()));
 	}
 }

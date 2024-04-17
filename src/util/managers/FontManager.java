@@ -19,10 +19,11 @@ public class FontManager {
 
 	private void initFonts() {
 
-		fontCache.addFont("Game Title", new File("fonts\\fortune.otf"),24f);
+		fontCache.addFont("Game Title", new File("fonts\\fortune.otf"), 24f);
 		fontCache.addFont("Game File", new File("fonts\\player.ttf"), 20f);
 		fontCache.addFont("Player Status", new File("fonts\\player.ttf"), 16f);
 		fontCache.addFont("Player", new File("fonts\\player.ttf"), 16f);
+		fontCache.addFont("Standard", new Font("Arial", Font.BOLD, 15));
 	}
 
 	public static FontManager getInstance() {

@@ -30,8 +30,9 @@ public class TinyBat extends Enemy {
 
 
 	@Override
-	public void attack(Player player, CharactersPanel panel) throws EnemyDeadException {
+	public void attack() throws EnemyDeadException {
 
+		Player player = Player.getInstance();
 		String message = "";
 		if (!isDead()) {
 
@@ -47,14 +48,14 @@ public class TinyBat extends Enemy {
 		} else {
 			throw new EnemyDeadException();
 		}
-		((DialogPanel) panel.getDialogPanel()).getText().append(message);
+		DialogPanel.getInstance().getText().append(message);
 	}
 
 	@Override
-	public void dropItem(Player player, CharactersPanel panel) {
+	public void dropItem(Player player) {
 
 		int ratio = Randomized.randomizeNumber(1, 100);
-		player.getInventory().addItem(ratio > 50 ? new BatWing() : new BatEar(), (DialogPanel) panel.getDialogPanel());
+		player.getInventory().addItem(ratio > 50 ? new BatWing() : new BatEar());
 	}
 
 	public String simpleAttack(Player player) {

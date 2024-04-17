@@ -1,9 +1,10 @@
-import game.Game;
+import gui.GameWindow;
+import player.Player;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		Game game = new Game(1);
+		GameWindow.getInstance(Player.getInstance()).startGame();
 	}
 }

@@ -2,8 +2,7 @@ package enemies.wolfs;
 
 import enemies.Enemy;
 import game.exceptions.EnemyDeadException;
-import gui_old.panels.CharactersPanel;
-import gui_old.panels.DialogPanel;
+import gui.panels.DialogPanel;
 import items.armors.head.WoodHelmet;
 import items.misc.WolfFur;
 import player.Player;
@@ -41,10 +40,9 @@ public class AloneWolf extends Enemy {
 	/**
 	 * Función que permite al lobo solitario atacar al jugador.
 	 *
-	 * @param player Jugador al que se le ataca.
 	 */
 	@Override
-	public void attack(Player player, CharactersPanel panel) throws EnemyDeadException {
+	public void attack() throws EnemyDeadException {
 
 		String message;
 		if (!isDead()) {
@@ -63,7 +61,7 @@ public class AloneWolf extends Enemy {
 		} else {
 			throw new EnemyDeadException();
 		}
-		DialogPanel.getInstance().getText().append(message);
+		DialogPanel.getInstance().getDialogBox().append(message);
 	}
 
 	/**
@@ -72,14 +70,14 @@ public class AloneWolf extends Enemy {
 	 * @param player Jugador al que se le suelta el objeto.
 	 */
 	@Override
-	public void dropItem(Player player, CharactersPanel panel) {
+	public void dropItem(Player player) {
 
 		if (getLevel() > 5) {
 
 			int ratio = Randomized.randomizeNumber(1, 100);
-			player.getInventory().addItem(ratio > 65 ? new WoodHelmet() : new WolfFur(), (DialogPanel) panel.getDialogPanel());
+			player.getInventory().addItem(ratio > 65 ? new WoodHelmet() : new WolfFur());
 		} else {
-			player.getInventory().addItem(new WolfFur(), (DialogPanel) panel.getDialogPanel());
+			player.getInventory().addItem(new WolfFur());
 		}
 	}
 

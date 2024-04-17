@@ -1,6 +1,6 @@
 package player;
 
-import gui_old.panels.DialogPanel;
+import gui.panels.DialogPanel;
 import items.Item;
 import items.armors.Armor;
 import items.weapons.Weapon;
@@ -169,10 +169,10 @@ public class Inventory implements Serializable {
 	 *
 	 * @param item el elemento a agregar
 	 */
-	public void addItem(Item item, DialogPanel panel) {
+	public void addItem(Item item) {
 
 		String addMessage = String.format("%s se ha agregado al Inventario!", item.getName());
-		panel.getText().append(items.add(item) ? addMessage : "Inventario Lleno.");
+		DialogPanel.getInstance().getDialogBox().append(items.add(item) ? addMessage : "Inventario Lleno.");
 	}
 
 	/**

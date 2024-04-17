@@ -34,10 +34,10 @@ public class AttackButtonAction implements ActionListener {
 
 			try {
 
-				player.attack(enemy, charactersPanel);
+				player.attack(enemy);
 				if (!enemy.isDead()) {
 
-					enemy.attack(player, charactersPanel);
+					enemy.attack();
 				}
 			} catch (PlayerDeathException | EnemyDeadException ex) {
 
@@ -46,10 +46,10 @@ public class AttackButtonAction implements ActionListener {
 		} else {
 			try {
 
-				enemy.attack(player, charactersPanel);
+				enemy.attack();
 				if (!player.isDead() && !enemy.isDead()) {
 
-					player.attack(enemy, charactersPanel);
+					player.attack(enemy);
 				}
 			} catch (PlayerDeathException | EnemyDeadException ex) {
 				throw new RuntimeException(ex);

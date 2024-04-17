@@ -182,12 +182,12 @@ public class Player extends BasicCharacter implements Serializable {
 	 *
 	 * @throws PlayerDeathException si el jugador está muerto
 	 */
-	public void attack(@NotNull Enemy enemy, CharactersPanel panel) throws PlayerDeathException {
+	public void attack(@NotNull Enemy enemy) throws PlayerDeathException {
 
 		if (!isDead()) {
 
 			DialogPanel.getInstance().getText().append(String.format("%s", enemy.takeDamage(this)));
-			if (enemy.isDead()) getRewards(enemy, panel);
+			if (enemy.isDead()) getRewards(enemy);
 		} else {
 			throw new PlayerDeathException();
 		}
@@ -198,13 +198,13 @@ public class Player extends BasicCharacter implements Serializable {
 	 *
 	 * @param enemy el enemigo derrotado
 	 */
-	private void getRewards(@NotNull Enemy enemy, CharactersPanel panel) {
+	private void getRewards(@NotNull Enemy enemy) {
 
 		String message = gainExperience(enemy.getExperience());
 		message += gainGold(enemy.getGold());
-		((DialogPanel) panel.getDialogPanel()).getText().append(message);
-		enemy.dropItem(this, panel);
-		StatusPanel.getInstance(ActionsPanel.getInstance(), 0, panel.getPlayer()).update();
+		DialogPanel.getInstance().getText().append(message);
+		enemy.dropItem(this);
+		StatusPanel.getInstance(ActionsPanel.getInstance(), 0, Player.getInstance()).update();
 	}
 
 	public String getActualHp() {

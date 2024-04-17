@@ -3,8 +3,7 @@ package enemies.goblins;
 import enemies.Enemy;
 import game.exceptions.EnemyDeadException;
 import game.exceptions.ZeroException;
-import gui_old.panels.CharactersPanel;
-import gui_old.panels.DialogPanel;
+import gui.panels.DialogPanel;
 import items.misc.GoblinEar;
 import items.weapons.blades.WoodBlade;
 import org.jetbrains.annotations.NotNull;
@@ -43,12 +42,10 @@ public class RookieGoblin extends Enemy {
 	/**
 	 * Función que permite al RookieGoblin atacar al jugador.
 	 *
-	 * @param player Jugador al que se le ataca.
-	 *
 	 * @throws EnemyDeadException Excepción que se lanza si el enemigo está muerto.
 	 */
 	@Override
-	public void attack(Player player, CharactersPanel panel) throws EnemyDeadException {
+	public void attack() throws EnemyDeadException {
 
 		String message = "";
 		if (!isDead()) {
@@ -67,7 +64,7 @@ public class RookieGoblin extends Enemy {
 		} else {
 			throw new EnemyDeadException();
 		}
-		((DialogPanel) panel.getDialogPanel()).getText().append(message);
+		DialogPanel.getInstance().getDialogBox().append(message);
 	}
 
 	/**
@@ -76,10 +73,10 @@ public class RookieGoblin extends Enemy {
 	 * @param player Jugador al que se le suelta el objeto.
 	 */
 	@Override
-	public void dropItem(Player player, CharactersPanel panel) {
+	public void dropItem(Player player) {
 
 		int ratio = Randomized.randomizeNumber(1, 100);
-		player.getInventory().addItem(ratio > 50 ? new WoodBlade() : new GoblinEar(), (DialogPanel) panel.getDialogPanel());
+		player.getInventory().addItem(ratio > 50 ? new WoodBlade() : new GoblinEar());
 	}
 
 	/**

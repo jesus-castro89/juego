@@ -1,5 +1,7 @@
 package gui.panels;
 
+import gui.GameWindow;
+import gui.buttons.AttackButton;
 import player.Player;
 
 import javax.swing.*;
@@ -17,6 +19,12 @@ public class BattlePanel extends JPanel {
 	private final ImageIcon activeIcon;
 	private final ImageIcon inactiveIcon;
 	private JPanel backgroundPanel;
+	private JPanel buttonsPanel;
+	private JPanel skillsPanel;
+	private JButton attackButton;
+	private JButton fleeButton;
+	private JButton saveButton;
+	private JButton exitButton;
 
 	public static BattlePanel getInstance(int tabIndex) {
 
@@ -92,5 +100,10 @@ public class BattlePanel extends JPanel {
 		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.drawImage(img, 0, 0, 1019, 342, null);
+	}
+
+	private void createUIComponents() {
+
+		attackButton = new AttackButton(GameWindow.getInstance(Player.getInstance()).getEnemy());
 	}
 }

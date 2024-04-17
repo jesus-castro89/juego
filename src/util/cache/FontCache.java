@@ -54,6 +54,11 @@ public class FontCache {
 		throw new CloneNotSupportedException("Clonación no permitida para la clase Singleton.");
 	}
 
+	public void addFont(String fontName, Font font){
+
+		fontCache.put(fontName, font);
+	}
+
 	/**
 	 * Método que añade una fuente al caché
 	 *

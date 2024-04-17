@@ -48,7 +48,7 @@ public class FuryAttack extends Skill {
 			message += player.gainGold(enemy.getGold());
 			message += player.gainExperience(enemy.getExperience());
 			((DialogPanel) getCharactersPanel().getDialogPanel()).getText().append(message);
-			enemy.dropItem(player, getCharactersPanel());
+			enemy.dropItem(player);
 			Enemy newEnemy = EnemyFactory.generateRegularEnemy(player);
 			getCharactersPanel().getWindow().setEnemy(enemy);
 			charactersPanel.updateEnemy(newEnemy);
@@ -58,7 +58,7 @@ public class FuryAttack extends Skill {
 			playerPanel.updatePlayer(player);
 		} else {
 			try {
-				enemy.attack(player, getCharactersPanel());
+				enemy.attack();
 			} catch (EnemyDeadException e) {
 				throw new RuntimeException(e);
 			}

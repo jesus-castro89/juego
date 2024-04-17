@@ -169,9 +169,9 @@ public abstract class Enemy extends BasicCharacter {
 		return message;
 	}
 
-	public abstract void attack(Player player, CharactersPanel panel) throws EnemyDeadException;
+	public abstract void attack() throws EnemyDeadException;
 
-	public abstract void dropItem(Player player, CharactersPanel panel);
+	public abstract void dropItem(Player player);
 
 	public HashMap<Stats, Integer> getStats() {
 

@@ -39,7 +39,7 @@ public class BasicHeal extends Skill {
 		String message = effect(player);
 		((DialogPanel) getCharactersPanel().getDialogPanel()).getText().append(message);
 		try {
-			enemy.attack(player, getCharactersPanel());
+			enemy.attack();
 		} catch (EnemyDeadException e) {
 			throw new RuntimeException(e);
 		}

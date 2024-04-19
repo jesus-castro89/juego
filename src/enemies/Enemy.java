@@ -2,6 +2,7 @@ package enemies;
 
 import characters.BasicCharacter;
 import game.exceptions.EnemyDeadException;
+import gui.panels.DialogPanel;
 import gui_old.panels.CharactersPanel;
 import player.Player;
 import player.Stats;
@@ -62,23 +63,22 @@ public abstract class Enemy extends BasicCharacter {
 		return defense;
 	}
 
+	public int getAdjustedSpeed() {
+
+		return stats.get(Stats.SPEED) + (player.getLevel() - BASE_LEVEL) * adjustmentFactor;
+	}
+
 	public int getAdjustedAttack() {
 
 		int adjustedAttack = stats.get(Stats.ATTACK) + (player.getLevel() - BASE_LEVEL) * adjustmentFactor;
-		if (adjustedAttack < player.getDefense()) {
-
-			adjustedAttack = player.getDefense() + adjustmentFactor;
-		}
+		if (adjustedAttack <= player.getDefense()) adjustedAttack = player.getDefense() + adjustmentFactor;
 		return adjustedAttack;
 	}
 
 	public int getAdjustedDefense() {
 
 		int adjustedDefense = stats.get(Stats.DEFENSE) + (player.getLevel() - BASE_LEVEL) * adjustmentFactor;
-		if (adjustedDefense > player.getDamage()) {
-
-			adjustedDefense = player.getDamage() - adjustmentFactor;
-		}
+		if (adjustedDefense >= player.getDamage()) adjustedDefense = player.getDamage() - adjustmentFactor;
 		return adjustedDefense;
 	}
 
@@ -169,7 +169,12 @@ public abstract class Enemy extends BasicCharacter {
 		return message;
 	}
 
-	public abstract void attack() throws EnemyDeadException;
+	public void attack() throws EnemyDeadException {
+
+		DialogPanel.getInstance().addText(getAttack());
+	}
+
+	public abstract String getAttack() throws EnemyDeadException;
 
 	public abstract void dropItem(Player player);
 

@@ -2,6 +2,7 @@ package util.enemies;
 
 import enemies.Enemy;
 import enemies.bats.TinyBat;
+import gui.panels.DialogPanel;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
@@ -42,7 +43,9 @@ public class EnemyFactory {
 		// Intenta crear una instancia de la clase obtenida
 		try {
 
-			return (Enemy) claseEnemyRegular.getDeclaredConstructor(Player.class).newInstance(player);
+			Enemy enemy = (Enemy) claseEnemyRegular.getDeclaredConstructor(Player.class).newInstance(player);
+			DialogPanel.getInstance().addText("¡Un " + enemy.getName() + " aparece frente a ti!\n");
+			return enemy;
 		} catch (Exception e) {
 
 			return new TinyBat(player);

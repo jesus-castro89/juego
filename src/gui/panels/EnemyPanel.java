@@ -33,6 +33,23 @@ public class EnemyPanel extends JPanel {
 
 		this.enemy = enemy;
 		add(backgroundPanel);
+		update();
+	}
+
+	public void update() {
+
+		enemyName.setText(enemy.getName());
+		hpLabel.setText(String.format("%d/%d", enemy.getHp(), enemy.getMaxHp()));
+		attackLabel.setText(String.format("%s: %d", Stats.ATTACK.getName(),
+				enemy.getAdjustedAttack()));
+		defenseLabel.setText(String.format("%s: %d", Stats.DEFENSE.getName(),
+				enemy.getAdjustedDefense()));
+		speedLabel.setText(String.format("%s: %d", Stats.SPEED.getName(),
+				enemy.getAdjustedSpeed()));
+		expLabel.setText(String.format("EXP: %d", enemy.getExperience()));
+		goldLabel.setText(String.format("ORO: %d", enemy.getGold()));
+		repaint();
+
 	}
 
 	@Override
@@ -54,16 +71,21 @@ public class EnemyPanel extends JPanel {
 		hpLabel = new HpLabel(enemy);
 		//Agregamos la etiqueta del ataque
 		attackLabel = new RedTextLabel(String.format("%s: %d", Stats.ATTACK.getName(),
-				enemy.getStats().get(Stats.ATTACK)));
+				enemy.getAdjustedAttack()));
 		//Agregamos la etiqueta de la defensa
 		defenseLabel = new RedTextLabel(String.format("%s: %d", Stats.DEFENSE.getName(),
-				enemy.getStats().get(Stats.DEFENSE)));
+				enemy.getAdjustedDefense()));
 		//Agregamos la etiqueta de la velocidad
 		speedLabel = new RedTextLabel(String.format("%s: %d", Stats.SPEED.getName(),
-				enemy.getStats().get(Stats.SPEED)));
+				enemy.getAdjustedSpeed()));
 		//Agregamos la etiqueta de la experiencia
 		expLabel = new RedTextLabel(String.format("EXP: %d", enemy.getExperience()));
 		//Agregamos la etiqueta del oro
 		goldLabel = new RedTextLabel(String.format("ORO: %d", enemy.getGold()));
+	}
+
+	public void setEnemy(Enemy enemy) {
+
+		this.enemy = enemy;
 	}
 }

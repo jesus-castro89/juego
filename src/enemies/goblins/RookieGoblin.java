@@ -45,7 +45,7 @@ public class RookieGoblin extends Enemy {
 	 * @throws EnemyDeadException Excepción que se lanza si el enemigo está muerto.
 	 */
 	@Override
-	public void attack() throws EnemyDeadException {
+	public String getAttack() throws EnemyDeadException {
 
 		String message = "";
 		if (!isDead()) {
@@ -64,7 +64,7 @@ public class RookieGoblin extends Enemy {
 		} else {
 			throw new EnemyDeadException();
 		}
-		DialogPanel.getInstance().getDialogBox().append(message);
+		return message;
 	}
 
 	/**

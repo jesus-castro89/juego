@@ -100,7 +100,7 @@ public class Inventory implements Serializable {
 			}
 		}
 		player.equipArmor(selectedArmor);
-		player.printEquipArmor(selectedArmor);
+
 		items.remove(selectedArmor);
 	}
 
@@ -138,7 +138,7 @@ public class Inventory implements Serializable {
 		if (player.getWeapon() != null)
 			items.add(player.getWeapon());
 		player.equipWeapon(selectedWeapon);
-		player.printEquipWeapon(selectedWeapon);
+
 		items.remove(selectedWeapon);
 	}
 
@@ -171,8 +171,8 @@ public class Inventory implements Serializable {
 	 */
 	public void addItem(Item item) {
 
-		String addMessage = String.format("%s se ha agregado al Inventario!", item.getName());
-		DialogPanel.getInstance().getDialogBox().append(items.add(item) ? addMessage : "Inventario Lleno.");
+		String addMessage = String.format("%s se ha agregado al Inventario!\n", item.getName());
+		DialogPanel.getInstance().addText(items.add(item) ? addMessage : "Inventario Lleno.\n");
 	}
 
 	/**

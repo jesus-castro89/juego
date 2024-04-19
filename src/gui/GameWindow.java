@@ -35,7 +35,7 @@ public class GameWindow extends JFrame {
 	 *
 	 * @return instancia de la ventana principal
 	 */
-	public static GameWindow getInstance(Player player) {
+	public static synchronized GameWindow getInstance(Player player) {
 
 		//Si la instancia es nula, la creamos
 		if (instance == null) {
@@ -57,12 +57,12 @@ public class GameWindow extends JFrame {
 	/**
 	 * Método que inicializa la ventana
 	 */
-	public void startGame() {
+	public void  startGame() {
 
 		//Título de la Ventana
 		setTitle("Game Window");
 		//Operación por defecto de cierre
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		//No la hacemos escalable
 		setResizable(false);
 		//Agregamos el panel principal
@@ -83,6 +83,7 @@ public class GameWindow extends JFrame {
 
 	private void createUIComponents() {
 
+		DialogPanel.getInstance().addText("¡Bienvenido a la aventura!\n");
 		//Agregamos el panel del jugador
 		playerPanel = PlayerPanel.getInstance(player);
 		//Agregamos el enemigo
@@ -96,7 +97,7 @@ public class GameWindow extends JFrame {
 		//Agregamos el panel de estado
 		statusPanel = StatusPanel.getInstance(0);
 		//Agregamos el panel de batalla
-		battlePanel = BattlePanel.getInstance(1);
+		battlePanel = BattlePanel.getInstance(1, enemy);
 	}
 
 	public Player getPlayer() {

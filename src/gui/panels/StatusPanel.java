@@ -43,6 +43,12 @@ public class StatusPanel extends JPanel {
 		return instance;
 	}
 
+	@Override
+	public void update(Graphics g) {
+
+		super.update(g);
+	}
+
 	/**
 	 * Constructor de la clase
 	 *
@@ -81,6 +87,27 @@ public class StatusPanel extends JPanel {
 				actionsPanel.setTabIcon(tabIndex, inactiveIcon);
 			}
 		});
+		update();
+	}
+
+	public void update(){
+
+		levelLabel.setText("EXP: " + player.getExperience());
+		attackLabel.setText(player.getTotalAttack());
+		defenseLabel.setText(player.getTotalDefense());
+		goldLabel.setText("ORO: " + player.getGold());
+		intLabel.setText(player.getTotalIntelligence());
+		resLabel.setText(player.getTotalResistance());
+		luckLabel.setText(player.getTotalLuck());
+		desLabel.setText(player.getTotalDexterity());
+		speedLabel.setText(player.getTotalSpeed());
+		weaponLabel.setText(player.getWeapon() != null ? player.getWeapon().getName() : "No equipado");
+		headArmorLabel.setText(player.getHeadArmor() != null ? player.getHeadArmor().getName() : "No equipado");
+		chestArmorLabel.setText(player.getChestArmor() != null ? player.getChestArmor().getName() : "No equipado");
+		feetArmorLabel.setText(player.getFootArmor() != null ? player.getFootArmor().getName() : "No equipado");
+		legArmorLabel.setText(player.getLegArmor() != null ? player.getLegArmor().getName() : "No equipado");
+		handArmorLabel.setText(player.getHandArmor() != null ? player.getHandArmor().getName() : "No equipado");
+		repaint();
 	}
 
 	private boolean isActive() {

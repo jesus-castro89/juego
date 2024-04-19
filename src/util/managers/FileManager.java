@@ -12,16 +12,17 @@ public class FileManager {
 		try {
 			player = (Player) new ObjectInputStream(new FileInputStream(file)).readObject();
 		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
 			throw new FileNotFoundException("No se encontró el archivo");
 		}
 		return player;
 	}
 
-	public static void saveGame(Player player, int slot) {
+	public static void saveGame(Player player) {
 
 		ObjectOutputStream oos = null;
 		try {
-			oos = new ObjectOutputStream(new FileOutputStream("files/game" + slot + ".dat"));
+			oos = new ObjectOutputStream(new FileOutputStream("files/game.dat"));
 			oos.writeObject(player);
 			try {
 				oos.close();

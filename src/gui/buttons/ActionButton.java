@@ -9,14 +9,21 @@ import java.awt.*;
 public abstract class ActionButton extends JButton {
 
 	private String displayText;
-	private Image image;
 	private Font font;
+	private Icon image;
+	private int topPadding;
 
 	public ActionButton(String text) {
 
 		this.displayText = text;
-		image = ImageManager.getInstance().getImage("button",
-				new ImageIcon("img/ui/holders/textHolder.png").getImage());
+		ImageManager.getInstance().getImage("button",
+				new ImageIcon("img/ui/buttons/idleButton.png").getImage());
+		ImageManager.getInstance().getImage("buttonHover",
+				new ImageIcon("img/ui/buttons/hoverButton.png").getImage());
+		setIcon(new ImageIcon(ImageManager.getInstance().getImage("button")));
+		setRolloverIcon(new ImageIcon(ImageManager.getInstance().getImage("buttonHover")));
+		image = getIcon();
+		topPadding=2;
 		font = FontManager.getInstance().getFont("Standard");
 		Dimension size = new Dimension(117, 29);
 		setSize(size);
@@ -28,6 +35,21 @@ public abstract class ActionButton extends JButton {
 		setFocusPainted(true);
 		setOpaque(false);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+
+				image = getRolloverIcon();
+				topPadding = 0;
+				repaint();
+			}
+
+			public void mouseExited(java.awt.event.MouseEvent evt) {
+
+				image = getIcon();
+				topPadding = 2;
+				repaint();
+			}
+		});
 	}
 
 	@Override
@@ -42,10 +64,11 @@ public abstract class ActionButton extends JButton {
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2d.setFont(font);
 		g2d.setColor(Color.BLACK);
-		g2d.drawImage(image, 0, 0, null);
+		//Pintamos la imagen
+		image.paintIcon(this, g2d, 0, 0);
 		//Calculamos la posición del texto
-		int textPositionY = image.getHeight(null) / 2 + (g2d.getFontMetrics().getHeight() / 4) + 2;
-		int textPositionX = (image.getWidth(null) - g2d.getFontMetrics().stringWidth(displayText)) / 2;
+		int textPositionY = image.getIconHeight() / 2 + (g2d.getFontMetrics().getHeight() / 4) + topPadding;
+		int textPositionX = (image.getIconWidth() - g2d.getFontMetrics().stringWidth(displayText)) / 2;
 		//Pintamos el texto
 		g2d.drawString(displayText, textPositionX, textPositionY);
 	}

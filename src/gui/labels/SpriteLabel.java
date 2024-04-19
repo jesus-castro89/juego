@@ -19,6 +19,12 @@ public class SpriteLabel extends JLabel {
 		setVisible(true);
 	}
 
+	public void updateImage(Image image) {
+
+		this.image = image;
+		repaint();
+	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 

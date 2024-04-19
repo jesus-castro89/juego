@@ -31,6 +31,12 @@ public class MainPanel extends JPanel {
 		add(backgroundPanel);
 	}
 
+	public void update(Enemy enemy) {
+
+		((SpriteLabel) enemySprite).updateImage(enemy.getImage());
+		repaint();
+	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 

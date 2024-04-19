@@ -76,4 +76,10 @@ public class MpLabel extends JLabel {
 		g2d.translate(textPositionX, textPositionY);
 		g2d.drawString(displayText, 0, 0);
 	}
+
+	public void setText(String text){
+
+		this.displayText = text;
+		repaint();
+	}
 }

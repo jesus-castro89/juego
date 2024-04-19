@@ -34,6 +34,16 @@ public class DialogPanel extends JPanel {
 		dialogBox.setBackground(null);
 		dialogBox.setMargin(new Insets(10, 10, 10, 10));
 		dialogBox.setEditable(false);
+		dialogBox.setAutoscrolls(true);
+		scrollPanel.setAutoscrolls(true);
+	}
+
+	public void addText(String text) {
+
+		SwingUtilities.invokeLater(() -> {
+			dialogBox.append(text);
+			dialogBox.setCaretPosition(dialogBox.getDocument().getLength());
+		});
 	}
 
 	@Override

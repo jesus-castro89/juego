@@ -43,8 +43,9 @@ public class StatLabel extends JLabel {
 		return image;
 	}
 
-	public void setDisplayText(String displayText) {
+	public void setText(String displayText) {
 
 		this.displayText = displayText;
+		repaint();
 	}
 }

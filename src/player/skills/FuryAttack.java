@@ -8,7 +8,9 @@ import gui_old.panels.PlayerPanel;
 import player.Player;
 import util.enemies.EnemyFactory;
 
-public class FuryAttack extends Skill {
+import java.io.Serializable;
+
+public class FuryAttack extends Skill implements Serializable {
 
 	private final static FuryAttack instance = new FuryAttack();
 	public final static String NAME = "Ataque Furia";

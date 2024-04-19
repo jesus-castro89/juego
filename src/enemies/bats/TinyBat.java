@@ -2,8 +2,7 @@ package enemies.bats;
 
 import enemies.Enemy;
 import game.exceptions.EnemyDeadException;
-import gui_old.panels.CharactersPanel;
-import gui_old.panels.DialogPanel;
+import gui.panels.DialogPanel;
 import items.misc.BatEar;
 import items.misc.BatWing;
 import player.Player;
@@ -30,7 +29,7 @@ public class TinyBat extends Enemy {
 
 
 	@Override
-	public void attack() throws EnemyDeadException {
+	public String getAttack() throws EnemyDeadException {
 
 		Player player = Player.getInstance();
 		String message = "";
@@ -48,7 +47,7 @@ public class TinyBat extends Enemy {
 		} else {
 			throw new EnemyDeadException();
 		}
-		DialogPanel.getInstance().getText().append(message);
+		return message;
 	}
 
 	@Override

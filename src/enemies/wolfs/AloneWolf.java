@@ -42,7 +42,7 @@ public class AloneWolf extends Enemy {
 	 *
 	 */
 	@Override
-	public void attack() throws EnemyDeadException {
+	public String getAttack() throws EnemyDeadException {
 
 		String message;
 		if (!isDead()) {
@@ -61,7 +61,7 @@ public class AloneWolf extends Enemy {
 		} else {
 			throw new EnemyDeadException();
 		}
-		DialogPanel.getInstance().getDialogBox().append(message);
+		return message;
 	}
 
 	/**

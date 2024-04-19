@@ -4,7 +4,9 @@ import enemies.Enemy;
 import gui_old.panels.CharactersPanel;
 import player.Player;
 
-public abstract class Skill {
+import java.io.Serializable;
+
+public abstract class Skill implements Serializable {
 
 	protected String name;
 	protected String description;

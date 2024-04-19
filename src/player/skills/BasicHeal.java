@@ -5,7 +5,9 @@ import game.exceptions.EnemyDeadException;
 import gui_old.panels.DialogPanel;
 import player.Player;
 
-public class BasicHeal extends Skill {
+import java.io.Serializable;
+
+public class BasicHeal extends Skill implements Serializable {
 
 	private static final BasicHeal instance = new BasicHeal();
 	public static final String NAME = "Curación Básica";

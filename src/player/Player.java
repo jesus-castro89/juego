@@ -2,24 +2,25 @@ package player;
 
 import characters.BasicCharacter;
 import enemies.Enemy;
+import game.exceptions.EnemyDeadException;
 import game.exceptions.PlayerDeathException;
-import gui_old.game.GameWindow;
-import gui_old.panels.ActionsPanel;
-import gui_old.panels.CharactersPanel;
-import gui_old.panels.DialogPanel;
-import gui_old.panels.StatusPanel;
+import gui.NewGameWindow;
+import gui.panels.DialogPanel;
+import gui.panels.StatusPanel;
 import items.armors.Armor;
 import items.weapons.Weapon;
 import org.jetbrains.annotations.NotNull;
 import player.skills.BasicHeal;
 import player.skills.FuryAttack;
 import player.skills.Skill;
-import util.interfaces.Interactive;
 import util.interfaces.Randomized;
+import util.managers.FileManager;
 import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,14 +70,23 @@ public class Player extends BasicCharacter implements Serializable {
 	 *
 	 * @return la instancia de la clase jugador
 	 */
-	public static Player getInstance() {
+	public static Player getInstance(String name) {
 
 		if (instance == null) {
 
-			instance = new Player("Juanito");
-			// instance = new Player(JOptionPane.showInputDialog("Ingresa el Nombre del Jugador"));
+			instance = new Player(name);
 		}
 		return instance;
+	}
+
+	public static synchronized Player getInstance() {
+
+		return instance;
+	}
+
+	public static void setInstance(Player player) {
+
+		instance = player;
 	}
 
 	/**
@@ -182,11 +192,11 @@ public class Player extends BasicCharacter implements Serializable {
 	 *
 	 * @throws PlayerDeathException si el jugador está muerto
 	 */
-	public void attack(@NotNull Enemy enemy) throws PlayerDeathException {
+	public void attack(@NotNull Enemy enemy) throws PlayerDeathException, EnemyDeadException {
 
 		if (!isDead()) {
 
-			DialogPanel.getInstance().getText().append(String.format("%s", enemy.takeDamage(this)));
+			DialogPanel.getInstance().addText(String.format("%s", enemy.takeDamage(this)));
 			if (enemy.isDead()) getRewards(enemy);
 		} else {
 			throw new PlayerDeathException();
@@ -198,13 +208,14 @@ public class Player extends BasicCharacter implements Serializable {
 	 *
 	 * @param enemy el enemigo derrotado
 	 */
-	private void getRewards(@NotNull Enemy enemy) {
+	private void getRewards(@NotNull Enemy enemy) throws EnemyDeadException {
 
 		String message = gainExperience(enemy.getExperience());
 		message += gainGold(enemy.getGold());
-		DialogPanel.getInstance().getText().append(message);
+		DialogPanel.getInstance().addText(message);
 		enemy.dropItem(this);
-		StatusPanel.getInstance(ActionsPanel.getInstance(), 0, Player.getInstance()).update();
+		StatusPanel.getInstance(0).update();
+		throw new EnemyDeadException();
 	}
 
 	public String getActualHp() {
@@ -225,6 +236,17 @@ public class Player extends BasicCharacter implements Serializable {
 	private int getArmorStat(Armor armor, Stats stat) {
 
 		return armor != null && armor.getStats().containsKey(stat) ? armor.getStats().get(stat) : 0;
+	}
+
+	public void tryToFlee() throws EnemyDeadException {
+
+		if (Randomized.randomizeNumber(1, 100) <= 50) {
+
+			DialogPanel.getInstance().addText("¡Has huido!\n");
+			throw new EnemyDeadException();
+		} else {
+			DialogPanel.getInstance().addText("¡No has podido huir!\n");
+		}
 	}
 
 	public String getTotalAttack() {
@@ -450,9 +472,9 @@ public class Player extends BasicCharacter implements Serializable {
 			hp = maxHp;
 			mp = maxMp;
 			strength += Randomized.randomizeNumber(1, 3);
-			defense += Randomized.randomizeNumber(1, 3);
+			defense += Randomized.randomizeNumber(2, 4);
 			randomizeStats(5);
-			GameWindow.getInstance().getStatusPanel().update(this);
+			StatusPanel.getInstance(0).update();
 			return String.format("¡%s ha subido al nivel %d!\n", getName(), level);
 		} else {
 			return "";
@@ -470,9 +492,10 @@ public class Player extends BasicCharacter implements Serializable {
 		return "¡Has muerto!";
 	}
 
-	public void printRun() {
+	public void printRun() throws EnemyDeadException {
 
-		Interactive.printDialog("¡Has huido!");
+		DialogPanel.getInstance().addText("¡Has huido!\n");
+		throw new EnemyDeadException();
 	}
 
 	public String printGold(int gold) {
@@ -483,21 +506,6 @@ public class Player extends BasicCharacter implements Serializable {
 	public String printExperience(int experience) {
 
 		return String.format("Has ganado %d puntos de experiencia!\n", experience);
-	}
-
-	public void printHeal(int heal) {
-
-		Interactive.printDialog(String.format("Has recuperado %d puntos de salud!", heal));
-	}
-
-	public void printEquipWeapon(@NotNull Weapon weapon) {
-
-		Interactive.printDialog(String.format("Has equipado %s!", weapon.getName()));
-	}
-
-	public void printEquipArmor(@NotNull Armor armor) {
-
-		Interactive.printDialog(String.format("Has equipado %s!", armor.getName()));
 	}
 
 	//Getters and Setters
@@ -537,11 +545,6 @@ public class Player extends BasicCharacter implements Serializable {
 		this.defense = defense;
 	}
 
-	public int getIntelligence() {
-
-		return intelligence;
-	}
-
 	public int getDexterity() {
 
 		return dexterity;
@@ -557,11 +560,6 @@ public class Player extends BasicCharacter implements Serializable {
 		return weapon;
 	}
 
-	public String getWeaponName() {
-
-		return weapon != null ? weapon.getName() : "None";
-	}
-
 	public int getDamage() {
 
 		return getAtk();
@@ -575,11 +573,6 @@ public class Player extends BasicCharacter implements Serializable {
 	public Inventory getInventory() {
 
 		return inventory;
-	}
-
-	public int getResistance() {
-
-		return resistance;
 	}
 
 	public int getSpeed() {

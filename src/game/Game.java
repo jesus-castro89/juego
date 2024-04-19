@@ -118,7 +118,7 @@ public class Game {
 	private void endGame() {
 
 		Interactive.printDialog("Gracias por jugar");
-		FileManager.saveGame(player, slot);
+		//FileManager.saveGame(player, slot);
 		enemies.clear();
 	}
 
@@ -167,7 +167,7 @@ public class Game {
 				switch (battleOption) {
 
 					case 1 -> battleOrder(enemy);
-					case 2 -> fleeTry(enemy);
+					//case 2 -> fleeTry(enemy);
 					default -> throw new InvalidOptionException();
 				}
 			} catch (InvalidOptionException e) {
@@ -212,22 +212,6 @@ public class Game {
 //			enemy.attack(player);
 //		}
 //		battleMenu(enemy);
-	}
-
-	/**
-	 * Intenta huir de la batalla.
-	 *
-	 * @param enemy el enemigo con el que se está peleando
-	 */
-	private void fleeTry(Enemy enemy) {
-
-		if (Randomized.randomizeBoolean()) {
-			player.printRun();
-			enemy.setHp(0);
-		} else {
-			Interactive.printDialog("No has podido huir!");
-			battleMenu(enemy);
-		}
 	}
 
 

@@ -35,7 +35,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="189f2" class="javax.swing.JButton" binding="saveButton">
+          <component id="189f2" class="javax.swing.JButton" binding="saveButton" custom-create="true">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="117" height="29"/>
@@ -44,10 +44,10 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value=""/>
             </properties>
           </component>
-          <component id="5e741" class="javax.swing.JButton" binding="exitButton">
+          <component id="5e741" class="javax.swing.JButton" binding="exitButton" custom-create="true">
             <constraints>
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="117" height="29"/>
@@ -56,10 +56,10 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value=""/>
             </properties>
           </component>
-          <component id="7fbf" class="javax.swing.JButton" binding="fleeButton">
+          <component id="7fbf" class="javax.swing.JButton" binding="fleeButton" custom-create="true">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <minimum-size width="117" height="29"/>
@@ -68,7 +68,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value=""/>
             </properties>
           </component>
           <vspacer id="b3108">

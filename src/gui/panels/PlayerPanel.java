@@ -46,6 +46,16 @@ public class PlayerPanel extends JPanel {
 
 		this.player = Player.getInstance();
 		add(backgroundPanel);
+		update();
+	}
+
+	public void update() {
+
+		nameLabel.setText(player.getName());
+		levelLabel.setText("Nivel: " + player.getLevel());
+		hpLabel.setText(player.getHp() + "/" + player.getMaxHp());
+		mpLabel.setText(player.getMp() + "/" + player.getMaxMp());
+		repaint();
 	}
 
 	/**

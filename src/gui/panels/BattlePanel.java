@@ -1,7 +1,11 @@
 package gui.panels;
 
+import enemies.Enemy;
 import gui.GameWindow;
 import gui.buttons.AttackButton;
+import gui.buttons.ExitButton;
+import gui.buttons.FleeButton;
+import gui.buttons.SaveButton;
 import player.Player;
 
 import javax.swing.*;
@@ -13,7 +17,7 @@ public class BattlePanel extends JPanel {
 
 	private static BattlePanel instance;
 	private final Image img;
-	private Player player;
+	private Enemy enemy;
 	private final ActionsPanel actionsPanel;
 	private final int tabIndex;
 	private final ImageIcon activeIcon;
@@ -26,11 +30,11 @@ public class BattlePanel extends JPanel {
 	private JButton saveButton;
 	private JButton exitButton;
 
-	public static BattlePanel getInstance(int tabIndex) {
+	public static BattlePanel getInstance(int tabIndex, Enemy enemy) {
 
 		if (instance == null) {
 
-			instance = new BattlePanel(tabIndex, Player.getInstance());
+			instance = new BattlePanel(tabIndex, enemy);
 		}
 		return instance;
 	}
@@ -39,11 +43,10 @@ public class BattlePanel extends JPanel {
 	 * Constructor de la clase
 	 *
 	 * @param tabIndex índice de la pestaña
-	 * @param player   jugador
 	 */
-	private BattlePanel(int tabIndex, Player player) {
+	private BattlePanel(int tabIndex, Enemy enemy) {
 
-		this.player = player;
+		this.enemy = enemy;
 		img = new ImageIcon("img/ui/panels/battlePanel.png").getImage();
 		this.tabIndex = tabIndex;
 		this.activeIcon = new ImageIcon("img/ui/tabs/battleTabActive.png");
@@ -104,6 +107,19 @@ public class BattlePanel extends JPanel {
 
 	private void createUIComponents() {
 
-		attackButton = new AttackButton(GameWindow.getInstance(Player.getInstance()).getEnemy());
+		attackButton = new AttackButton(enemy);
+		fleeButton = new FleeButton(enemy);
+		saveButton = new SaveButton(Player.getInstance());
+		exitButton = new ExitButton();
+	}
+
+	public Enemy getEnemy() {
+
+		return enemy;
+	}
+
+	public void setEnemy(Enemy enemy) {
+
+		this.enemy = enemy;
 	}
 }

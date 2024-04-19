@@ -54,9 +54,20 @@ public class RedTextLabel extends JLabel {
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2d.drawImage(image, 0, 10, null);
 		//Calculamos la posición del texto
-		int textPositionY = image.getHeight(null) / 2 + (g2d.getFontMetrics().getHeight() / 2) + 6;
+		int textPositionY = image.getHeight(null) / 2 + (g2d.getFontMetrics().getHeight() / 2) + 7;
 		int textPositionX = (image.getWidth(null) - g2d.getFontMetrics().stringWidth(displayText)) / 2;
 		//Pintamos el texto
 		g2d.drawString(displayText, textPositionX, textPositionY);
+	}
+
+	/**
+	 * Método que establece el texto a mostrar
+	 *
+	 * @param text texto a mostrar
+	 */
+	public void setText(String text) {
+
+		this.displayText = text;
+		repaint();
 	}
 }

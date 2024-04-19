@@ -1,9 +1,9 @@
 package gui.panels;
 
 import enemies.Enemy;
-import player.Stats;
 import gui.labels.HpLabel;
 import gui.labels.RedTextLabel;
+import player.Stats;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +39,7 @@ public class EnemyPanel extends JPanel {
 	public void update() {
 
 		enemyName.setText(enemy.getName());
-		hpLabel.setText(String.format("%d/%d", enemy.getHp(), enemy.getMaxHp()));
+		((HpLabel) hpLabel).updateCharacter(enemy);
 		attackLabel.setText(String.format("%s: %d", Stats.ATTACK.getName(),
 				enemy.getAdjustedAttack()));
 		defenseLabel.setText(String.format("%s: %d", Stats.DEFENSE.getName(),

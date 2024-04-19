@@ -12,7 +12,6 @@ public class FileManager {
 		try {
 			player = (Player) new ObjectInputStream(new FileInputStream(file)).readObject();
 		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
 			throw new FileNotFoundException("No se encontró el archivo");
 		}
 		return player;

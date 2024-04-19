@@ -40,16 +40,16 @@ public class HpLabel extends JLabel {
 			image = imageManager.getImage("hp80");
 			color = new Color(0, 0, 0, 255);
 		} else if (hpPercentage > 0.4) {
-			imageManager.getImage("h60");
+			image = imageManager.getImage("hp60");
 			color = new Color(109, 109, 109, 255);
 		} else if (hpPercentage > 0.2) {
-			imageManager.getImage("hp40");
+			image = imageManager.getImage("hp40");
 			color = new Color(109, 109, 109, 255);
 		} else if (hpPercentage > 0) {
-			imageManager.getImage("hp20");
+			image = imageManager.getImage("hp20");
 			color = new Color(109, 109, 109, 255);
 		} else {
-			imageManager.getImage("hp0");
+			image = imageManager.getImage("hp0");
 			color = new Color(255, 255, 255, 255);
 		}
 		setForeground(color);
@@ -78,7 +78,7 @@ public class HpLabel extends JLabel {
 		g2d.drawString(displayText, 0, 0);
 	}
 
-	public void setText(String text){
+	public void setText(String text) {
 
 		this.displayText = text;
 		repaint();

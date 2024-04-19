@@ -1,22 +1,15 @@
 package gui.buttons;
 
 import enemies.Enemy;
-import gui.GameWindow;
 import gui.events.AttackButtonListener;
-import gui.panels.MainPanel;
-import player.Player;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AttackButton extends ActionButton {
 
-	private Enemy enemy;
-
+	// Constructor que recibe un enemigo como parámetro
 	public AttackButton(Enemy enemy) {
 
 		super("Atacar");
-		this.enemy = enemy;
+		// Asignar la acción de atacar al enemigo
 		addActionListener(new AttackButtonListener(enemy));
 	}
 }

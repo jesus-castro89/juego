@@ -1,10 +1,10 @@
 package gui.panels;
 
-import player.Player;
 import gui.labels.HpLabel;
 import gui.labels.MpLabel;
 import gui.labels.PortraitLabel;
 import gui.labels.RedTextLabel;
+import player.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,12 +49,19 @@ public class PlayerPanel extends JPanel {
 		update();
 	}
 
+	/**
+	 * Método que actualiza el panel
+	 */
 	public void update() {
 
+		//Actualizamos los valores del jugador
 		nameLabel.setText(player.getName());
-		levelLabel.setText("Nivel: " + player.getLevel());
-		hpLabel.setText(player.getHp() + "/" + player.getMaxHp());
-		mpLabel.setText(player.getMp() + "/" + player.getMaxMp());
+		// Actualizamos el nivel del jugador
+		levelLabel.setText(String.format("Nivel: %d", player.getLevel()));
+		// Actualizamos las barras
+		((HpLabel) hpLabel).updateCharacter(player);
+		((MpLabel) mpLabel).updateCharacter(player);
+		// Actualizamos el panel
 		repaint();
 	}
 

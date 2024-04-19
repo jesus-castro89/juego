@@ -13,10 +13,9 @@ public class Main {
 		try {
 
 			Player.setInstance(FileManager.loadGame(new File("files/game.dat")));
-			GameWindow.getInstance(Player.getInstance()).startGame();
+			Player player = Player.getInstance();
+			GameWindow.getInstance(player).startGame();
 		} catch (FileNotFoundException e) {
-
-			e.printStackTrace();
 			new NewGameWindow();
 		}
 	}

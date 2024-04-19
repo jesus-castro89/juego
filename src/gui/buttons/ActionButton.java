@@ -15,27 +15,39 @@ public abstract class ActionButton extends JButton {
 
 	public ActionButton(String text) {
 
+		// Inicializamos los atributos
 		this.displayText = text;
+		// Cargamos las imágenes
 		ImageManager.getInstance().getImage("button",
 				new ImageIcon("img/ui/buttons/idleButton.png").getImage());
 		ImageManager.getInstance().getImage("buttonHover",
 				new ImageIcon("img/ui/buttons/hoverButton.png").getImage());
+		// Configuramos el botón
+		// Establecemos las imágenes
 		setIcon(new ImageIcon(ImageManager.getInstance().getImage("button")));
+		// Establecemos la imagen de rollover o cuando el jugador tiene el mouse sobre el botón
 		setRolloverIcon(new ImageIcon(ImageManager.getInstance().getImage("buttonHover")));
 		image = getIcon();
+		// Establecemos el texto con un padding superior de 2px
 		topPadding=2;
+		// Establecemos la fuente en Standard
 		font = FontManager.getInstance().getFont("Standard");
+		// Establecemos el tamaño del botón
 		Dimension size = new Dimension(117, 29);
 		setSize(size);
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);
+		// Establecemos que el botón no tenga fondo ni borde, y además sea transparente lo que no se la imagen
 		setContentAreaFilled(false);
 		setBorderPainted(false);
 		setFocusPainted(true);
 		setOpaque(false);
+		// Establecemos el cursor del mouse
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		// Agregamos la acción del botón cuando el jugador pasa el mouse sobre él
 		addMouseListener(new java.awt.event.MouseAdapter() {
+			// Cuando el mouse entra en el botón
 			public void mouseEntered(java.awt.event.MouseEvent evt) {
 
 				image = getRolloverIcon();
@@ -43,6 +55,7 @@ public abstract class ActionButton extends JButton {
 				repaint();
 			}
 
+			// Cuando el mouse sale del botón
 			public void mouseExited(java.awt.event.MouseEvent evt) {
 
 				image = getIcon();

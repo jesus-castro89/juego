@@ -4,7 +4,6 @@ import characters.BasicCharacter;
 import enemies.Enemy;
 import game.exceptions.EnemyDeadException;
 import game.exceptions.PlayerDeathException;
-import gui.NewGameWindow;
 import gui.panels.DialogPanel;
 import gui.panels.StatusPanel;
 import items.armors.Armor;
@@ -14,13 +13,10 @@ import player.skills.BasicHeal;
 import player.skills.FuryAttack;
 import player.skills.Skill;
 import util.interfaces.Randomized;
-import util.managers.FileManager;
 import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -108,7 +104,7 @@ public class Player extends BasicCharacter implements Serializable {
 		handArmor = null;
 		strength = 5;
 		defense = 5;
-		randomizeStats(20);
+		randomizeStats(25);
 		inventory = new Inventory();
 		skillMap = new HashMap<>();
 		skillMap.put(BasicHeal.NAME, BasicHeal.getInstance());
@@ -471,9 +467,10 @@ public class Player extends BasicCharacter implements Serializable {
 			maxMp += 3;
 			hp = maxHp;
 			mp = maxMp;
-			strength += Randomized.randomizeNumber(1, 3);
-			defense += Randomized.randomizeNumber(2, 4);
-			randomizeStats(5);
+			strength += Randomized.randomizeNumber(0, 3);
+			defense += Randomized.randomizeNumber(0, 3);
+			speed += Randomized.randomizeNumber(0, 3);
+			randomizeStats(10);
 			StatusPanel.getInstance(0).update();
 			return String.format("¡%s ha subido al nivel %d!\n", getName(), level);
 		} else {

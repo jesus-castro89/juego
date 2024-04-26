@@ -57,7 +57,7 @@ public class GameWindow extends JFrame {
 	/**
 	 * Método que inicializa la ventana
 	 */
-	public void  startGame() {
+	public void startGame() {
 
 		//Título de la Ventana
 		setTitle("Game Window");
@@ -117,6 +117,7 @@ public class GameWindow extends JFrame {
 
 	public void setEnemy(Enemy enemy) {
 
+		BattlePanel.getInstance(1, this.enemy).setEnemy(enemy);
 		this.enemy = enemy;
 	}
 }

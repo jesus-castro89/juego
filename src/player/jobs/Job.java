@@ -26,7 +26,7 @@ public abstract class Job {
 
 	public void callSkill(String skillName) {
 
-		this.skills.get(skillName).activate(this.player);
+		this.skills.get(skillName).activate();
 	}
 
 	public String showSkills() {

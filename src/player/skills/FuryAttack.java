@@ -2,10 +2,14 @@ package player.skills;
 
 import enemies.Enemy;
 import game.exceptions.EnemyDeadException;
-import gui_old.panels.DialogPanel;
-import gui_old.panels.EnemyPanel;
-import gui_old.panels.PlayerPanel;
+import game.exceptions.PlayerDeathException;
+import gui.GameWindow;
+import gui.panels.DialogPanel;
+import gui.panels.EnemyPanel;
+import gui.panels.MainPanel;
+import gui.panels.PlayerPanel;
 import player.Player;
+import player.Stats;
 import util.enemies.EnemyFactory;
 
 import java.io.Serializable;
@@ -27,48 +31,86 @@ public class FuryAttack extends Skill implements Serializable {
 
 	public FuryAttack() {
 
-		super(NAME, "Ataque al enemigo con 5 puntos de daño", 5, 3);
+		super(NAME, "Ataque al enemigo con +5 puntos de daño", 5, 3);
 	}
 
-	@Override
-	public String effect(Player player) {
+	private void attack(Player player, Enemy enemy) throws EnemyDeadException {
 
-		return null;
-	}
-
-	@Override
-	public String effect(Player player, Enemy enemy) {
-
+		int damage = player.getDamage() + 5;
 		player.useMp(manaCost);
-		String message = "";
-		message += String.format("¡%s ataca a %s con %d puntos de daño!\n", player.getName(), enemy.getName(), 5);
-		message += enemy.takeDamage(player, 5);
-		((DialogPanel) getCharactersPanel().getDialogPanel()).getText().append(message);
+		DialogPanel.getInstance().addText(
+				String.format("¡%s ataca a %s con %d puntos de daño!\n", player.getName(), enemy.getName(), damage));
+		DialogPanel.getInstance().addText(enemy.takeDamage(damage - enemy.getAdjustedDefense()));
 		if (enemy.isDead()) {
-
-			message += String.format("%s ha ganado %d de oro y %d de experiencia!\n", player.getName(), enemy.getGold(), enemy.getExperience());
-			message += player.gainGold(enemy.getGold());
-			message += player.gainExperience(enemy.getExperience());
-			((DialogPanel) getCharactersPanel().getDialogPanel()).getText().append(message);
-			enemy.dropItem(player);
-			Enemy newEnemy = EnemyFactory.generateRegularEnemy(player);
-			getCharactersPanel().getWindow().setEnemy(enemy);
-			charactersPanel.updateEnemy(newEnemy);
-			EnemyPanel enemyPanel = (EnemyPanel) getCharactersPanel().getWindow().getEnemyPanel();
-			PlayerPanel playerPanel = (PlayerPanel) getCharactersPanel().getWindow().getPlayerPanel();
-			enemyPanel.updateEnemy(newEnemy);
-			playerPanel.updatePlayer(player);
-		} else {
-			try {
-				enemy.attack();
-			} catch (EnemyDeadException e) {
-				throw new RuntimeException(e);
-			}
-			EnemyPanel enemyPanel = (EnemyPanel) getCharactersPanel().getWindow().getEnemyPanel();
-			PlayerPanel playerPanel = (PlayerPanel) getCharactersPanel().getWindow().getPlayerPanel();
-			enemyPanel.updateEnemy(enemy);
-			playerPanel.updatePlayer(player);
+			player.getRewards(enemy);
 		}
-		return message;
+		updatePanels(player);
+	}
+
+	private void setNewEnemy(Player player) {
+
+		// Si el enemigo está muerto o escapo por una habilidad
+		// Creamos un nuevo enemigo
+		Enemy enemy = GameWindow.getInstance(player).getEnemy();
+		Enemy newEnemy = EnemyFactory.generateRegularEnemy(player);
+		// Asignamos el nuevo enemigo al panel de juego
+		GameWindow.getInstance(player).setEnemy(newEnemy);
+		// Actualizamos los paneles
+		updatePanels(player);
+	}
+
+	@Override
+	public void activate() {
+
+		Player player = Player.getInstance();
+		Enemy enemy = GameWindow.getInstance(player).getEnemy();
+		// Validamos si el jugador tiene el maná suficiente
+		if (player.getMp() < manaCost) {
+
+			DialogPanel.getInstance().addText("¡No tienes suficiente maná para realizar esta habilidad!\n");
+		} else {
+			//Si el jugador es más rápido, entonces se cura y el enemigo ataca
+			if (player.getSpeed() >= enemy.getStats().get(Stats.SPEED)) {
+
+				try {
+					// Primero el jugador ataca
+					attack(player, enemy);
+					// Luego el enemigo ataca si sigue con vida
+					enemy.attack();
+				} catch (EnemyDeadException e) {
+					// Si el enemigo muere, entonces se crea un nuevo enemigo
+					setNewEnemy(player);
+					updatePanels(player);
+				}
+				// Actualizamos los paneles
+				updatePanels(player);
+			} else {
+				//Si el enemigo es más rápido, entonces el enemigo ataca y el jugador se cura
+				try {
+					enemy.attack();
+				} catch (EnemyDeadException e) {
+					// Si el enemigo muere, entonces se crea un nuevo enemigo
+					setNewEnemy(player);
+				}
+				try {
+					if (!player.isDead()) attack(player, enemy);
+					else throw new PlayerDeathException();
+				} catch (PlayerDeathException e) {
+					// Si el jugador muere, mostramos un mensaje de consolación
+					DialogPanel.getInstance().addText("¡Quizás deberías entrenar más duro!\n");
+					// Revivimos al jugador
+					player.revive();
+					// Mostramos un mensaje de que el jugador fue revivido
+					DialogPanel.getInstance().addText("¡Has sido revivido!\n");
+					// Creamos un nuevo enemigo
+					setNewEnemy(player);
+					updatePanels(player);
+				} catch (EnemyDeadException e) {
+					// Si el enemigo muere, entonces se crea un nuevo enemigo
+					setNewEnemy(player);
+					updatePanels(player);
+				}
+			}
+		}
 	}
 }

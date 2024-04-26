@@ -1,7 +1,9 @@
 package player.skills;
 
 import enemies.Enemy;
-import gui_old.panels.CharactersPanel;
+import gui.GameWindow;
+import gui.buttons.SkillButton;
+import gui.panels.*;
 import player.Player;
 
 import java.io.Serializable;
@@ -12,7 +14,7 @@ public abstract class Skill implements Serializable {
 	protected String description;
 	protected int level;
 	protected int manaCost;
-	protected CharactersPanel charactersPanel;
+	protected SkillButton button;
 
 	public Skill(String name, String description, int level, int manaCost) {
 
@@ -20,29 +22,22 @@ public abstract class Skill implements Serializable {
 		this.description = description;
 		this.level = level;
 		this.manaCost = manaCost;
+		this.button = new SkillButton(this);
 	}
 
-	public String activate(Player player) {
+	protected void updatePanels(Player player) {
 
-		if (player.getMp() < manaCost) {
-			return "¡No hay suficiente maná!";
-		}
-		player.useMp(manaCost);
-		return effect(player);
+		Enemy enemy = GameWindow.getInstance(player).getEnemy();
+		// Actualizamos los paneles
+		GameWindow.getInstance(player).repaint();
+		StatusPanel.getInstance(0).update();
+		MainPanel.getInstance(enemy).update(enemy);
+		PlayerPanel.getInstance(player).update();
+		EnemyPanel.getInstance(enemy).setEnemy(enemy);
+		EnemyPanel.getInstance(enemy).update();
 	}
 
-	public String activate(Player player, Enemy enemy) {
-
-		if (player.getMp() < manaCost) {
-			return "¡No hay suficiente maná!";
-		}
-		player.useMp(manaCost);
-		return effect(player, enemy);
-	}
-
-	public abstract String effect(Player player);
-
-	public abstract String effect(Player player, Enemy enemy);
+	public abstract void activate();
 
 	public String getName() {
 
@@ -59,19 +54,9 @@ public abstract class Skill implements Serializable {
 		return description;
 	}
 
-	public void setDescription(String description) {
-
-		this.description = description;
-	}
-
 	public int getLevel() {
 
 		return level;
-	}
-
-	public void setLevel(int level) {
-
-		this.level = level;
 	}
 
 	public int getManaCost() {
@@ -79,18 +64,13 @@ public abstract class Skill implements Serializable {
 		return manaCost;
 	}
 
-	public void setManaCost(int manaCost) {
+	public SkillDetail getSkillDetailPanel() {
 
-		this.manaCost = manaCost;
+		return new SkillDetail(this);
 	}
 
-	public CharactersPanel getCharactersPanel() {
+	public SkillButton getButton() {
 
-		return charactersPanel;
-	}
-
-	public void setCharactersPanel(CharactersPanel charactersPanel) {
-
-		this.charactersPanel = charactersPanel;
+		return button;
 	}
 }

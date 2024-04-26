@@ -17,6 +17,7 @@ public class StartButton extends ActionButton {
 			Player player = Player.getInstance(window.getPlayerName());
 			// Cerramos la ventana de inicio de juego y abrimos la ventana de juego
 			window.dispose();
+			// Iniciamos el juego
 			GameWindow.getInstance(player).startGame();
 		});
 	}

@@ -15,15 +15,9 @@ public class KnigthHeal extends Skill {
 	}
 
 	@Override
-	public String effect(Player player) {
+	public void activate() {
 
+		Player player = Player.getInstance();
 		player.heal((int) (player.getMaxHp() * .05));
-		return null;
-	}
-
-	@Override
-	public String effect(Player player, Enemy enemy) {
-
-		return null;
 	}
 }

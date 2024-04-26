@@ -3,7 +3,6 @@ package enemies;
 import characters.BasicCharacter;
 import game.exceptions.EnemyDeadException;
 import gui.panels.DialogPanel;
-import gui_old.panels.CharactersPanel;
 import player.Player;
 import player.Stats;
 import util.interfaces.Randomized;
@@ -162,8 +161,8 @@ public abstract class Enemy extends BasicCharacter {
 
 		int finalDamage = calculateDamage(player, damage);
 		hp -= finalDamage;
-		String message = String.format("¡%s ataca con %d punto(s) de daño!\n", name, damage);
-		message += String.format("¡%s sufre %d punto(s) de daño!\n", name, finalDamage);
+		String message = String.format("¡%s sufre %d punto(s) de daño!\n", name, finalDamage);
+		message += String.format("¡%s ataca con %d punto(s) de daño!\n", name, damage);
 		if (isDead())
 			message += String.format("¡%s ha sido derrotado!\n", name);
 		return message;

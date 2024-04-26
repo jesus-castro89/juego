@@ -2,8 +2,12 @@ package player.skills;
 
 import enemies.Enemy;
 import game.exceptions.EnemyDeadException;
-import gui_old.panels.DialogPanel;
+import gui.GameWindow;
+import gui.panels.DialogPanel;
+import gui.panels.MainPanel;
+import org.jetbrains.annotations.NotNull;
 import player.Player;
+import player.Stats;
 
 import java.io.Serializable;
 
@@ -28,23 +32,38 @@ public class BasicHeal extends Skill implements Serializable {
 	}
 
 	@Override
-	public String effect(Player player) {
+	public void activate() {
+
+		//Primero debo determinar quien es más rápido
+		Player player = Player.getInstance();
+		Enemy enemy = GameWindow.getInstance(player).getEnemy();
+		//Si el jugador es más rápido, entonces se cura y el enemigo ataca
+		if (player.getSpeed() >= enemy.getStats().get(Stats.SPEED)) {
+
+			heal(player);
+			try {
+				enemy.attack();
+			} catch (EnemyDeadException e) {
+				throw new RuntimeException(e);
+			}
+			updatePanels(player);
+		} else {
+			//Si el enemigo es más rápido, entonces el enemigo ataca y el jugador se cura
+			try {
+				enemy.attack();
+			} catch (EnemyDeadException e) {
+				throw new RuntimeException(e);
+			}
+			heal(player);
+			updatePanels(player);
+		}
+	}
+
+	private void heal(@NotNull Player player) {
 
 		player.heal(8);
 		player.useMp(manaCost);
-		return String.format("¡%s ha sido curado por 8 puntos de vida!", player.getName());
-	}
-
-	@Override
-	public String effect(Player player, Enemy enemy) {
-
-		String message = effect(player);
-		((DialogPanel) getCharactersPanel().getDialogPanel()).getText().append(message);
-		try {
-			enemy.attack();
-		} catch (EnemyDeadException e) {
-			throw new RuntimeException(e);
-		}
-		return message;
+		String message = String.format("¡%s usa curación básica y recupera 8 puntos de vida!", player.getName());
+		DialogPanel.getInstance().addText(message);
 	}
 }

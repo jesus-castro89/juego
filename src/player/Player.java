@@ -204,7 +204,7 @@ public class Player extends BasicCharacter implements Serializable {
 	 *
 	 * @param enemy el enemigo derrotado
 	 */
-	private void getRewards(@NotNull Enemy enemy) throws EnemyDeadException {
+	public void getRewards(@NotNull Enemy enemy) throws EnemyDeadException {
 
 		String message = gainExperience(enemy.getExperience());
 		message += gainGold(enemy.getGold());

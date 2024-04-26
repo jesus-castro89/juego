@@ -63,6 +63,10 @@ public class ImageManager {
 
 	private void addTabs() {
 		//Tabs
+		imageCache.addImage("activeTab",
+				new ImageIcon("img\\ui\\tabs\\activeTab.png").getImage());
+		imageCache.addImage("inactiveTab",
+				new ImageIcon("img\\ui\\tabs\\inactiveTab.png").getImage());
 		imageCache.addImage("battleTabActive",
 				new ImageIcon("img\\ui\\tabs\\battleTabActive.png").getImage());
 		imageCache.addImage("battleTabInactive",

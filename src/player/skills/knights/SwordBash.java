@@ -1,6 +1,7 @@
 package player.skills.knights;
 
 import enemies.Enemy;
+import gui.GameWindow;
 import player.Player;
 import player.skills.Skill;
 import util.annotations.JobRestriction;
@@ -14,15 +15,10 @@ public class SwordBash extends Skill {
 	}
 
 	@Override
-	public String effect(Player player) {
+	public void activate() {
 
-		return null;
-	}
-
-	@Override
-	public String effect(Player player, Enemy enemy) {
-
+		Player player = Player.getInstance();
+		Enemy enemy = GameWindow.getInstance(player).getEnemy();
 		enemy.takeDamage((int) (player.getStrength() * 1.5));
-		return null;
 	}
 }

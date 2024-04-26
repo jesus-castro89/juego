@@ -4,14 +4,15 @@ import enemies.Enemy;
 import gui.labels.HpLabel;
 import gui.labels.RedTextLabel;
 import player.Stats;
+import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class EnemyPanel extends JPanel {
+public class EnemyPanel extends BackGroundPanel {
 
 	private static EnemyPanel instance;
-	private JPanel backgroundPanel;
+	private JPanel mainPanel;
 	private JLabel enemyName;
 	private JLabel hpLabel;
 	private JLabel attackLabel;
@@ -24,15 +25,17 @@ public class EnemyPanel extends JPanel {
 	public static EnemyPanel getInstance(Enemy enemy) {
 
 		if (instance == null) {
-			instance = new EnemyPanel(enemy);
+			instance = new EnemyPanel(enemy, ImageManager.getInstance().getImage("enemyPanel"),
+					new Dimension(256, 384));
 		}
 		return instance;
 	}
 
-	private EnemyPanel(Enemy enemy) {
+	private EnemyPanel(Enemy enemy, Image image, Dimension dimension) {
 
+		super(image, dimension);
 		this.enemy = enemy;
-		add(backgroundPanel);
+		add(mainPanel);
 		update();
 	}
 
@@ -49,19 +52,6 @@ public class EnemyPanel extends JPanel {
 		expLabel.setText(String.format("EXP: %d", enemy.getExperience()));
 		goldLabel.setText(String.format("ORO: %d", enemy.getGold()));
 		repaint();
-
-	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		Image image = new ImageIcon("img/ui/panels/enemyPanel.png").getImage();
-		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.drawImage(image, 0, 0, 256, 384, null);
 	}
 
 	private void createUIComponents() {

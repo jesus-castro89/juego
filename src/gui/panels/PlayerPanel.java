@@ -5,6 +5,7 @@ import gui.labels.MpLabel;
 import gui.labels.PortraitLabel;
 import gui.labels.RedTextLabel;
 import player.Player;
+import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,11 +13,11 @@ import java.awt.*;
 /**
  * Clase que representa el panel del jugador
  */
-public class PlayerPanel extends JPanel {
+public class PlayerPanel extends BackGroundPanel {
 
 	private static PlayerPanel instance;
 	private final Player player;
-	private JPanel backgroundPanel;
+	private JPanel mainPanel;
 	private JLabel portraitLabel;
 	private JLabel nameLabel;
 	private JLabel levelLabel;
@@ -32,7 +33,8 @@ public class PlayerPanel extends JPanel {
 
 		if (instance == null) {
 
-			instance = new PlayerPanel(player);
+			instance = new PlayerPanel(player, ImageManager.getInstance().getImage("playerPanel"),
+					new Dimension(256, 384));
 		}
 		return instance;
 	}
@@ -42,10 +44,11 @@ public class PlayerPanel extends JPanel {
 	 *
 	 * @param player jugador
 	 */
-	private PlayerPanel(Player player) {
+	private PlayerPanel(Player player, Image image, Dimension dimension) {
 
+		super(image, dimension);
 		this.player = Player.getInstance();
-		add(backgroundPanel);
+		add(mainPanel);
 		update();
 	}
 
@@ -63,21 +66,6 @@ public class PlayerPanel extends JPanel {
 		((MpLabel) mpLabel).updateCharacter(player);
 		// Actualizamos el panel
 		repaint();
-	}
-
-	/**
-	 * Método que inicializa el panel
-	 */
-	@Override
-	public void paintComponent(Graphics g) {
-
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		Image image = new ImageIcon("img/ui/panels/playerPanel.png").getImage();
-		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.drawImage(image, 0, 0, 256, 384, null);
 	}
 
 	/**
@@ -116,7 +104,7 @@ public class PlayerPanel extends JPanel {
 	 */
 	public JPanel getBackgroundPanel() {
 
-		return backgroundPanel;
+		return mainPanel;
 	}
 
 	/**

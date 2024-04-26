@@ -72,25 +72,11 @@ public class StatusPanel extends JPanel {
 		setOpaque(false);
 		setBackground(null);
 		setMixingCutoutShape(new Rectangle(0, 0, 0, 0));
-		actionsPanel.addTab("Status", this);
-		actionsPanel.setTabIcon(tabIndex, isActive() ? activeIcon : inactiveIcon);
-		addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentShown(ComponentEvent e) {
-
-				actionsPanel.setTabIcon(tabIndex, activeIcon);
-			}
-
-			@Override
-			public void componentHidden(ComponentEvent e) {
-
-				actionsPanel.setTabIcon(tabIndex, inactiveIcon);
-			}
-		});
+		setName("Estado");
 		update();
 	}
 
-	public void update(){
+	public void update() {
 
 		levelLabel.setText("EXP: " + player.getExperience());
 		attackLabel.setText(player.getTotalAttack());

@@ -35,9 +35,20 @@ public abstract class Skill implements Serializable {
 		PlayerPanel.getInstance(player).update();
 		EnemyPanel.getInstance(enemy).setEnemy(enemy);
 		EnemyPanel.getInstance(enemy).update();
+		InventoryPanel.getInstance(2).update();
 	}
 
-	public abstract void activate();
+	protected abstract void skillAction();
+
+	public void activate() {
+
+		if (Player.getInstance().getMp() < manaCost) {
+
+			DialogPanel.getInstance().addText("No tienes suficiente mana para usar esta habilidad\n");
+		} else {
+			skillAction();
+		}
+	}
 
 	public String getName() {
 

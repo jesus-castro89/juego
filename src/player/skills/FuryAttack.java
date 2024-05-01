@@ -1,13 +1,10 @@
 package player.skills;
 
 import enemies.Enemy;
-import game.exceptions.EnemyDeadException;
-import game.exceptions.PlayerDeathException;
+import gui.exceptions.EnemyDeadException;
+import gui.exceptions.PlayerDeathException;
 import gui.GameWindow;
 import gui.panels.DialogPanel;
-import gui.panels.EnemyPanel;
-import gui.panels.MainPanel;
-import gui.panels.PlayerPanel;
 import player.Player;
 import player.Stats;
 import util.enemies.EnemyFactory;
@@ -60,7 +57,7 @@ public class FuryAttack extends Skill implements Serializable {
 	}
 
 	@Override
-	public void activate() {
+	public void skillAction() {
 
 		Player player = Player.getInstance();
 		Enemy enemy = GameWindow.getInstance(player).getEnemy();

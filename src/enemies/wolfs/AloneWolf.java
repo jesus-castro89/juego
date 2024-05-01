@@ -1,8 +1,7 @@
 package enemies.wolfs;
 
 import enemies.Enemy;
-import game.exceptions.EnemyDeadException;
-import gui.panels.DialogPanel;
+import gui.exceptions.EnemyDeadException;
 import items.armors.head.WoodHelmet;
 import items.misc.WolfFur;
 import player.Player;

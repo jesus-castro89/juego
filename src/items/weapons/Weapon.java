@@ -1,6 +1,7 @@
 package items.weapons;
 
 import items.Item;
+import items.ItemType;
 
 import java.io.Serializable;
 
@@ -10,6 +11,7 @@ public abstract class Weapon extends Item implements Serializable {
 
 		super(name, description, price);
 		initStats();
+		type = ItemType.WEAPON;
 	}
 
 	public abstract String effect();

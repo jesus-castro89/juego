@@ -26,7 +26,7 @@ public class EnemyPanel extends BackGroundPanel {
 
 		if (instance == null) {
 			instance = new EnemyPanel(enemy, ImageManager.getInstance().getImage("enemyPanel"),
-					new Dimension(256, 384));
+					new Dimension(256, 360));
 		}
 		return instance;
 	}

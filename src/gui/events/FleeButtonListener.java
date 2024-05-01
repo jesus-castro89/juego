@@ -1,7 +1,7 @@
 package gui.events;
 
 import enemies.Enemy;
-import game.exceptions.EnemyDeadException;
+import gui.exceptions.EnemyDeadException;
 import gui.GameWindow;
 import gui.panels.EnemyPanel;
 import gui.panels.MainPanel;

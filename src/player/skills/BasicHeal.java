@@ -1,10 +1,9 @@
 package player.skills;
 
 import enemies.Enemy;
-import game.exceptions.EnemyDeadException;
+import gui.exceptions.EnemyDeadException;
 import gui.GameWindow;
 import gui.panels.DialogPanel;
-import gui.panels.MainPanel;
 import org.jetbrains.annotations.NotNull;
 import player.Player;
 import player.Stats;
@@ -32,7 +31,7 @@ public class BasicHeal extends Skill implements Serializable {
 	}
 
 	@Override
-	public void activate() {
+	public void skillAction() {
 
 		//Primero debo determinar quien es más rápido
 		Player player = Player.getInstance();

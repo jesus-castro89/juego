@@ -1,8 +1,7 @@
 package enemies.bats;
 
 import enemies.Enemy;
-import game.exceptions.EnemyDeadException;
-import gui.panels.DialogPanel;
+import gui.exceptions.EnemyDeadException;
 import items.misc.BatEar;
 import items.misc.BatWing;
 import player.Player;

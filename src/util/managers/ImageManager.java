@@ -67,18 +67,18 @@ public class ImageManager {
 				new ImageIcon("img\\ui\\tabs\\activeTab.png").getImage());
 		imageCache.addImage("inactiveTab",
 				new ImageIcon("img\\ui\\tabs\\inactiveTab.png").getImage());
-		imageCache.addImage("battleTabActive",
-				new ImageIcon("img\\ui\\tabs\\battleTabActive.png").getImage());
-		imageCache.addImage("battleTabInactive",
-				new ImageIcon("img\\ui\\tabs\\battleTabInactive.png").getImage());
-		imageCache.addImage("inventoryTabActive",
-				new ImageIcon("img\\ui\\tabs\\inventoryTabActive.png").getImage());
-		imageCache.addImage("inventoryTabInactive",
-				new ImageIcon("img\\ui\\tabs\\inventoryTabInactive.png").getImage());
-		imageCache.addImage("statusTabActive",
-				new ImageIcon("img\\ui\\tabs\\statusTabActive.png").getImage());
-		imageCache.addImage("statusTabInactive",
-				new ImageIcon("img\\ui\\tabs\\statusTabInactive.png").getImage());
+		imageCache.addImage("armorTab",
+				new ImageIcon("img\\ui\\tabs\\armorTabActive.png").getImage());
+		imageCache.addImage("weaponTab",
+				new ImageIcon("img\\ui\\tabs\\weaponTabActive.png").getImage());
+		imageCache.addImage("miscTab",
+				new ImageIcon("img\\ui\\tabs\\miscTabActive.png").getImage());
+		imageCache.addImage("armorTabInactive",
+				new ImageIcon("img\\ui\\tabs\\armorTabInactive.png").getImage());
+		imageCache.addImage("weaponTabInactive",
+				new ImageIcon("img\\ui\\tabs\\weaponTabInactive.png").getImage());
+		imageCache.addImage("miscTabInactive",
+				new ImageIcon("img\\ui\\tabs\\miscTabInactive.png").getImage());
 	}
 
 	private void addHolders() {
@@ -115,8 +115,6 @@ public class ImageManager {
 				new ImageIcon("img\\ui\\holders\\weaponHolder.png").getImage());
 		imageCache.addImage("textHolder",
 				new ImageIcon("img\\ui\\holders\\textHolder.png").getImage());
-		imageCache.addImage("jobHolder",
-				new ImageIcon("img\\ui\\holders\\jobHolder.png").getImage());
 		imageCache.addImage("itemHolder",
 				new ImageIcon("img\\ui\\holders\\itemHolder.png").getImage());
 	}

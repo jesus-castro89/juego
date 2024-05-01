@@ -4,7 +4,6 @@ import items.armors.Armor;
 import items.armors.ArmorType;
 import player.Player;
 import player.Stats;
-import util.interfaces.Interactive;
 
 import java.io.Serializable;
 
@@ -14,7 +13,7 @@ public class WoodHelmet extends Armor implements Serializable {
 
 		super("Casco de Madera",
 				"Un casco de madera que no protege mucho, pero es mejor que nada.", 5);
-		this.type = ArmorType.HEAD;
+		this.armorType = ArmorType.HEAD;
 	}
 
 

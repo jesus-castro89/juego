@@ -4,7 +4,6 @@ import items.armors.Armor;
 import items.armors.ArmorType;
 import player.Player;
 import player.Stats;
-import util.interfaces.Interactive;
 
 import java.io.Serializable;
 
@@ -16,7 +15,7 @@ public class IronHelmet extends Armor implements Serializable {
 		super("Casco de Hierro",
 				"Un casco de hierro que protege más que el de madera.", 10);
 		this.counter = 0;
-		this.type = ArmorType.HEAD;
+		this.armorType = ArmorType.HEAD;
 	}
 
 	@Override

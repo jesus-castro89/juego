@@ -2,6 +2,7 @@ package gui.panels;
 
 import player.Player;
 import gui.labels.StatLabel;
+import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,8 +16,6 @@ public class StatusPanel extends JPanel {
 	private final Player player;
 	private final ActionsPanel actionsPanel;
 	private final int tabIndex;
-	private final ImageIcon activeIcon;
-	private final ImageIcon inactiveIcon;
 	private JPanel backgroundPanel;
 	private JLabel levelLabel;
 	private JLabel attackLabel;
@@ -43,12 +42,6 @@ public class StatusPanel extends JPanel {
 		return instance;
 	}
 
-	@Override
-	public void update(Graphics g) {
-
-		super.update(g);
-	}
-
 	/**
 	 * Constructor de la clase
 	 *
@@ -58,10 +51,8 @@ public class StatusPanel extends JPanel {
 	private StatusPanel(int tabIndex, Player player) {
 
 		this.player = player;
-		img = new ImageIcon("img/ui/panels/statusPanel.png").getImage();
+		img = ImageManager.getInstance().getImage("statusPanel");
 		this.tabIndex = tabIndex;
-		this.activeIcon = new ImageIcon("img/ui/tabs/statusTabActive.png");
-		this.inactiveIcon = new ImageIcon("img/ui/tabs/statusTabInactive.png");
 		this.actionsPanel = ActionsPanel.getInstance();
 		Dimension size = new Dimension(1019, 342);
 		setPreferredSize(size);
@@ -94,11 +85,6 @@ public class StatusPanel extends JPanel {
 		legArmorLabel.setText(player.getLegArmor() != null ? player.getLegArmor().getName() : "No equipado");
 		handArmorLabel.setText(player.getHandArmor() != null ? player.getHandArmor().getName() : "No equipado");
 		repaint();
-	}
-
-	private boolean isActive() {
-
-		return actionsPanel.getSelectedIndex() == tabIndex;
 	}
 
 	/**

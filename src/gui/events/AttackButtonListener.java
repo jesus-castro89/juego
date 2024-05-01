@@ -1,8 +1,8 @@
 package gui.events;
 
 import enemies.Enemy;
-import game.exceptions.EnemyDeadException;
-import game.exceptions.PlayerDeathException;
+import gui.exceptions.EnemyDeadException;
+import gui.exceptions.PlayerDeathException;
 import gui.GameWindow;
 import gui.panels.*;
 import player.Player;
@@ -96,5 +96,6 @@ public class AttackButtonListener implements ActionListener {
 		PlayerPanel.getInstance(player).update();
 		EnemyPanel.getInstance(enemy).setEnemy(enemy);
 		EnemyPanel.getInstance(enemy).update();
+		InventoryPanel.getInstance(2).update();
 	}
 }

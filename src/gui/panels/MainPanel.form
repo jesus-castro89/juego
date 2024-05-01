@@ -3,13 +3,13 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="512" height="384"/>
+      <xy x="20" y="20" width="512" height="360"/>
     </constraints>
     <properties>
-      <maximumSize width="512" height="384"/>
-      <minimumSize width="512" height="384"/>
+      <maximumSize width="512" height="360"/>
+      <minimumSize width="512" height="360"/>
       <opaque value="false"/>
-      <preferredSize width="512" height="384"/>
+      <preferredSize width="512" height="360"/>
     </properties>
     <border type="none"/>
     <children>

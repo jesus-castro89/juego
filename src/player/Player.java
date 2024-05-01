@@ -2,8 +2,8 @@ package player;
 
 import characters.BasicCharacter;
 import enemies.Enemy;
-import game.exceptions.EnemyDeadException;
-import game.exceptions.PlayerDeathException;
+import gui.exceptions.EnemyDeadException;
+import gui.exceptions.PlayerDeathException;
 import gui.panels.DialogPanel;
 import gui.panels.StatusPanel;
 import items.armors.Armor;
@@ -163,7 +163,7 @@ public class Player extends BasicCharacter implements Serializable {
 	 */
 	public void equipArmor(Armor armor) {
 
-		switch (armor.getType()) {
+		switch (armor.getArmorType()) {
 			case HEAD -> headArmor = armor;
 			case CHEST -> chestArmor = armor;
 			case LEGS -> legArmor = armor;

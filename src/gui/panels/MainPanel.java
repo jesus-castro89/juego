@@ -22,7 +22,7 @@ public class MainPanel extends BackGroundPanel {
 
 		if (instance == null) {
 			instance = new MainPanel(enemy, ImageManager.getInstance().getImage("charactersPanel"),
-					new Dimension(512, 384));
+					new Dimension(512, 360));
 		}
 		return instance;
 	}

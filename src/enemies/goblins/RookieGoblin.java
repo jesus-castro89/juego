@@ -1,9 +1,8 @@
 package enemies.goblins;
 
 import enemies.Enemy;
-import game.exceptions.EnemyDeadException;
-import game.exceptions.ZeroException;
-import gui.panels.DialogPanel;
+import gui.exceptions.EnemyDeadException;
+import gui.exceptions.ZeroException;
 import items.misc.GoblinEar;
 import items.weapons.blades.WoodBlade;
 import org.jetbrains.annotations.NotNull;

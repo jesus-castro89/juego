@@ -1,11 +1,14 @@
 package util;
 
+import items.Item;
+import items.ItemType;
 import items.armors.Armor;
 import items.weapons.Weapon;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Una FixedArrayList es una lista que tiene una capacidad fija y puede cambiar de tamaño de acuerdo a su función
@@ -61,13 +64,14 @@ public class FixedArrayList<T> extends ArrayList<T> implements Serializable {
 	 */
 	public List<Armor> filterArmors() {
 
-		List<Armor> armors = new ArrayList<>();
-		for (T item : this) {
-			if (item instanceof Armor) {
-				armors.add((Armor) item);
-			}
-		}
-		return armors;
+		return this.stream().filter(item -> ((Item) item).getType() == ItemType.ARMOR)
+				.map(item -> (Armor) item).collect(Collectors.toList());
+	}
+
+	public List<Item> filterMiscItems() {
+
+		return this.stream().filter(item -> ((Item) item).getType() == ItemType.MISC)
+				.map(item -> (Item) item).collect(Collectors.toList());
 	}
 
 	/**
@@ -77,12 +81,7 @@ public class FixedArrayList<T> extends ArrayList<T> implements Serializable {
 	 */
 	public List<Weapon> filterWeapons() {
 
-		List<Weapon> weapons = new ArrayList<>();
-		for (T item : this) {
-			if (item instanceof Weapon) {
-				weapons.add((Weapon) item);
-			}
-		}
-		return weapons;
+		return this.stream().filter(item -> ((Item) item).getType() == ItemType.WEAPON)
+				.map(item -> (Weapon) item).collect(Collectors.toList());
 	}
 }

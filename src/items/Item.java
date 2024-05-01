@@ -15,6 +15,7 @@ public abstract class Item implements Serializable {
 	protected final int price;
 	protected final Rarity rarity;
 	protected final HashMap<Stats, Integer> stats;
+	protected ItemType type;
 
 	public Item(String name, String description, int price) {
 
@@ -23,6 +24,7 @@ public abstract class Item implements Serializable {
 		this.price = price;
 		this.rarity = Rarity.getRandomRarity();
 		stats = new HashMap<>();
+		type = ItemType.MISC;
 	}
 
 	public String getRarity() {
@@ -66,5 +68,10 @@ public abstract class Item implements Serializable {
 	public HashMap<Stats, Integer> getStats() {
 
 		return stats;
+	}
+
+	public ItemType getType() {
+
+		return type;
 	}
 }

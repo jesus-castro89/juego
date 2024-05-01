@@ -1,7 +1,8 @@
 package enemies;
 
 import characters.BasicCharacter;
-import game.exceptions.EnemyDeadException;
+
+import gui.exceptions.EnemyDeadException;
 import gui.panels.DialogPanel;
 import player.Player;
 import player.Stats;

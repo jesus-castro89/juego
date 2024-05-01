@@ -34,7 +34,7 @@ public class PlayerPanel extends BackGroundPanel {
 		if (instance == null) {
 
 			instance = new PlayerPanel(player, ImageManager.getInstance().getImage("playerPanel"),
-					new Dimension(256, 384));
+					new Dimension(256, 360));
 		}
 		return instance;
 	}

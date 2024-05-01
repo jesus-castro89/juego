@@ -1,8 +1,6 @@
 package gui.panels;
 
 import player.Player;
-import player.skills.BasicHeal;
-import player.skills.FuryAttack;
 import player.skills.Skill;
 import util.managers.ImageManager;
 

@@ -29,6 +29,7 @@ public class GameWindow extends JFrame {
 	private JPanel mainPanel;
 	private JPanel statusPanel;
 	private JPanel battlePanel;
+	private JPanel inventoryPanel;
 
 	/**
 	 * Método que devuelve la instancia de la ventana principal
@@ -98,6 +99,8 @@ public class GameWindow extends JFrame {
 		statusPanel = StatusPanel.getInstance(0);
 		//Agregamos el panel de batalla
 		battlePanel = BattlePanel.getInstance(1, enemy);
+		//Agregamos el panel de inventario
+		inventoryPanel = InventoryPanel.getInstance(2);
 	}
 
 	public Player getPlayer() {

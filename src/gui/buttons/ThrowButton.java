@@ -1,9 +1,13 @@
 package gui.buttons;
 
-public class ThrowButton extends ActionButton{
+import gui.events.ThrowButtonListener;
+import items.Item;
 
-	public ThrowButton() {
+public class ThrowButton extends ActionButton {
+
+	public ThrowButton(Item item) {
 
 		super("Tirar");
+		addActionListener(new ThrowButtonListener(item));
 	}
 }

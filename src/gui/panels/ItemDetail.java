@@ -18,21 +18,36 @@ public class ItemDetail extends BackGroundPanel {
 	private JButton throwButton;
 	private JLabel itemName;
 	private JTextArea itemDescription;
+	private Item item;
 
 	public ItemDetail(Item item) {
 
 		super(ImageManager.getInstance().getImage("itemHolder"), new Dimension(470, 135));
+		this.item = item;
 		add(mainPanel);
 		itemName.setFont(FontManager.getInstance().getFont("Standard"));
 		itemDescription.setFont(FontManager.getInstance().getFont("Standard"));
-		itemName.setText(String.format("%s (%s - $%d)", item.getName(), item.getRarity(), item.getPrice()));
 		itemDescription.setText(item.getDescription());
+		switch (item.getType()) {
+			case WEAPON, ARMOR -> {
+				itemName.setText(String.format("%s (%s - $%d)", item.getName(), item.getRarity(), item.getPrice()));
+				equipButton.setVisible(true);
+				sellButton.setVisible(true);
+				throwButton.setVisible(false);
+			}
+			case MISC -> {
+				itemName.setText(String.format("%s ($%d)", item.getName(), item.getPrice()));
+				equipButton.setVisible(false);
+				sellButton.setVisible(true);
+				throwButton.setVisible(true);
+			}
+		}
 	}
 
 	private void createUIComponents() {
 
-		equipButton = new EquipButton();
-		sellButton = new SellButton();
-		throwButton = new ThrowButton();
+		equipButton = new EquipButton(item);
+		sellButton = new SellButton(item);
+		throwButton = new ThrowButton(item);
 	}
 }

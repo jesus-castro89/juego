@@ -49,6 +49,8 @@ public class ItemPanel extends BackGroundPanel {
 				inventory.getItems().filterMiscItems().forEach(this::addItem);
 				break;
 		}
+		// Colocamos el scroll en la parte superior
+		scrollPanel.getViewport().setViewPosition(new Point(0, 0));
 	}
 
 	protected void addItem(Item item) {

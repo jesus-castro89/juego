@@ -34,7 +34,7 @@ public class StatLabel extends JLabel {
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2d.drawImage(image, 0, 0, null);
 		int textPositionY = image.getHeight(null) / 2 + g2d.getFontMetrics().getHeight() / 4;
-		int textPositionX = (image.getWidth(null) - g2d.getFontMetrics().stringWidth(displayText)) / 2;
+		int textPositionX = (image.getWidth(null) - g2d.getFontMetrics().stringWidth(displayText)) / 2 + 15;
 		g2d.drawString(displayText, textPositionX, textPositionY);
 	}
 

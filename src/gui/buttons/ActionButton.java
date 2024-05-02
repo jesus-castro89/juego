@@ -1,5 +1,6 @@
 package gui.buttons;
 
+import gui.events.ButtonCursorAdapter;
 import util.managers.FontManager;
 import util.managers.ImageManager;
 
@@ -46,23 +47,7 @@ public abstract class ActionButton extends JButton {
 		// Establecemos el cursor del mouse
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		// Agregamos la acción del botón cuando el jugador pasa el mouse sobre él
-		addMouseListener(new java.awt.event.MouseAdapter() {
-			// Cuando el mouse entra en el botón
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
-
-				image = getRolloverIcon();
-				topPadding = 0;
-				repaint();
-			}
-
-			// Cuando el mouse sale del botón
-			public void mouseExited(java.awt.event.MouseEvent evt) {
-
-				image = getIcon();
-				topPadding = 2;
-				repaint();
-			}
-		});
+		addMouseListener(new ButtonCursorAdapter(this));
 	}
 
 	@Override
@@ -84,5 +69,47 @@ public abstract class ActionButton extends JButton {
 		int textPositionX = (image.getIconWidth() - g2d.getFontMetrics().stringWidth(displayText)) / 2;
 		//Pintamos el texto
 		g2d.drawString(displayText, textPositionX, textPositionY);
+	}
+
+	public String getDisplayText() {
+
+		return displayText;
+	}
+
+	@Override
+	public Font getFont() {
+
+		return font;
+	}
+
+	public Icon getImage() {
+
+		return image;
+	}
+
+	public int getTopPadding() {
+
+		return topPadding;
+	}
+
+	public void setDisplayText(String displayText) {
+
+		this.displayText = displayText;
+	}
+
+	@Override
+	public void setFont(Font font) {
+
+		this.font = font;
+	}
+
+	public void setImage(Icon image) {
+
+		this.image = image;
+	}
+
+	public void setTopPadding(int topPadding) {
+
+		this.topPadding = topPadding;
 	}
 }

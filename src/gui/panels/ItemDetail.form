@@ -50,6 +50,7 @@
         <properties>
           <label value=""/>
           <text value=""/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="5416f" class="javax.swing.JButton" binding="sellButton" custom-create="true">
@@ -63,6 +64,7 @@
         <properties>
           <label value=""/>
           <text value=""/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="a1cfc" class="javax.swing.JButton" binding="throwButton" custom-create="true">
@@ -76,6 +78,7 @@
         <properties>
           <label value=""/>
           <text value=""/>
+          <visible value="false"/>
         </properties>
       </component>
     </children>

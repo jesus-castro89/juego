@@ -6,4 +6,3 @@ public class ZeroException extends Exception {
         super("El Dato ingresado en 0");
     }
 }
-

@@ -18,11 +18,6 @@ public abstract class ActionButton extends JButton {
 
 		// Inicializamos los atributos
 		this.displayText = text;
-		// Cargamos las imágenes
-		ImageManager.getInstance().getImage("button",
-				new ImageIcon("img/ui/buttons/idleButton.png").getImage());
-		ImageManager.getInstance().getImage("buttonHover",
-				new ImageIcon("img/ui/buttons/hoverButton.png").getImage());
 		// Configuramos el botón
 		// Establecemos las imágenes
 		setIcon(new ImageIcon(ImageManager.getInstance().getImage("button")));
@@ -30,7 +25,7 @@ public abstract class ActionButton extends JButton {
 		setRolloverIcon(new ImageIcon(ImageManager.getInstance().getImage("buttonHover")));
 		image = getIcon();
 		// Establecemos el texto con un padding superior de 2px
-		topPadding=2;
+		topPadding = 2;
 		// Establecemos la fuente en Standard
 		font = FontManager.getInstance().getFont("Standard");
 		// Establecemos el tamaño del botón
@@ -39,7 +34,7 @@ public abstract class ActionButton extends JButton {
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);
-		// Establecemos que el botón no tenga fondo ni borde, y además sea transparente lo que no se la imagen
+		// Establecemos que el botón no tenga fondo ni borde, y además sea transparente lo que no sea la imagen
 		setContentAreaFilled(false);
 		setBorderPainted(false);
 		setFocusPainted(true);
@@ -71,11 +66,6 @@ public abstract class ActionButton extends JButton {
 		g2d.drawString(displayText, textPositionX, textPositionY);
 	}
 
-	public String getDisplayText() {
-
-		return displayText;
-	}
-
 	@Override
 	public Font getFont() {
 
@@ -85,16 +75,6 @@ public abstract class ActionButton extends JButton {
 	public Icon getImage() {
 
 		return image;
-	}
-
-	public int getTopPadding() {
-
-		return topPadding;
-	}
-
-	public void setDisplayText(String displayText) {
-
-		this.displayText = displayText;
 	}
 
 	@Override

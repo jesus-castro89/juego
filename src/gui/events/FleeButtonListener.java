@@ -64,7 +64,7 @@ public class FleeButtonListener implements ActionListener {
 		} catch (EnemyDeadException ex) {
 			// Si el enemigo muere o huye haremos esto.
 			// Se genera un nuevo enemigo.
-			enemy = EnemyFactory.generateRegularEnemy(player);
+			enemy = EnemyFactory.generateRegularEnemy();
 			// Se actualiza la instancia del enemigo en la ventana de juego.
 			GameWindow.getInstance(player).setEnemy(enemy);
 			// Se actualizan los paneles.

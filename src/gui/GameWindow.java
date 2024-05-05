@@ -88,7 +88,7 @@ public class GameWindow extends JFrame {
 		//Agregamos el panel del jugador
 		playerPanel = PlayerPanel.getInstance(player);
 		//Agregamos el enemigo
-		enemy = EnemyFactory.generateRegularEnemy(player);
+		enemy = EnemyFactory.generateRegularEnemy();
 		//Agregamos el panel del enemigo
 		enemyPanel = EnemyPanel.getInstance(enemy);
 		//Agregamos el panel principal

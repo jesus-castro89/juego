@@ -16,13 +16,6 @@ public class WoodHelmet extends Armor implements Serializable {
 		this.armorType = ArmorType.HEAD;
 	}
 
-
-	@Override
-	public String effect() {
-
-		return null;
-	}
-
 	@Override
 	protected void initStats() {
 
@@ -47,10 +40,5 @@ public class WoodHelmet extends Armor implements Serializable {
 				break;
 
 		}
-	}
-
-	@Override
-	public void callEffect(Player player) {
-
 	}
 }

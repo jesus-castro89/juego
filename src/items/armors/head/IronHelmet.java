@@ -19,12 +19,6 @@ public class IronHelmet extends Armor implements Serializable {
 	}
 
 	@Override
-	public String effect() {
-
-		return "Aumenta la defensa en 2 puntos por 3 turnos.";
-	}
-
-	@Override
 	protected void initStats() {
 
 		switch (rarity) {
@@ -50,13 +44,6 @@ public class IronHelmet extends Armor implements Serializable {
 		}
 	}
 
-	@Override
-	public void callEffect(Player player) {
-
-		counter = 3;
-		player.setDefense(player.getDefense() + 2);
-	}
-
 	public void update(Player player) {
 
 		if (counter > 0) {
@@ -65,15 +52,5 @@ public class IronHelmet extends Armor implements Serializable {
 				player.setDefense(player.getDefense() - 2);
 			}
 		}
-	}
-
-	public int getCounter() {
-
-		return counter;
-	}
-
-	public void setCounter(int counter) {
-
-		this.counter = counter;
 	}
 }

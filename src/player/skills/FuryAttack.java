@@ -2,7 +2,7 @@ package player.skills;
 
 import enemies.Enemy;
 import gui.exceptions.EnemyDeadException;
-import gui.exceptions.PlayerDeathException;
+import gui.exceptions.PlayerDeadException;
 import gui.GameWindow;
 import gui.panels.DialogPanel;
 import player.Player;
@@ -49,7 +49,7 @@ public class FuryAttack extends Skill implements Serializable {
 		// Si el enemigo está muerto o escapo por una habilidad
 		// Creamos un nuevo enemigo
 		Enemy enemy = GameWindow.getInstance(player).getEnemy();
-		Enemy newEnemy = EnemyFactory.generateRegularEnemy(player);
+		Enemy newEnemy = EnemyFactory.generateRegularEnemy();
 		// Asignamos el nuevo enemigo al panel de juego
 		GameWindow.getInstance(player).setEnemy(newEnemy);
 		// Actualizamos los paneles
@@ -91,8 +91,8 @@ public class FuryAttack extends Skill implements Serializable {
 				}
 				try {
 					if (!player.isDead()) attack(player, enemy);
-					else throw new PlayerDeathException();
-				} catch (PlayerDeathException e) {
+					else throw new PlayerDeadException();
+				} catch (PlayerDeadException e) {
 					// Si el jugador muere, mostramos un mensaje de consolación
 					DialogPanel.getInstance().addText("¡Quizás deberías entrenar más duro!\n");
 					// Revivimos al jugador

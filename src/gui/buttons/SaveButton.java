@@ -15,9 +15,9 @@ public class SaveButton extends ActionButton {
 			FileManager.saveGame(player);
 			// Agregamos un texto al panel de diálogo para indicar que la partida se guardó correctamente
 			DialogPanel.getInstance().addText("""
-					+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-					+ Partida guardada correctamente. +
-					+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+					------------------------------------------------
+					¡Partida guardada correctamente!
+					------------------------------------------------
 					""");
 		});
 	}

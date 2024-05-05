@@ -2,7 +2,6 @@ package items.armors;
 
 import items.Item;
 import items.ItemType;
-import player.Player;
 import player.Stats;
 
 import java.io.Serializable;
@@ -20,11 +19,7 @@ public abstract class Armor extends Item implements Serializable {
 		type = ItemType.ARMOR;
 	}
 
-	public abstract String effect();
-
 	protected abstract void initStats();
-
-	public abstract void callEffect(Player player);
 
 	public HashMap<Stats, Integer> getStats() {
 
@@ -39,10 +34,5 @@ public abstract class Armor extends Item implements Serializable {
 	public ArmorType getArmorType() {
 
 		return armorType;
-	}
-
-	public void setArmorType(ArmorType armorType) {
-
-		this.armorType = armorType;
 	}
 }

@@ -6,8 +6,6 @@ import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class StatusPanel extends JPanel {
 
@@ -70,14 +68,14 @@ public class StatusPanel extends JPanel {
 	public void update() {
 
 		levelLabel.setText("EXP: " + player.getExperience());
-		attackLabel.setText(player.getTotalAttack());
-		defenseLabel.setText(player.getTotalDefense());
+		attackLabel.setText(player.getDisplayAttack());
+		defenseLabel.setText(player.getDisplayDefense());
 		goldLabel.setText("ORO: " + player.getGold());
-		intLabel.setText(player.getTotalIntelligence());
-		resLabel.setText(player.getTotalResistance());
-		luckLabel.setText(player.getTotalLuck());
-		desLabel.setText(player.getTotalDexterity());
-		speedLabel.setText(player.getTotalSpeed());
+		intLabel.setText(player.getDisplayIntelligence());
+		resLabel.setText(player.getDisplayResistance());
+		luckLabel.setText(player.getDisplayLuck());
+		desLabel.setText(player.getDisplayDexterity());
+		speedLabel.setText(player.getDisplaySpeed());
 		weaponLabel.setText(player.getWeapon() != null ? player.getWeapon().getName() : "No equipado");
 		headArmorLabel.setText(player.getHeadArmor() != null ? player.getHeadArmor().getName() : "No equipado");
 		chestArmorLabel.setText(player.getChestArmor() != null ? player.getChestArmor().getName() : "No equipado");
@@ -105,21 +103,21 @@ public class StatusPanel extends JPanel {
 
 		levelLabel = new StatLabel("EXP: " + player.getExperience(),
 				new ImageIcon("img/ui/holders/expHolder.png").getImage());
-		attackLabel = new StatLabel(player.getTotalAttack(),
+		attackLabel = new StatLabel(player.getDisplayAttack(),
 				new ImageIcon("img/ui/holders/attackHolder.png").getImage());
-		defenseLabel = new StatLabel(player.getTotalDefense(),
+		defenseLabel = new StatLabel(player.getDisplayDefense(),
 				new ImageIcon("img/ui/holders/defenseHolder.png").getImage());
 		goldLabel = new StatLabel("ORO: " + player.getGold(),
 				new ImageIcon("img/ui/holders/goldHolder.png").getImage());
-		intLabel = new StatLabel(player.getTotalIntelligence(),
+		intLabel = new StatLabel(player.getDisplayIntelligence(),
 				new ImageIcon("img/ui/holders/intHolder.png").getImage());
-		resLabel = new StatLabel(player.getTotalResistance(),
+		resLabel = new StatLabel(player.getDisplayResistance(),
 				new ImageIcon("img/ui/holders/resHolder.png").getImage());
-		luckLabel = new StatLabel(player.getTotalLuck(),
+		luckLabel = new StatLabel(player.getDisplayLuck(),
 				new ImageIcon("img/ui/holders/lukHolder.png").getImage());
-		desLabel = new StatLabel(player.getTotalDexterity(),
+		desLabel = new StatLabel(player.getDisplayDexterity(),
 				new ImageIcon("img/ui/holders/dexterityHolder.png").getImage());
-		speedLabel = new StatLabel(player.getTotalSpeed(),
+		speedLabel = new StatLabel(player.getDisplaySpeed(),
 				new ImageIcon("img/ui/holders/velHolder.png").getImage());
 		weaponLabel = new StatLabel(player.getWeapon() != null ? player.getWeapon().getName() : "No equipado",
 				new ImageIcon("img/ui/holders/weaponHolder.png").getImage());

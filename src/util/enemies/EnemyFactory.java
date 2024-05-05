@@ -24,12 +24,11 @@ public class EnemyFactory {
 	/**
 	 * Genera un enemigo regular aleatorio
 	 *
-	 * @param player el jugador
-	 *
 	 * @return un enemigo regular
 	 */
-	public static Enemy generateRegularEnemy(Player player) {
+	public static Enemy generateRegularEnemy() {
 
+		Player player = Player.getInstance();
 		// Reflections es una librería que permite obtener información sobre las clases de un paquete
 		Reflections reflections = new Reflections(new ConfigurationBuilder()
 				.setUrls(ClasspathHelper.forJavaClassPath())

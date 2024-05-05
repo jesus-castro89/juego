@@ -2,14 +2,9 @@ package player;
 
 import gui.panels.DialogPanel;
 import items.Item;
-import items.armors.Armor;
-import items.weapons.Weapon;
 import util.FixedArrayList;
-import util.interfaces.Interactive;
 
-import javax.swing.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Inventory es una clase que representa el inventario del jugador.

@@ -1,12 +1,9 @@
 package items;
 
 import player.Stats;
-import util.interfaces.Interactive;
 
-import javax.swing.*;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Random;
 
 public abstract class Item implements Serializable {
 
@@ -29,25 +26,14 @@ public abstract class Item implements Serializable {
 
 	public String getRarity() {
 
-		switch (rarity) {
-			case COMMON:
-				return "Común";
-			case UNCOMMON:
-				return "Poco común";
-			case RARE:
-				return "Raro";
-			case EPIC:
-				return "Épico";
-			case LEGENDARY:
-				return "Legendario";
-			default:
-				throw new IllegalArgumentException("Invalid rarity: " + rarity);
-		}
-	}
-
-	public void displayData() {
-
-		Interactive.printDialog(String.format("Nombre: %s\nDescripción: %s\nPrecio: %d", name, description, price));
+		return switch (rarity) {
+			case COMMON -> "Común";
+			case UNCOMMON -> "Poco común";
+			case RARE -> "Raro";
+			case EPIC -> "Épico";
+			case LEGENDARY -> "Legendario";
+			default -> throw new IllegalArgumentException("Invalid rarity: " + rarity);
+		};
 	}
 
 	public String getName() {

@@ -2,7 +2,7 @@ package gui.events;
 
 import enemies.Enemy;
 import gui.exceptions.EnemyDeadException;
-import gui.exceptions.PlayerDeathException;
+import gui.exceptions.PlayerDeadException;
 import gui.GameWindow;
 import gui.panels.*;
 import player.Player;
@@ -38,7 +38,7 @@ public class AttackButtonListener implements ActionListener {
 			// Si la velocidad del jugador es mayor a la velocidad ajustada del enemigo
 			if (player.getSpeed() > enemy.getAdjustedSpeed()) {
 				// Si el jugador está muerto, lanzamos una excepción
-				if (player.isDead()) throw new PlayerDeathException();
+				if (player.isDead()) throw new PlayerDeadException();
 				// Si no, atacamos al enemigo
 				player.attack(enemy);
 				// Si el enemigo no está muerto
@@ -61,12 +61,12 @@ public class AttackButtonListener implements ActionListener {
 		} catch (EnemyDeadException ex) {
 			// Si el enemigo está muerto o escapo por una habilidad
 			// Creamos un nuevo enemigo
-			enemy = EnemyFactory.generateRegularEnemy(player);
+			enemy = EnemyFactory.generateRegularEnemy();
 			// Asignamos el nuevo enemigo al panel de juego
 			GameWindow.getInstance(player).setEnemy(enemy);
 			// Actualizamos los paneles
 			updatePanels(player);
-		} catch (PlayerDeathException ex) {
+		} catch (PlayerDeadException ex) {
 			// Si el jugador está muerto, mostramos un mensaje de consolación
 			dialogPanel.addText("¡Quizás deberías entrenar más duro!\n");
 			// Revivimos al jugador
@@ -74,7 +74,7 @@ public class AttackButtonListener implements ActionListener {
 			// Mostramos un mensaje de que el jugador fue revivido
 			dialogPanel.addText("¡Has sido revivido!\n");
 			// Creamos un nuevo enemigo
-			enemy = EnemyFactory.generateRegularEnemy(player);
+			enemy = EnemyFactory.generateRegularEnemy();
 			// Asignamos el nuevo enemigo al panel de juego
 			GameWindow.getInstance(player).setEnemy(enemy);
 			// Actualizamos los paneles

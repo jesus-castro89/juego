@@ -15,10 +15,12 @@ public class ItemPanel extends BackGroundPanel {
 	protected JScrollPane scrollPanel;
 	protected JPanel displayPanel;
 	private final ItemType type;
+	private Player player;
 
-	public ItemPanel(ItemType type) {
+	public ItemPanel(ItemType type, Player player) {
 
 		super(ImageManager.getInstance().getImage("skillPanel"), new Dimension(984, 286));
+		this.player = player;
 		this.type = type;
 		add(mainPanel);
 		initComponents();
@@ -37,7 +39,7 @@ public class ItemPanel extends BackGroundPanel {
 		scrollPanel.getViewport().setOpaque(false);
 		scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		Inventory inventory = Player.getInstance().getInventory();
+		Inventory inventory = player.getInventory();
 		switch (type) {
 			case WEAPON:
 				inventory.getItems().filterWeapons().forEach(this::addItem);

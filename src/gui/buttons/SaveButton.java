@@ -6,13 +6,13 @@ import util.managers.FileManager;
 
 public class SaveButton extends ActionButton {
 
-	public SaveButton(Player player) {
+	public SaveButton(int slot, Player player) {
 
 		super("Guardar");
 		// Asignar la acción de guardar el avance del jugador en el archivo correspondiente
 		addActionListener(e -> {
 			// Save the game
-			FileManager.saveGame(player);
+			FileManager.saveGame(slot, player);
 			// Agregamos un texto al panel de diálogo para indicar que la partida se guardó correctamente
 			DialogPanel.getInstance().addText("""
 					------------------------------------------------

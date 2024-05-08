@@ -2,7 +2,7 @@ package gui.events;
 
 import enemies.Enemy;
 import gui.exceptions.EnemyDeadException;
-import gui.GameWindow;
+import gui.windows.GameWindow;
 import gui.panels.EnemyPanel;
 import gui.panels.MainPanel;
 import gui.panels.PlayerPanel;
@@ -64,9 +64,9 @@ public class FleeButtonListener implements ActionListener {
 		} catch (EnemyDeadException ex) {
 			// Si el enemigo muere o huye haremos esto.
 			// Se genera un nuevo enemigo.
-			enemy = EnemyFactory.generateRegularEnemy();
+			enemy = EnemyFactory.generateRegularEnemy(player);
 			// Se actualiza la instancia del enemigo en la ventana de juego.
-			GameWindow.getInstance(player).setEnemy(enemy);
+			GameWindow.getInstance().setEnemy(enemy);
 			// Se actualizan los paneles.
 			updatePanels(player);
 		}
@@ -74,9 +74,9 @@ public class FleeButtonListener implements ActionListener {
 
 	private void updatePanels(Player player) {
 
-		GameWindow.getInstance(player).repaint();
-		StatusPanel.getInstance(0).update();
-		MainPanel.getInstance(enemy).update(enemy);
+		GameWindow.getInstance().repaint();
+		StatusPanel.getInstance(0, player).update();
+		MainPanel.getInstance(enemy, player).update(enemy);
 		PlayerPanel.getInstance(player).update();
 		EnemyPanel.getInstance(enemy).setEnemy(enemy);
 		EnemyPanel.getInstance(enemy).update();

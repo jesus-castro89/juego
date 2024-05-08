@@ -1,6 +1,7 @@
 package gui.panels;
 
 import enemies.Enemy;
+import gui.windows.GameWindow;
 import gui.buttons.AttackButton;
 import gui.buttons.ExitButton;
 import gui.buttons.FleeButton;
@@ -16,6 +17,7 @@ public class BattlePanel extends BackGroundPanel {
 
 	private static BattlePanel instance;
 	private Enemy enemy;
+	private Player player;
 	private final ActionsPanel actionsPanel;
 	private final int tabIndex;
 	private JPanel mainPanel;
@@ -24,12 +26,13 @@ public class BattlePanel extends BackGroundPanel {
 	private JButton fleeButton;
 	private JButton saveButton;
 	private JButton exitButton;
+	private final int slot;
 
-	public static BattlePanel getInstance(int tabIndex, Enemy enemy) {
+	public static BattlePanel getInstance(int tabIndex, Enemy enemy, Player player, int slot) {
 
 		if (instance == null) {
 
-			instance = new BattlePanel(tabIndex, enemy);
+			instance = new BattlePanel(tabIndex, enemy, player, slot);
 		}
 		return instance;
 	}
@@ -39,10 +42,12 @@ public class BattlePanel extends BackGroundPanel {
 	 *
 	 * @param tabIndex índice de la pestaña
 	 */
-	private BattlePanel(int tabIndex, Enemy enemy) {
+	private BattlePanel(int tabIndex, Enemy enemy, Player player, int slot) {
 
 		super(ImageManager.getInstance().getImage("battlePanel"), new Dimension(1019, 342));
+		this.slot = slot;
 		this.enemy = enemy;
+		this.player=player;
 		this.tabIndex = tabIndex;
 		this.actionsPanel = ActionsPanel.getInstance();
 		Dimension size = new Dimension(1019, 342);
@@ -64,11 +69,11 @@ public class BattlePanel extends BackGroundPanel {
 
 	private void createUIComponents() {
 
-		attackButton = new AttackButton(enemy);
+		attackButton = new AttackButton(enemy, player);
 		fleeButton = new FleeButton(enemy);
-		saveButton = new SaveButton(Player.getInstance());
+		saveButton = new SaveButton(getSlot(), player);
 		exitButton = new ExitButton();
-		skillsPanel = new SkillPanel();
+		skillsPanel = new SkillPanel(player);
 	}
 
 	public Enemy getEnemy() {
@@ -80,6 +85,11 @@ public class BattlePanel extends BackGroundPanel {
 
 		this.enemy = enemy;
 		attackButton.removeActionListener(attackButton.getActionListeners()[0]);
-		attackButton.addActionListener(new AttackButtonListener(enemy));
+		attackButton.addActionListener(new AttackButtonListener(enemy, player));
+	}
+
+	public int getSlot() {
+
+		return slot;
 	}
 }

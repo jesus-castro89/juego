@@ -14,18 +14,17 @@ public class SkillPanel extends BackGroundPanel {
 	private JPanel skillList;
 	private JScrollPane scrollPanel;
 
-	public SkillPanel() {
+	public SkillPanel(Player player) {
 
 		super(ImageManager.getInstance().getImage("skillPanel"), new Dimension(560, 254));
 		scrollPanel.getViewport().setOpaque(false);
 		add(mainPanel);
 		setOpaque(false);
-		initSkills();
+		initSkills(player);
 	}
 
-	private void initSkills() {
+	private void initSkills(Player player) {
 
-		Player player = Player.getInstance();
 		GridBagLayout layout = new GridBagLayout();
 		layout.columnWidths = new int[]{540};
 		layout.rowHeights = new int[]{106};

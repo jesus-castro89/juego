@@ -3,7 +3,7 @@ package gui.events;
 import enemies.Enemy;
 import gui.exceptions.EnemyDeadException;
 import gui.exceptions.PlayerDeadException;
-import gui.GameWindow;
+import gui.windows.GameWindow;
 import gui.panels.*;
 import player.Player;
 import util.enemies.EnemyFactory;
@@ -18,11 +18,13 @@ public class AttackButtonListener implements ActionListener {
 
 	// Enemigo al que se le va a atacar
 	private Enemy enemy;
+	private final Player player;
 
 	// Constructor que recibe un enemigo como parámetro
-	public AttackButtonListener(Enemy enemy) {
+	public AttackButtonListener(Enemy enemy, Player player) {
 
 		this.enemy = enemy;
+		this.player = player;
 	}
 
 	// Método que se ejecuta al presionar el botón de ataque
@@ -31,8 +33,6 @@ public class AttackButtonListener implements ActionListener {
 
 		// Obtenemos las instancias de los paneles necesarios
 		DialogPanel dialogPanel = DialogPanel.getInstance();
-		// Obtenemos la instancia del jugador
-		Player player = Player.getInstance();
 		// Intentamos atacar al enemigo
 		try {
 			// Si la velocidad del jugador es mayor a la velocidad ajustada del enemigo
@@ -61,9 +61,9 @@ public class AttackButtonListener implements ActionListener {
 		} catch (EnemyDeadException ex) {
 			// Si el enemigo está muerto o escapo por una habilidad
 			// Creamos un nuevo enemigo
-			enemy = EnemyFactory.generateRegularEnemy();
+			enemy = EnemyFactory.generateRegularEnemy(player);
 			// Asignamos el nuevo enemigo al panel de juego
-			GameWindow.getInstance(player).setEnemy(enemy);
+			GameWindow.getInstance().setEnemy(enemy);
 			// Actualizamos los paneles
 			updatePanels(player);
 		} catch (PlayerDeadException ex) {
@@ -74,9 +74,9 @@ public class AttackButtonListener implements ActionListener {
 			// Mostramos un mensaje de que el jugador fue revivido
 			dialogPanel.addText("¡Has sido revivido!\n");
 			// Creamos un nuevo enemigo
-			enemy = EnemyFactory.generateRegularEnemy();
+			enemy = EnemyFactory.generateRegularEnemy(player);
 			// Asignamos el nuevo enemigo al panel de juego
-			GameWindow.getInstance(player).setEnemy(enemy);
+			GameWindow.getInstance().setEnemy(enemy);
 			// Actualizamos los paneles
 			updatePanels(player);
 		}
@@ -90,12 +90,12 @@ public class AttackButtonListener implements ActionListener {
 	private void updatePanels(Player player) {
 
 		// Actualizamos los paneles
-		GameWindow.getInstance(player).repaint();
-		StatusPanel.getInstance(0).update();
-		MainPanel.getInstance(enemy).update(enemy);
+		GameWindow.getInstance().repaint();
+		StatusPanel.getInstance(0, player).update();
+		MainPanel.getInstance(enemy, player).update(enemy);
 		PlayerPanel.getInstance(player).update();
 		EnemyPanel.getInstance(enemy).setEnemy(enemy);
 		EnemyPanel.getInstance(enemy).update();
-		InventoryPanel.getInstance(2).update();
+		InventoryPanel.getInstance(2, player).update();
 	}
 }

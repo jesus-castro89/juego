@@ -47,7 +47,7 @@ public class PlayerPanel extends BackGroundPanel {
 	private PlayerPanel(Player player, Image image, Dimension dimension) {
 
 		super(image, dimension);
-		this.player = Player.getInstance();
+		this.player = player;
 		add(mainPanel);
 		update();
 	}
@@ -76,13 +76,13 @@ public class PlayerPanel extends BackGroundPanel {
 		//Agregamos la etiqueta del retrato
 		portraitLabel = new PortraitLabel();
 		//Agregamos la etiqueta del nombre
-		nameLabel = new RedTextLabel(Player.getInstance().getName());
+		nameLabel = new RedTextLabel(player.getName());
 		//Agregamos la etiqueta del nivel
-		levelLabel = new RedTextLabel("Nivel: " + Player.getInstance().getLevel());
+		levelLabel = new RedTextLabel("Nivel: " + player.getLevel());
 		//Agregamos la etiqueta de los puntos de vida
-		hpLabel = new HpLabel(Player.getInstance());
+		hpLabel = new HpLabel(player);
 		//Agregamos la etiqueta de los puntos de maná
-		mpLabel = new MpLabel(Player.getInstance());
+		mpLabel = new MpLabel(player);
 	}
 
 	//Getters

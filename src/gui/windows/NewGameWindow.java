@@ -1,4 +1,4 @@
-package gui;
+package gui.windows;
 
 import gui.buttons.ExitButton;
 import gui.buttons.StartButton;
@@ -11,6 +11,8 @@ import java.awt.*;
 
 public class NewGameWindow extends JFrame {
 
+	private static NewGameWindow instance;
+	private final int slot;
 	private JPanel backgroundPanel;
 	private JButton exitButton;
 	private JButton startButton;
@@ -19,8 +21,17 @@ public class NewGameWindow extends JFrame {
 	private JLabel playerLabel;
 	private JLabel portraitLabel;
 
-	public NewGameWindow() {
+	public static NewGameWindow getInstance(int slot) {
 
+		if (instance == null) {
+			instance = new NewGameWindow(slot);
+		}
+		return instance;
+	}
+
+	private NewGameWindow(int slot) {
+
+		this.slot = slot;
 		setTitle("New Game");
 		add(backgroundPanel);
 		pack();
@@ -39,6 +50,7 @@ public class NewGameWindow extends JFrame {
 		playerName.setForeground(Color.WHITE);
 		playerLabel.setFont(FontManager.getInstance().getFont("Standard"));
 		playerLabel.setForeground(Color.WHITE);
+		((StartButton) startButton).setSlot(slot);
 	}
 
 	private void createUIComponents() {
@@ -55,7 +67,7 @@ public class NewGameWindow extends JFrame {
 			}
 		};
 		portraitLabel = new PortraitLabel();
-		startButton = new StartButton(this);
+		startButton = new StartButton(this, slot);
 		exitButton = new ExitButton();
 	}
 

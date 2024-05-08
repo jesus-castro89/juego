@@ -204,7 +204,7 @@ public class Player extends BasicCharacter implements Serializable {
 		message += gainGold(enemy.getGold());
 		DialogPanel.getInstance().addText(message);
 		enemy.dropItem(this);
-		StatusPanel.getInstance(0).update();
+		StatusPanel.getInstance(0, this).update();
 		throw new EnemyDeadException();
 	}
 
@@ -402,7 +402,7 @@ public class Player extends BasicCharacter implements Serializable {
 			defense += Randomized.randomizeNumber(0, 3);
 			speed += Randomized.randomizeNumber(0, 3);
 			randomizeStats(10);
-			StatusPanel.getInstance(0).update();
+			StatusPanel.getInstance(0, this).update();
 			return String.format("¡%s ha subido al nivel %d!\n", getName(), level);
 		} else {
 			return "";

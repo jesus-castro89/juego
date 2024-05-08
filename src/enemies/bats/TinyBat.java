@@ -30,7 +30,6 @@ public class TinyBat extends Enemy {
 	@Override
 	public String getAttack() throws EnemyDeadException {
 
-		Player player = Player.getInstance();
 		String message = "";
 		if (!isDead()) {
 

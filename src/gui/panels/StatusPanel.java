@@ -31,11 +31,11 @@ public class StatusPanel extends JPanel {
 	private JLabel legArmorLabel;
 	private JLabel handArmorLabel;
 
-	public static StatusPanel getInstance(int tabIndex) {
+	public static StatusPanel getInstance(int tabIndex, Player player) {
 
 		if (instance == null) {
 
-			instance = new StatusPanel(tabIndex, Player.getInstance());
+			instance = new StatusPanel(tabIndex, player);
 		}
 		return instance;
 	}

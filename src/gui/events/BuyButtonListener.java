@@ -41,8 +41,8 @@ public class BuyButtonListener implements ActionListener {
 
 		Player player = Player.getInstance();
 		// Actualizamos los paneles
-		StatusPanel.getInstance(0).update();
+		StatusPanel.getInstance(0, player).update();
 		PlayerPanel.getInstance(player).update();
-		InventoryPanel.getInstance(2).update();
+		InventoryPanel.getInstance(2, player).update();
 	}
 }

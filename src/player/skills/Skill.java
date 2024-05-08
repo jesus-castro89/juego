@@ -1,7 +1,7 @@
 package player.skills;
 
 import enemies.Enemy;
-import gui.GameWindow;
+import gui.windows.GameWindow;
 import gui.buttons.SkillButton;
 import gui.panels.*;
 import player.Player;
@@ -27,15 +27,15 @@ public abstract class Skill implements Serializable {
 
 	protected void updatePanels(Player player) {
 
-		Enemy enemy = GameWindow.getInstance(player).getEnemy();
+		Enemy enemy = GameWindow.getInstance().getEnemy();
 		// Actualizamos los paneles
-		GameWindow.getInstance(player).repaint();
-		StatusPanel.getInstance(0).update();
-		MainPanel.getInstance(enemy).update(enemy);
+		GameWindow.getInstance().repaint();
+		StatusPanel.getInstance(0, player).update();
+		MainPanel.getInstance(enemy, player).update(enemy);
 		PlayerPanel.getInstance(player).update();
 		EnemyPanel.getInstance(enemy).setEnemy(enemy);
 		EnemyPanel.getInstance(enemy).update();
-		InventoryPanel.getInstance(2).update();
+		InventoryPanel.getInstance(2, player).update();
 	}
 
 	protected abstract void skillAction();

@@ -2,7 +2,7 @@ package player.skills;
 
 import enemies.Enemy;
 import gui.exceptions.EnemyDeadException;
-import gui.GameWindow;
+import gui.windows.GameWindow;
 import gui.panels.DialogPanel;
 import org.jetbrains.annotations.NotNull;
 import player.Player;
@@ -35,7 +35,7 @@ public class BasicHeal extends Skill implements Serializable {
 
 		//Primero debo determinar quien es más rápido
 		Player player = Player.getInstance();
-		Enemy enemy = GameWindow.getInstance(player).getEnemy();
+		Enemy enemy = GameWindow.getInstance().getEnemy();
 		//Si el jugador es más rápido, entonces se cura y el enemigo ataca
 		if (player.getSpeed() >= enemy.getStats().get(Stats.SPEED)) {
 

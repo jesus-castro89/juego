@@ -12,25 +12,27 @@ public class MainPanel extends BackGroundPanel {
 
 	private static MainPanel instance;
 	private Enemy enemy;
+	private final Player player;
 	private JPanel mainPanel;
 	private JPanel spritesPanel;
 	private JPanel dialogPanel;
 	private JLabel enemySprite;
 	private JLabel playerSprite;
 
-	public static MainPanel getInstance(Enemy enemy) {
+	public static MainPanel getInstance(Enemy enemy, Player player) {
 
 		if (instance == null) {
-			instance = new MainPanel(enemy, ImageManager.getInstance().getImage("charactersPanel"),
+			instance = new MainPanel(enemy, player, ImageManager.getInstance().getImage("charactersPanel"),
 					new Dimension(512, 360));
 		}
 		return instance;
 	}
 
-	private MainPanel(Enemy enemy, Image image, Dimension dimension) {
+	private MainPanel(Enemy enemy, Player player, Image image, Dimension dimension) {
 
 		super(image, dimension);
 		this.enemy = enemy;
+		this.player=player;
 		add(mainPanel);
 	}
 
@@ -43,7 +45,7 @@ public class MainPanel extends BackGroundPanel {
 	private void createUIComponents() {
 
 		dialogPanel = DialogPanel.getInstance();
-		playerSprite = new SpriteLabel(Player.getInstance().getImage());
+		playerSprite = new SpriteLabel(player.getImage());
 		enemySprite = new SpriteLabel(enemy.getImage());
 	}
 

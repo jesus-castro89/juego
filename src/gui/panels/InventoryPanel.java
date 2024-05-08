@@ -22,11 +22,11 @@ public class InventoryPanel extends JPanel {
 	private JPanel armorsPanel;
 	private JPanel miscsPanel;
 
-	public static InventoryPanel getInstance(int tabIndex) {
+	public static InventoryPanel getInstance(int tabIndex, Player player) {
 
 		if (instance == null) {
 
-			instance = new InventoryPanel(tabIndex);
+			instance = new InventoryPanel(tabIndex, player);
 		}
 		return instance;
 	}
@@ -39,9 +39,9 @@ public class InventoryPanel extends JPanel {
 		repaint();
 	}
 
-	private InventoryPanel(int tabIndex) {
+	private InventoryPanel(int tabIndex, Player player) {
 
-		player = Player.getInstance();
+		this.player = player;
 		itemDisplayPanel.setUI(new InventoryTab());
 		img = ImageManager.getInstance().getImage("inventoryPanel");
 		this.tabIndex = tabIndex;
@@ -75,9 +75,9 @@ public class InventoryPanel extends JPanel {
 
 	private void createUIComponents() {
 
-		weaponsPanel = new ItemPanel(ItemType.WEAPON);
-		armorsPanel = new ItemPanel(ItemType.ARMOR);
-		miscsPanel = new ItemPanel(ItemType.MISC);
+		weaponsPanel = new ItemPanel(ItemType.WEAPON, player);
+		armorsPanel = new ItemPanel(ItemType.ARMOR, player);
+		miscsPanel = new ItemPanel(ItemType.MISC, player);
 	}
 
 	public void update() {

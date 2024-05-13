@@ -21,9 +21,9 @@
       <scrollpane id="374b8" binding="scrollPanel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <minimum-size width="-1" height="162"/>
-            <preferred-size width="-1" height="162"/>
-            <maximum-size width="-1" height="162"/>
+            <minimum-size width="-1" height="150"/>
+            <preferred-size width="-1" height="150"/>
+            <maximum-size width="-1" height="150"/>
           </grid>
         </constraints>
         <properties>

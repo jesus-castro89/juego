@@ -1,5 +1,6 @@
 package gui.panels;
 
+import util.interfaces.Dimensions;
 import util.managers.FontManager;
 import util.managers.ImageManager;
 
@@ -18,7 +19,7 @@ public class DialogPanel extends BackGroundPanel {
 		if (instance == null) {
 
 			instance = new DialogPanel(ImageManager.getInstance().getImage("dialogPanel"),
-					new Dimension(500, 182));
+					Dimensions.DIALOG_SCROLL_SIZE);
 		}
 		return instance;
 	}
@@ -27,6 +28,10 @@ public class DialogPanel extends BackGroundPanel {
 
 		super(image, dimension);
 		add(mainPanel);
+		mainPanel.setSize(dimension);
+		mainPanel.setPreferredSize(dimension);
+		mainPanel.setMaximumSize(dimension);
+		mainPanel.setMinimumSize(dimension);
 		scrollPanel.getViewport().setOpaque(false);
 		scrollPanel.setOpaque(false);
 		scrollPanel.setBorder(null);

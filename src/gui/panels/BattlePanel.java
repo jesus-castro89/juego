@@ -44,13 +44,13 @@ public class BattlePanel extends BackGroundPanel {
 	 */
 	private BattlePanel(int tabIndex, Enemy enemy, Player player, int slot) {
 
-		super(ImageManager.getInstance().getImage("battlePanel"), new Dimension(1019, 342));
+		super(ImageManager.getInstance().getImage("battlePanel"), new Dimension(1275, 340));
 		this.slot = slot;
 		this.enemy = enemy;
 		this.player=player;
 		this.tabIndex = tabIndex;
 		this.actionsPanel = ActionsPanel.getInstance();
-		Dimension size = new Dimension(1019, 342);
+		Dimension size = new Dimension(1275, 340);
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);

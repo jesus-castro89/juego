@@ -9,10 +9,9 @@ import util.managers.ImageManager;
 import javax.swing.*;
 import java.awt.*;
 
-public class InventoryPanel extends JPanel {
+public class InventoryPanel extends BackGroundPanel {
 
 	private static InventoryPanel instance;
-	private final Image img;
 	private final Player player;
 	private final ActionsPanel actionsPanel;
 	private final int tabIndex;
@@ -41,12 +40,12 @@ public class InventoryPanel extends JPanel {
 
 	private InventoryPanel(int tabIndex, Player player) {
 
+		super(ImageManager.getInstance().getImage("inventoryPanel"), new Dimension(1275, 340));
 		this.player = player;
 		itemDisplayPanel.setUI(new InventoryTab());
-		img = ImageManager.getInstance().getImage("inventoryPanel");
 		this.tabIndex = tabIndex;
 		this.actionsPanel = ActionsPanel.getInstance();
-		Dimension size = new Dimension(1019, 342);
+		Dimension size = new Dimension(1275, 340);
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);
@@ -57,20 +56,6 @@ public class InventoryPanel extends JPanel {
 		setMixingCutoutShape(new Rectangle(0, 0, 0, 0));
 		setName("Inventario");
 		itemDisplayPanel.addMouseMotionListener(new HandCursorListener(itemDisplayPanel));
-	}
-
-	/**
-	 * Método que inicializa el panel
-	 */
-	@Override
-	public void paintComponent(Graphics g) {
-
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.drawImage(img, 0, 0, 1019, 342, null);
 	}
 
 	private void createUIComponents() {

@@ -3,6 +3,7 @@ package gui.panels;
 import enemies.Enemy;
 import player.Player;
 import gui.labels.SpriteLabel;
+import util.interfaces.Dimensions;
 import util.managers.ImageManager;
 
 import javax.swing.*;
@@ -23,7 +24,7 @@ public class MainPanel extends BackGroundPanel {
 
 		if (instance == null) {
 			instance = new MainPanel(enemy, player, ImageManager.getInstance().getImage("charactersPanel"),
-					new Dimension(512, 360));
+					Dimensions.MAIN_PANEL_SIZE);
 		}
 		return instance;
 	}
@@ -33,6 +34,14 @@ public class MainPanel extends BackGroundPanel {
 		super(image, dimension);
 		this.enemy = enemy;
 		this.player=player;
+		mainPanel.setSize(dimension);
+		mainPanel.setPreferredSize(dimension);
+		mainPanel.setMaximumSize(dimension);
+		mainPanel.setMinimumSize(dimension);
+		spritesPanel.setSize(Dimensions.DIALOG_PANEL_SIZE);
+		spritesPanel.setPreferredSize(Dimensions.DIALOG_PANEL_SIZE);
+		spritesPanel.setMaximumSize(Dimensions.DIALOG_PANEL_SIZE);
+		spritesPanel.setMinimumSize(Dimensions.DIALOG_PANEL_SIZE);
 		add(mainPanel);
 	}
 

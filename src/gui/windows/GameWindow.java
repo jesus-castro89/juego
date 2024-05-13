@@ -4,8 +4,10 @@ import enemies.Enemy;
 import player.Player;
 import util.enemies.EnemyFactory;
 import gui.panels.*;
+import util.interfaces.Dimensions;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Clase que representa la ventana principal del juego
@@ -78,6 +80,31 @@ public class GameWindow extends JFrame {
 	 */
 	public void startGame() {
 
+		backgroundPanel.setSize(Dimensions.SCREEN_SIZE);
+		backgroundPanel.setPreferredSize(Dimensions.SCREEN_SIZE);
+		backgroundPanel.setMaximumSize(Dimensions.SCREEN_SIZE);
+		backgroundPanel.setMinimumSize(Dimensions.SCREEN_SIZE);
+		//Panel superior
+		topPanel.setSize(Dimensions.TOP_PANEL_SIZE);
+		topPanel.setPreferredSize(Dimensions.TOP_PANEL_SIZE);
+		topPanel.setMaximumSize(Dimensions.TOP_PANEL_SIZE);
+		topPanel.setMinimumSize(Dimensions.TOP_PANEL_SIZE);
+		System.out.println(topPanel.getSize());
+		//Panel Principal
+		mainPanel.setSize(Dimensions.MAIN_PANEL_SIZE);
+		mainPanel.setPreferredSize(Dimensions.MAIN_PANEL_SIZE);
+		mainPanel.setMaximumSize(Dimensions.MAIN_PANEL_SIZE);
+		mainPanel.setMinimumSize(Dimensions.MAIN_PANEL_SIZE);
+		//Panel de Jugador
+		playerPanel.setSize(Dimensions.SIDE_PANEL_SIZE);
+		playerPanel.setPreferredSize(Dimensions.SIDE_PANEL_SIZE);
+		playerPanel.setMaximumSize(Dimensions.SIDE_PANEL_SIZE);
+		playerPanel.setMinimumSize(Dimensions.SIDE_PANEL_SIZE);
+		//Panel de Enemigo
+		enemyPanel.setSize(Dimensions.SIDE_PANEL_SIZE);
+		enemyPanel.setPreferredSize(Dimensions.SIDE_PANEL_SIZE);
+		enemyPanel.setMaximumSize(Dimensions.SIDE_PANEL_SIZE);
+		enemyPanel.setMinimumSize(Dimensions.SIDE_PANEL_SIZE);
 		//Título de la Ventana
 		setTitle("Game Window");
 		//Operación por defecto de cierre
@@ -92,6 +119,7 @@ public class GameWindow extends JFrame {
 		setLocationRelativeTo(null);
 		//Hacemos visible la ventana
 		setVisible(true);
+		System.out.println(topPanel);
 	}
 
 	private void createUIComponents() {

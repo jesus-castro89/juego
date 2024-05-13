@@ -4,6 +4,7 @@ import enemies.Enemy;
 import gui.labels.HpLabel;
 import gui.labels.RedTextLabel;
 import player.Stats;
+import util.interfaces.Dimensions;
 import util.managers.ImageManager;
 
 import javax.swing.*;
@@ -26,7 +27,7 @@ public class EnemyPanel extends BackGroundPanel {
 
 		if (instance == null) {
 			instance = new EnemyPanel(enemy, ImageManager.getInstance().getImage("enemyPanel"),
-					new Dimension(256, 360));
+					Dimensions.SIDE_PANEL_SIZE);
 		}
 		return instance;
 	}
@@ -37,6 +38,10 @@ public class EnemyPanel extends BackGroundPanel {
 		this.enemy = enemy;
 		add(mainPanel);
 		update();
+		mainPanel.setSize(dimension);
+		mainPanel.setPreferredSize(dimension);
+		mainPanel.setMaximumSize(dimension);
+		mainPanel.setMinimumSize(dimension);
 	}
 
 	public void update() {

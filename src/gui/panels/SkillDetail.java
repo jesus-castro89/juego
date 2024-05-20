@@ -3,10 +3,8 @@ package gui.panels;
 import gui.buttons.SkillButton;
 import player.skills.Skill;
 import util.managers.FontManager;
-import util.managers.ImageManager;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class SkillDetail extends BackGroundPanel {
 
@@ -20,8 +18,8 @@ public class SkillDetail extends BackGroundPanel {
 
 	public SkillDetail(Skill skill) {
 
-		super(ImageManager.getInstance().getImage("skillDetailPanel"),
-				new Dimension(530, 116));
+		super(
+		);
 		this.skill = skill;
 		add(mainPanel);
 		skillNameLabel.setText(skill.getName());

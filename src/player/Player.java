@@ -241,12 +241,18 @@ public class Player extends BasicCharacter implements Serializable {
 
 	public String getDisplayAttack() {
 
-		int plusAttack = getTotalAttack();
+		int plusAttack = getPlusAttack();
 		return plusAttack == strength ? String.format("FUE: %d", strength) :
 				String.format("FUE: %d (+%d)", getStrength(), plusAttack);
 	}
 
 	private int getTotalAttack() {
+
+		int plusAttack = getPlusAttack();
+		return plusAttack > 0 ? strength + plusAttack : strength;
+	}
+
+	private int getPlusAttack() {
 
 		int plusAttack = 0;
 		plusAttack += getWeaponStat(weapon, Stats.ATTACK);
@@ -255,17 +261,23 @@ public class Player extends BasicCharacter implements Serializable {
 		plusAttack += getArmorStat(legArmor, Stats.ATTACK);
 		plusAttack += getArmorStat(footArmor, Stats.ATTACK);
 		plusAttack += getArmorStat(handArmor, Stats.ATTACK);
-		return plusAttack > 0 ? strength + plusAttack : strength;
+		return plusAttack;
 	}
 
 	public String getDisplayDefense() {
 
-		int plusDefense = getTotalDefense();
+		int plusDefense = getPlusDefense();
 		return plusDefense == defense ? String.format("DEF: %d", defense) :
 				String.format("DEF: %d (+%d)", getDefense(), plusDefense);
 	}
 
 	private int getTotalDefense() {
+
+		int plusDefense = getPlusDefense();
+		return plusDefense > 0 ? defense + plusDefense : defense;
+	}
+
+	private int getPlusDefense() {
 
 		int plusDefense = 0;
 		plusDefense += getArmorStat(headArmor, Stats.DEFENSE);
@@ -273,17 +285,23 @@ public class Player extends BasicCharacter implements Serializable {
 		plusDefense += getArmorStat(legArmor, Stats.DEFENSE);
 		plusDefense += getArmorStat(footArmor, Stats.DEFENSE);
 		plusDefense += getArmorStat(handArmor, Stats.DEFENSE);
-		return plusDefense > 0 ? defense + plusDefense : defense;
+		return plusDefense;
 	}
 
 	public String getDisplayIntelligence() {
 
-		int plusIntelligence = getTotalIntelligence();
+		int plusIntelligence = getPlusIntelligence();
 		return plusIntelligence == intelligence ? String.format("INT: %d", intelligence) :
 				String.format("INT: %d (+%d)", intelligence, plusIntelligence);
 	}
 
 	private int getTotalIntelligence() {
+
+		int plusIntelligence = getPlusIntelligence();
+		return plusIntelligence > 0 ? intelligence + plusIntelligence : intelligence;
+	}
+
+	private int getPlusIntelligence() {
 
 		int plusIntelligence = 0;
 		plusIntelligence += getArmorStat(headArmor, Stats.INTELLIGENCE);
@@ -291,12 +309,12 @@ public class Player extends BasicCharacter implements Serializable {
 		plusIntelligence += getArmorStat(legArmor, Stats.INTELLIGENCE);
 		plusIntelligence += getArmorStat(footArmor, Stats.INTELLIGENCE);
 		plusIntelligence += getArmorStat(handArmor, Stats.INTELLIGENCE);
-		return plusIntelligence > 0 ? intelligence + plusIntelligence : intelligence;
+		return plusIntelligence;
 	}
 
 	public String getDisplayDexterity() {
 
-		int plusDexterity = getTotalDexterity();
+		int plusDexterity = getPlusDexterity();
 		return plusDexterity == dexterity ? String.format("DES: %d", dexterity) :
 				String.format("DES: %d (+%d)", dexterity, plusDexterity);
 
@@ -304,23 +322,35 @@ public class Player extends BasicCharacter implements Serializable {
 
 	private int getTotalDexterity() {
 
+		int plusDexterity = getPlusDexterity();
+		return plusDexterity > 0 ? dexterity + plusDexterity : dexterity;
+	}
+
+	private int getPlusDexterity() {
+
 		int plusDexterity = 0;
 		plusDexterity += getArmorStat(headArmor, Stats.DEXTERITY);
 		plusDexterity += getArmorStat(chestArmor, Stats.DEXTERITY);
 		plusDexterity += getArmorStat(legArmor, Stats.DEXTERITY);
 		plusDexterity += getArmorStat(footArmor, Stats.DEXTERITY);
 		plusDexterity += getArmorStat(handArmor, Stats.DEXTERITY);
-		return plusDexterity > 0 ? dexterity + plusDexterity : dexterity;
+		return plusDexterity;
 	}
 
 	public String getDisplayLuck() {
 
-		int plusLuck = getTotalLuck();
+		int plusLuck = getPlusLuck();
 		return plusLuck == luck ? String.format("SUE: %d", luck) :
 				String.format("SUE: %d (+%d)", luck, plusLuck);
 	}
 
 	private int getTotalLuck() {
+
+		int plusLuck = getPlusLuck();
+		return plusLuck > 0 ? luck + plusLuck : luck;
+	}
+
+	private int getPlusLuck() {
 
 		int plusLuck = 0;
 		plusLuck += getArmorStat(headArmor, Stats.LUCK);
@@ -328,17 +358,23 @@ public class Player extends BasicCharacter implements Serializable {
 		plusLuck += getArmorStat(legArmor, Stats.LUCK);
 		plusLuck += getArmorStat(footArmor, Stats.LUCK);
 		plusLuck += getArmorStat(handArmor, Stats.LUCK);
-		return plusLuck > 0 ? luck + plusLuck : luck;
+		return plusLuck;
 	}
 
 	public String getDisplayResistance() {
 
-		int plusResistance = getTotalResistance();
+		int plusResistance = getPlusResistance();
 		return plusResistance == resistance ? String.format("RES: %d", resistance) :
 				String.format("RES: %d (+%d)", resistance, plusResistance);
 	}
 
 	private int getTotalResistance() {
+
+		int plusResistance = getPlusResistance();
+		return plusResistance > 0 ? resistance + plusResistance : resistance;
+	}
+
+	private int getPlusResistance() {
 
 		int plusResistance = 0;
 		plusResistance += getArmorStat(headArmor, Stats.RESISTANCE);
@@ -346,17 +382,23 @@ public class Player extends BasicCharacter implements Serializable {
 		plusResistance += getArmorStat(legArmor, Stats.RESISTANCE);
 		plusResistance += getArmorStat(footArmor, Stats.RESISTANCE);
 		plusResistance += getArmorStat(handArmor, Stats.RESISTANCE);
-		return plusResistance > 0 ? resistance + plusResistance : resistance;
+		return plusResistance;
 	}
 
 	public String getDisplaySpeed() {
 
-		int plusSpeed = getTotalSpeed();
+		int plusSpeed = getPlusSpeed();
 		return plusSpeed == speed ? String.format("VEL: %d", speed) :
 				String.format("VEL: %d (+%d)", speed, plusSpeed);
 	}
 
 	private int getTotalSpeed() {
+
+		int plusSpeed = getPlusSpeed();
+		return plusSpeed > 0 ? speed + plusSpeed : speed;
+	}
+
+	private int getPlusSpeed() {
 
 		int plusSpeed = 0;
 		plusSpeed += getArmorStat(headArmor, Stats.SPEED);
@@ -364,7 +406,7 @@ public class Player extends BasicCharacter implements Serializable {
 		plusSpeed += getArmorStat(legArmor, Stats.SPEED);
 		plusSpeed += getArmorStat(footArmor, Stats.SPEED);
 		plusSpeed += getArmorStat(handArmor, Stats.SPEED);
-		return plusSpeed > 0 ? speed + plusSpeed : speed;
+		return plusSpeed;
 	}
 
 	public String takeDamage(int damage) {

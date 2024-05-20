@@ -4,7 +4,6 @@ import items.Item;
 import items.ItemType;
 import player.Inventory;
 import player.Player;
-import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,11 +14,11 @@ public class ItemPanel extends BackGroundPanel {
 	protected JScrollPane scrollPanel;
 	protected JPanel displayPanel;
 	private final ItemType type;
-	private Player player;
+	private final Player player;
 
 	public ItemPanel(ItemType type, Player player) {
 
-		super(ImageManager.getInstance().getImage("skillPanel"), new Dimension(984, 286));
+		super();
 		this.player = player;
 		this.type = type;
 		add(mainPanel);
@@ -29,7 +28,7 @@ public class ItemPanel extends BackGroundPanel {
 	public void initComponents() {
 
 		GridBagLayout layout = new GridBagLayout();
-		layout.columnWidths = new int[]{450, 450};
+		layout.columnWidths = new int[]{400, 400, 400};
 		displayPanel.removeAll();
 		displayPanel.setLayout(layout);
 		displayPanel.setOpaque(false);
@@ -58,8 +57,8 @@ public class ItemPanel extends BackGroundPanel {
 	protected void addItem(Item item) {
 
 		GridBagConstraints c = new GridBagConstraints();
-		c.gridx = displayPanel.getComponentCount() % 2;
-		c.gridy = displayPanel.getComponentCount() / 2;
+		c.gridx = displayPanel.getComponentCount() % 3;
+		c.gridy = displayPanel.getComponentCount() / 3;
 		c.fill = GridBagConstraints.CENTER;
 		c.anchor = GridBagConstraints.CENTER;
 		c.weightx = 1;

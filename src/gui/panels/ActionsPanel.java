@@ -1,7 +1,7 @@
 package gui.panels;
 
 import gui.events.HandCursorListener;
-import gui.tabs.GameTab;
+import gui.ui.GameTabUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +28,7 @@ public class ActionsPanel extends JTabbedPane {
 		setMaximumSize(size);
 		setSize(size);
 		setOpaque(false);
-		setUI(new GameTab());
+		setUI(new GameTabUI());
 		addMouseMotionListener(new HandCursorListener(this));
 	}
 }

@@ -1,6 +1,8 @@
 package gui.labels;
 
 import characters.BasicCharacter;
+import util.interfaces.Dimensions;
+import util.managers.FontManager;
 import util.managers.ImageManager;
 
 import javax.swing.*;
@@ -8,26 +10,26 @@ import java.awt.*;
 
 public class HpLabel extends JLabel {
 
-	private BasicCharacter character;
-	private Image image;
-	private String displayText;
+	protected BasicCharacter character;
+	protected Image image;
+	protected String displayText;
 
 	public HpLabel(BasicCharacter character) {
 
 		super(character.getName());
 		this.character = character;
 		init();
-		Font font = new Font("Arial", Font.BOLD, 15);
-		Dimension size = new Dimension(image.getWidth(null), image.getHeight(null) + 10);
+		Font font = FontManager.getInstance().getFont("Depixel");
+		Dimension size = Dimensions.BAR_SIZE;
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);
 		setSize(size);
-		setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+		setBorder(BorderFactory.createEmptyBorder());
 		setFont(font);
 	}
 
-	private void init() {
+	protected void init() {
 
 		displayText = String.format("%d/%d", character.getHp(), character.getMaxHp());
 		double hpPercentage = (double) character.getHp() / character.getMaxHp();
@@ -71,8 +73,13 @@ public class HpLabel extends JLabel {
 		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		g2d.drawImage(image, 0, 10, null);
-		int textPositionY = image.getHeight(null) / 2 + 11 + g2d.getFontMetrics().getHeight() / 4;
+		paintImage(g2d);
+	}
+
+	protected void paintImage(Graphics2D g2d) {
+
+		g2d.drawImage(image, 0, 0, null);
+		int textPositionY = image.getHeight(null) / 2 + 1 + g2d.getFontMetrics().getHeight() / 4;
 		int textPositionX = ((image.getWidth(null) - 28) / 2) + 28 - (g2d.getFontMetrics().stringWidth(displayText) / 2);
 		g2d.translate(textPositionX, textPositionY);
 		g2d.drawString(displayText, 0, 0);

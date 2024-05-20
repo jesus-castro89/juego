@@ -1,14 +1,13 @@
 package gui.panels;
 
 import enemies.Enemy;
-import gui.windows.GameWindow;
 import gui.buttons.AttackButton;
 import gui.buttons.ExitButton;
 import gui.buttons.FleeButton;
 import gui.buttons.SaveButton;
 import gui.events.AttackButtonListener;
 import player.Player;
-import util.managers.ImageManager;
+import util.interfaces.Dimensions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,13 +43,13 @@ public class BattlePanel extends BackGroundPanel {
 	 */
 	private BattlePanel(int tabIndex, Enemy enemy, Player player, int slot) {
 
-		super(ImageManager.getInstance().getImage("battlePanel"), new Dimension(1275, 340));
+		super();
 		this.slot = slot;
 		this.enemy = enemy;
-		this.player=player;
+		this.player = player;
 		this.tabIndex = tabIndex;
 		this.actionsPanel = ActionsPanel.getInstance();
-		Dimension size = new Dimension(1275, 340);
+		Dimension size = Dimensions.TAB_SIZE;
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);
@@ -70,7 +69,7 @@ public class BattlePanel extends BackGroundPanel {
 	private void createUIComponents() {
 
 		attackButton = new AttackButton(enemy, player);
-		fleeButton = new FleeButton(enemy);
+		fleeButton = new FleeButton(player, enemy);
 		saveButton = new SaveButton(getSlot(), player);
 		exitButton = new ExitButton();
 		skillsPanel = new SkillPanel(player);

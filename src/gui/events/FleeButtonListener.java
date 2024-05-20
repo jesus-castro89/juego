@@ -20,14 +20,16 @@ public class FleeButtonListener implements ActionListener {
 
 	// Enemigo al que se le aplicará el comportamiento de huir.
 	private Enemy enemy;
+	private Player player;
 
 	/**
 	 * Constructor de la clase.
 	 *
 	 * @param enemy Enemigo al que se le aplicará el comportamiento de huir.
 	 */
-	public FleeButtonListener(Enemy enemy) {
+	public FleeButtonListener(Player player, Enemy enemy) {
 
+		this.player = player;
 		this.enemy = enemy;
 	}
 
@@ -38,8 +40,7 @@ public class FleeButtonListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// Se obtiene la instancia del jugador.
-		Player player = Player.getInstance();
+
 		// Se intenta huir del enemigo.
 		try {
 			// Si la velocidad del jugador es mayor que la velocidad ajustada del enemigo,

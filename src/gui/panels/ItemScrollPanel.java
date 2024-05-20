@@ -1,11 +1,15 @@
 package gui.panels;
 
+import org.jetbrains.annotations.NotNull;
+import util.interfaces.Dimensions;
 import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ItemScrollPanel extends JScrollPane {
+
+	private Dimension scrollSize;
 
 	public ItemScrollPanel(JPanel panel) {
 
@@ -20,15 +24,13 @@ public class ItemScrollPanel extends JScrollPane {
 		setBorder(null);
 	}
 
-	@Override
-	protected void paintComponent(Graphics g) {
+	public Dimension getScrollSize() {
 
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.drawImage(ImageManager.getInstance().getImage("skillPanel"), 0, 0,
-				974, 291, null);
+		return scrollSize;
+	}
+
+	public void setScrollSize(Dimension scrollSize) {
+
+		this.scrollSize = scrollSize;
 	}
 }

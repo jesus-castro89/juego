@@ -2,7 +2,6 @@ package gui.panels;
 
 import player.Player;
 import player.skills.Skill;
-import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +15,7 @@ public class SkillPanel extends BackGroundPanel {
 
 	public SkillPanel(Player player) {
 
-		super(ImageManager.getInstance().getImage("skillPanel"), new Dimension(560, 254));
+		super();
 		scrollPanel.getViewport().setOpaque(false);
 		add(mainPanel);
 		setOpaque(false);

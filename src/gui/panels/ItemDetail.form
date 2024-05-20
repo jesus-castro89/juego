@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.panels.ItemDetail">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
-    <margin top="5" left="5" bottom="5" right="5"/>
+    <margin top="5" left="8" bottom="8" right="8"/>
     <constraints>
-      <xy x="20" y="20" width="460" height="110"/>
+      <xy x="20" y="20" width="460" height="135"/>
     </constraints>
     <properties>
-      <maximumSize width="460" height="110"/>
-      <minimumSize width="460" height="110"/>
+      <maximumSize width="-1" height="-1"/>
+      <minimumSize width="-1" height="-1"/>
       <opaque value="false"/>
-      <preferredSize width="460" height="110"/>
+      <preferredSize width="-1" height="-1"/>
     </properties>
     <border type="none"/>
     <children>

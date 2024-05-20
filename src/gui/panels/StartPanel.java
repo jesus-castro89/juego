@@ -5,7 +5,6 @@ import gui.buttons.NewGameButton;
 import player.Player;
 import util.managers.FileManager;
 import util.managers.FontManager;
-import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,7 +44,7 @@ public class StartPanel extends BackGroundPanel {
 
 	private StartPanel() {
 
-		super(ImageManager.getInstance().getImage("skillPanel"), new Dimension(960, 540));
+		super();
 		add(backgroundPanel);
 		update();
 	}

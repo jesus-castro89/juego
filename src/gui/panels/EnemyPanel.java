@@ -34,14 +34,11 @@ public class EnemyPanel extends BackGroundPanel {
 
 	private EnemyPanel(Enemy enemy, Image image, Dimension dimension) {
 
-		super(image, dimension);
+		super();
 		this.enemy = enemy;
 		add(mainPanel);
 		update();
-		mainPanel.setSize(dimension);
-		mainPanel.setPreferredSize(dimension);
-		mainPanel.setMaximumSize(dimension);
-		mainPanel.setMinimumSize(dimension);
+		setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
 	}
 
 	public void update() {

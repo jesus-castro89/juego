@@ -26,13 +26,12 @@ public class GameWindow extends JFrame {
 	private Enemy enemy;
 	private final int slot;
 	private JTabbedPane actionTabs;
-	private JPanel topPanel;
-	private JPanel playerPanel;
-	private JPanel enemyPanel;
-	private JPanel mainPanel;
 	private JPanel statusPanel;
 	private JPanel battlePanel;
 	private JPanel inventoryPanel;
+	private JPanel playerPanel;
+	private JPanel mainPanel;
+	private JPanel enemyPanel;
 
 	/**
 	 * Método que devuelve la instancia de la ventana principal
@@ -80,31 +79,7 @@ public class GameWindow extends JFrame {
 	 */
 	public void startGame() {
 
-		backgroundPanel.setSize(Dimensions.SCREEN_SIZE);
-		backgroundPanel.setPreferredSize(Dimensions.SCREEN_SIZE);
-		backgroundPanel.setMaximumSize(Dimensions.SCREEN_SIZE);
-		backgroundPanel.setMinimumSize(Dimensions.SCREEN_SIZE);
-		//Panel superior
-		topPanel.setSize(Dimensions.TOP_PANEL_SIZE);
-		topPanel.setPreferredSize(Dimensions.TOP_PANEL_SIZE);
-		topPanel.setMaximumSize(Dimensions.TOP_PANEL_SIZE);
-		topPanel.setMinimumSize(Dimensions.TOP_PANEL_SIZE);
-		System.out.println(topPanel.getSize());
-		//Panel Principal
-		mainPanel.setSize(Dimensions.MAIN_PANEL_SIZE);
-		mainPanel.setPreferredSize(Dimensions.MAIN_PANEL_SIZE);
-		mainPanel.setMaximumSize(Dimensions.MAIN_PANEL_SIZE);
-		mainPanel.setMinimumSize(Dimensions.MAIN_PANEL_SIZE);
-		//Panel de Jugador
-		playerPanel.setSize(Dimensions.SIDE_PANEL_SIZE);
-		playerPanel.setPreferredSize(Dimensions.SIDE_PANEL_SIZE);
-		playerPanel.setMaximumSize(Dimensions.SIDE_PANEL_SIZE);
-		playerPanel.setMinimumSize(Dimensions.SIDE_PANEL_SIZE);
-		//Panel de Enemigo
-		enemyPanel.setSize(Dimensions.SIDE_PANEL_SIZE);
-		enemyPanel.setPreferredSize(Dimensions.SIDE_PANEL_SIZE);
-		enemyPanel.setMaximumSize(Dimensions.SIDE_PANEL_SIZE);
-		enemyPanel.setMinimumSize(Dimensions.SIDE_PANEL_SIZE);
+		///setPanelsSize();
 		//Título de la Ventana
 		setTitle("Game Window");
 		//Operación por defecto de cierre
@@ -119,20 +94,16 @@ public class GameWindow extends JFrame {
 		setLocationRelativeTo(null);
 		//Hacemos visible la ventana
 		setVisible(true);
-		System.out.println(topPanel);
+		setPreferredSize(Dimensions.SCREEN_SIZE);
 	}
 
 	private void createUIComponents() {
 
 		DialogPanel.getInstance().addText("¡Bienvenido a la aventura!\n");
-		//Agregamos el panel del jugador
 		playerPanel = PlayerPanel.getInstance(player);
-		//Agregamos el enemigo
 		enemy = EnemyFactory.generateRegularEnemy(player);
-		//Agregamos el panel del enemigo
-		enemyPanel = EnemyPanel.getInstance(enemy);
-		//Agregamos el panel principal
 		mainPanel = MainPanel.getInstance(enemy, player);
+		enemyPanel = EnemyPanel.getInstance(enemy);
 		//Agregamos las pestañas
 		actionTabs = ActionsPanel.getInstance();
 		//Agregamos el panel de estado

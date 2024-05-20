@@ -1,5 +1,6 @@
 package gui.labels;
 
+import org.jetbrains.annotations.NotNull;
 import util.interfaces.Dimensions;
 
 import javax.swing.*;
@@ -7,7 +8,7 @@ import java.awt.*;
 
 public class SpriteLabel extends JLabel {
 
-	private Image image;
+	protected Image image;
 
 	public SpriteLabel(Image image) {
 
@@ -35,10 +36,16 @@ public class SpriteLabel extends JLabel {
 		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		int w = Math.min(image.getWidth(null), 256);
-		int h = Math.min(image.getHeight(null), 140);
-		int x = (384 - w) / 2;
-		int y = (140 - h) / 2;
+		paintImage(g2d);
+	}
+
+	protected void paintImage(@NotNull Graphics2D g2d) {
+
+
+		int w = Math.min(image.getWidth(null), Dimensions.SPRITE_SIZE.width);
+		int h = Math.min(image.getHeight(null), Dimensions.SPRITE_SIZE.height);
+		int x = ((Dimensions.DIALOG_PANEL_SIZE.width / 2) - w) / 2;
+		int y = (Dimensions.SPRITE_SIZE.height - h) / 2;
 		g2d.drawImage(image, x, y, w, h, null);
 	}
 }

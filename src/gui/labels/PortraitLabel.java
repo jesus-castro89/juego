@@ -1,5 +1,8 @@
 package gui.labels;
 
+import util.interfaces.Dimensions;
+import util.managers.ImageManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,28 +16,16 @@ public class PortraitLabel extends JLabel {
 	 */
 	public PortraitLabel() {
 
-		super();
-		Dimension size = new Dimension(117, 127);
+		Dimension size = Dimensions.PORTRAIT_SIZE;
 		setSize(size);
 		setPreferredSize(size);
 		setMaximumSize(size);
 		setMinimumSize(size);
-	}
-
-	/**
-	 * Método que pinta el componente
-	 *
-	 * @param g gráficos
-	 */
-	@Override
-	public void paint(Graphics g) {
-
-		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
-		Image image = new ImageIcon("img/player/portrait.png").getImage();
-		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.drawImage(image, 0, 0, null);
+		setVerticalAlignment(SwingConstants.CENTER);
+		setVerticalTextPosition(SwingConstants.CENTER);
+		setHorizontalAlignment(SwingConstants.CENTER);
+		setHorizontalTextPosition(SwingConstants.CENTER);
+		setOpaque(false);
+		setIcon(new ImageIcon(ImageManager.getInstance().getImage("portrait")));
 	}
 }

@@ -1,7 +1,9 @@
 package gui.panels;
 
+import gui.labels.EquipLabel;
 import player.Player;
 import gui.labels.StatLabel;
+import util.interfaces.Dimensions;
 import util.managers.ImageManager;
 
 import javax.swing.*;
@@ -47,15 +49,19 @@ public class StatusPanel extends BackGroundPanel {
 	 */
 	private StatusPanel(int tabIndex, Player player) {
 
-		super(ImageManager.getInstance().getImage("statusPanel"), new Dimension(1275, 340));
+		super();
 		this.player = player;
 		this.tabIndex = tabIndex;
 		this.actionsPanel = ActionsPanel.getInstance();
-		Dimension size = new Dimension(1275, 340);
+		Dimension size = Dimensions.TAB_SIZE;
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);
 		setSize(size);
+		backgroundPanel.setSize(size);
+		backgroundPanel.setPreferredSize(size);
+		backgroundPanel.setMinimumSize(size);
+		backgroundPanel.setMaximumSize(size);
 		add(backgroundPanel);
 		setOpaque(false);
 		setBackground(null);
@@ -86,35 +92,36 @@ public class StatusPanel extends BackGroundPanel {
 
 	private void createUIComponents() {
 
+		ImageManager imageManager = ImageManager.getInstance();
 		levelLabel = new StatLabel("EXP: " + player.getExperience(),
-				new ImageIcon("img/ui/holders/expHolder.png").getImage());
+				imageManager.getImage("expIcon"));
 		attackLabel = new StatLabel(player.getDisplayAttack(),
-				new ImageIcon("img/ui/holders/attackHolder.png").getImage());
+				imageManager.getImage("attackIcon"));
 		defenseLabel = new StatLabel(player.getDisplayDefense(),
-				new ImageIcon("img/ui/holders/defenseHolder.png").getImage());
+				imageManager.getImage("defenseIcon"));
 		goldLabel = new StatLabel("ORO: " + player.getGold(),
-				new ImageIcon("img/ui/holders/goldHolder.png").getImage());
+				imageManager.getImage("goldIcon"));
 		intLabel = new StatLabel(player.getDisplayIntelligence(),
-				new ImageIcon("img/ui/holders/intHolder.png").getImage());
+				imageManager.getImage("intelligenceIcon"));
 		resLabel = new StatLabel(player.getDisplayResistance(),
-				new ImageIcon("img/ui/holders/resHolder.png").getImage());
+				imageManager.getImage("resIcon"));
 		luckLabel = new StatLabel(player.getDisplayLuck(),
-				new ImageIcon("img/ui/holders/lukHolder.png").getImage());
+				imageManager.getImage("luckIcon"));
 		desLabel = new StatLabel(player.getDisplayDexterity(),
-				new ImageIcon("img/ui/holders/dexterityHolder.png").getImage());
+				imageManager.getImage("dexterityIcon"));
 		speedLabel = new StatLabel(player.getDisplaySpeed(),
-				new ImageIcon("img/ui/holders/velHolder.png").getImage());
-		weaponLabel = new StatLabel(player.getWeapon() != null ? player.getWeapon().getName() : "No equipado",
-				new ImageIcon("img/ui/holders/weaponHolder.png").getImage());
-		headArmorLabel = new StatLabel(player.getHeadArmor() != null ? player.getHeadArmor().getName() : "No equipado",
-				new ImageIcon("img/ui/holders/headArmorHolder.png").getImage());
-		chestArmorLabel = new StatLabel(player.getChestArmor() != null ? player.getChestArmor().getName() : "No equipado",
-				new ImageIcon("img/ui/holders/chestArmorHolder.png").getImage());
-		feetArmorLabel = new StatLabel(player.getFootArmor() != null ? player.getFootArmor().getName() : "No equipado",
-				new ImageIcon("img/ui/holders/feetArmorHolder.png").getImage());
-		legArmorLabel = new StatLabel(player.getLegArmor() != null ? player.getLegArmor().getName() : "No equipado",
-				new ImageIcon("img/ui/holders/legArmorHolder.png").getImage());
-		handArmorLabel = new StatLabel(player.getHandArmor() != null ? player.getHandArmor().getName() : "No equipado",
-				new ImageIcon("img/ui/holders/handArmorHolder.png").getImage());
+				imageManager.getImage("velIcon"));
+		weaponLabel = new EquipLabel(player.getWeapon() != null ? player.getWeapon().getName() : "No equipado",
+				imageManager.getImage("weaponIcon"));
+		headArmorLabel = new EquipLabel(player.getHeadArmor() != null ? player.getHeadArmor().getName() : "No equipado",
+				imageManager.getImage("headArmorIcon"));
+		chestArmorLabel = new EquipLabel(player.getChestArmor() != null ? player.getChestArmor().getName() : "No equipado",
+				imageManager.getImage("chestArmorIcon"));
+		feetArmorLabel = new EquipLabel(player.getFootArmor() != null ? player.getFootArmor().getName() : "No equipado",
+				imageManager.getImage("feetArmorIcon"));
+		legArmorLabel = new EquipLabel(player.getLegArmor() != null ? player.getLegArmor().getName() : "No equipado",
+				imageManager.getImage("legArmorIcon"));
+		handArmorLabel = new EquipLabel(player.getHandArmor() != null ? player.getHandArmor().getName() : "No equipado",
+				imageManager.getImage("handArmorIcon"));
 	}
 }

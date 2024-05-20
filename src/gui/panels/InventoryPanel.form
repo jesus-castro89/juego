@@ -3,22 +3,22 @@
   <grid id="27dc6" binding="backgroundPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="1019" height="344"/>
+      <xy x="20" y="20" width="1275" height="344"/>
     </constraints>
     <properties>
-      <maximumSize width="1019" height="344"/>
-      <minimumSize width="1019" height="344"/>
+      <maximumSize width="1275" height="340"/>
+      <minimumSize width="1275" height="340"/>
       <opaque value="false"/>
-      <preferredSize width="1019" height="344"/>
+      <preferredSize width="1275" height="340"/>
     </properties>
     <border type="none"/>
     <children>
       <tabbedpane id="cbbe8" binding="itemDisplayPanel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <minimum-size width="990" height="320"/>
-            <preferred-size width="990" height="320"/>
-            <maximum-size width="990" height="320"/>
+            <minimum-size width="1250" height="330"/>
+            <preferred-size width="1250" height="330"/>
+            <maximum-size width="1250" height="330"/>
           </grid>
         </constraints>
         <properties/>
@@ -37,7 +37,7 @@
             <border type="none"/>
             <children/>
           </grid>
-          <grid id="bd712" binding="armorsPanel" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="bd712" binding="armorsPanel" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Armor"/>
@@ -48,7 +48,7 @@
             <border type="none"/>
             <children/>
           </grid>
-          <grid id="d7e42" binding="miscsPanel" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="d7e42" binding="miscsPanel" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <tabbedpane title="Misc"/>

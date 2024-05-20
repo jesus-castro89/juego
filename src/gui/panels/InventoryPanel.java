@@ -1,10 +1,10 @@
 package gui.panels;
 
 import gui.events.HandCursorListener;
-import gui.tabs.InventoryTab;
+import gui.ui.InventoryTabUI;
 import items.ItemType;
 import player.Player;
-import util.managers.ImageManager;
+import util.interfaces.Dimensions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,12 +40,12 @@ public class InventoryPanel extends BackGroundPanel {
 
 	private InventoryPanel(int tabIndex, Player player) {
 
-		super(ImageManager.getInstance().getImage("inventoryPanel"), new Dimension(1275, 340));
+		super();
 		this.player = player;
-		itemDisplayPanel.setUI(new InventoryTab());
+		itemDisplayPanel.setUI(new InventoryTabUI());
 		this.tabIndex = tabIndex;
 		this.actionsPanel = ActionsPanel.getInstance();
-		Dimension size = new Dimension(1275, 340);
+		Dimension size = Dimensions.TAB_SIZE;
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);

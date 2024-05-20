@@ -4,8 +4,8 @@ import gui.buttons.EquipButton;
 import gui.buttons.SellButton;
 import gui.buttons.ThrowButton;
 import items.Item;
+import util.interfaces.Dimensions;
 import util.managers.FontManager;
-import util.managers.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,12 +18,17 @@ public class ItemDetail extends BackGroundPanel {
 	private JButton throwButton;
 	private JLabel itemName;
 	private JTextArea itemDescription;
-	private Item item;
+	private final Item item;
 
 	public ItemDetail(Item item) {
 
-		super(ImageManager.getInstance().getImage("itemHolder"), new Dimension(470, 135));
+		super();
 		this.item = item;
+		Dimension size = Dimensions.ITEM_DETAIL_SIZE;
+		mainPanel.setSize(size);
+		mainPanel.setPreferredSize(size);
+		mainPanel.setMinimumSize(size);
+		mainPanel.setMaximumSize(size);
 		add(mainPanel);
 		itemName.setFont(FontManager.getInstance().getFont("Standard"));
 		itemDescription.setFont(FontManager.getInstance().getFont("Standard"));

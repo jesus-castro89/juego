@@ -3,6 +3,7 @@ package gui.windows;
 import gui.panels.StartPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class StartWindow extends JFrame {
 

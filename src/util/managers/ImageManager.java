@@ -75,38 +75,44 @@ public class ImageManager {
 
 	private void addHolders() {
 		//Holders
-		imageCache.addImage("expHolder",
-				new ImageIcon("img/ui/holders/expHolder.png").getImage());
-		imageCache.addImage("attackHolder",
-				new ImageIcon("img/ui/holders/attackHolder.png").getImage());
-		imageCache.addImage("defenseHolder",
-				new ImageIcon("img/ui/holders/defenseHolder.png").getImage());
-		imageCache.addImage("goldHolder",
-				new ImageIcon("img/ui/holders/goldHolder.png").getImage());
-		imageCache.addImage("dexterityHolder",
-				new ImageIcon("img/ui/holders/dexterityHolder.png").getImage());
-		imageCache.addImage("intelligenceHolder",
-				new ImageIcon("img/ui/holders/intHolder.png").getImage());
-		imageCache.addImage("luckHolder",
-				new ImageIcon("img/ui/holders/lukHolder.png").getImage());
-		imageCache.addImage("headArmorHolder",
-				new ImageIcon("img/ui/holders/headArmorHolder.png").getImage());
-		imageCache.addImage("chestArmorHolder",
-				new ImageIcon("img/ui/holders/chestArmorHolder.png").getImage());
-		imageCache.addImage("legArmorHolder",
-				new ImageIcon("img/ui/holders/legArmorHolder.png").getImage());
-		imageCache.addImage("feetArmorHolder",
-				new ImageIcon("img/ui/holders/feetArmorHolder.png").getImage());
-		imageCache.addImage("handArmorHolder",
-				new ImageIcon("img/ui/holders/handArmorHolder.png").getImage());
-		imageCache.addImage("resHolder",
-				new ImageIcon("img/ui/holders/resHolder.png").getImage());
-		imageCache.addImage("velHolder",
-				new ImageIcon("img/ui/holders/velHolder.png").getImage());
-		imageCache.addImage("weaponHolder",
-				new ImageIcon("img/ui/holders/weaponHolder.png").getImage());
+		imageCache.addImage("statHolder",
+				new ImageIcon("img/ui/holders/statHolder.png").getImage());
+		imageCache.addImage("attackIcon",
+				new ImageIcon("img/ui/holders/attackIcon.png").getImage());
+		imageCache.addImage("expIcon",
+				new ImageIcon("img/ui/holders/expIcon.png").getImage());
+		imageCache.addImage("attackIcon",
+				new ImageIcon("img/ui/holders/attackIcon.png").getImage());
+		imageCache.addImage("defenseIcon",
+				new ImageIcon("img/ui/holders/defenseIcon.png").getImage());
+		imageCache.addImage("goldIcon",
+				new ImageIcon("img/ui/holders/goldIcon.png").getImage());
+		imageCache.addImage("dexterityIcon",
+				new ImageIcon("img/ui/holders/dexterityIcon.png").getImage());
+		imageCache.addImage("intelligenceIcon",
+				new ImageIcon("img/ui/holders/intIcon.png").getImage());
+		imageCache.addImage("luckIcon",
+				new ImageIcon("img/ui/holders/lukIcon.png").getImage());
+		imageCache.addImage("headArmorIcon",
+				new ImageIcon("img/ui/holders/headArmorIcon.png").getImage());
+		imageCache.addImage("chestArmorIcon",
+				new ImageIcon("img/ui/holders/chestArmorIcon.png").getImage());
+		imageCache.addImage("legArmorIcon",
+				new ImageIcon("img/ui/holders/legArmorIcon.png").getImage());
+		imageCache.addImage("feetArmorIcon",
+				new ImageIcon("img/ui/holders/feetArmorIcon.png").getImage());
+		imageCache.addImage("handArmorIcon",
+				new ImageIcon("img/ui/holders/handArmorIcon.png").getImage());
+		imageCache.addImage("resIcon",
+				new ImageIcon("img/ui/holders/resIcon.png").getImage());
+		imageCache.addImage("velIcon",
+				new ImageIcon("img/ui/holders/velIcon.png").getImage());
+		imageCache.addImage("weaponIcon",
+				new ImageIcon("img/ui/holders/weaponIcon.png").getImage());
 		imageCache.addImage("textHolder",
 				new ImageIcon("img/ui/holders/textHolder.png").getImage());
+		imageCache.addImage("equipHolder",
+				new ImageIcon("img/ui/holders/equipHolder.png").getImage());
 		imageCache.addImage("itemHolder",
 				new ImageIcon("img/ui/holders/itemHolder.png").getImage());
 	}

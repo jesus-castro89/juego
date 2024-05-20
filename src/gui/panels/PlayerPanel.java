@@ -9,6 +9,7 @@ import util.interfaces.Dimensions;
 import util.managers.ImageManager;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
@@ -47,14 +48,11 @@ public class PlayerPanel extends BackGroundPanel {
 	 */
 	private PlayerPanel(Player player, Image image, Dimension dimension) {
 
-		super(image, dimension);
+		super();
 		this.player = player;
 		add(mainPanel);
 		update();
-		mainPanel.setSize(dimension);
-		mainPanel.setPreferredSize(dimension);
-		mainPanel.setMaximumSize(dimension);
-		mainPanel.setMinimumSize(dimension);
+		setBorder(new EmptyBorder(0, 0, 0, 10));
 	}
 
 	/**
@@ -63,9 +61,9 @@ public class PlayerPanel extends BackGroundPanel {
 	public void update() {
 
 		//Actualizamos los valores del jugador
-		nameLabel.setText(player.getName());
+		nameLabel.setText(player.getName().toUpperCase());
 		// Actualizamos el nivel del jugador
-		levelLabel.setText(String.format("Nivel: %d", player.getLevel()));
+		levelLabel.setText(String.format("NIVEL: %d", player.getLevel()));
 		// Actualizamos las barras
 		((HpLabel) hpLabel).updateCharacter(player);
 		((MpLabel) mpLabel).updateCharacter(player);
@@ -81,9 +79,9 @@ public class PlayerPanel extends BackGroundPanel {
 		//Agregamos la etiqueta del retrato
 		portraitLabel = new PortraitLabel();
 		//Agregamos la etiqueta del nombre
-		nameLabel = new RedTextLabel(player.getName());
+		nameLabel = new RedTextLabel(player.getName().toUpperCase());
 		//Agregamos la etiqueta del nivel
-		levelLabel = new RedTextLabel("Nivel: " + player.getLevel());
+		levelLabel = new RedTextLabel("NIVEL: " + player.getLevel());
 		//Agregamos la etiqueta de los puntos de vida
 		hpLabel = new HpLabel(player);
 		//Agregamos la etiqueta de los puntos de maná

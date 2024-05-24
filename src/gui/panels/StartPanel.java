@@ -2,6 +2,9 @@ package gui.panels;
 
 import gui.buttons.LoadGameButton;
 import gui.buttons.NewGameButton;
+import gui.labels.FileLabel;
+import gui.labels.RedTextLabel;
+import gui.ui.TextLabelUI;
 import player.Player;
 import util.managers.FileManager;
 import util.managers.FontManager;
@@ -47,6 +50,7 @@ public class StartPanel extends BackGroundPanel {
 		super();
 		add(backgroundPanel);
 		update();
+		title.setFont(FontManager.getInstance().getFont("Game Title"));
 	}
 
 	public void update() {
@@ -60,12 +64,8 @@ public class StartPanel extends BackGroundPanel {
 				slotLabel = (JLabel) getClass().getDeclaredField("slot" + i + "Label").get(this);
 				Player player = FileManager.loadGame(i);
 				if (player != null)
-					slotName = player.getName();
+					slotName = String.format("%s - NIVEL: %d", player.getName().toUpperCase(), player.getLevel());
 				slotLabel.setText(slotName);
-				slotLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				slotLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-				slotLabel.setForeground(Color.WHITE);
-				slotLabel.setFont(FontManager.getInstance().getFont("Standard"));
 				switch (i) {
 					case 1 -> {
 						slot1NewGameButton.setVisible(false);
@@ -91,10 +91,6 @@ public class StartPanel extends BackGroundPanel {
 			} catch (FileNotFoundException e) {
 
 				slotLabel.setText("-- Vació --");
-				slotLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				slotLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-				slotLabel.setForeground(Color.RED);
-				slotLabel.setFont(FontManager.getInstance().getFont("Standard"));
 				switch (i) {
 					case 1 -> slot1LoadGameButton.setVisible(false);
 					case 2 -> slot2LoadGameButton.setVisible(false);
@@ -107,6 +103,11 @@ public class StartPanel extends BackGroundPanel {
 
 	private void createUIComponents() {
 
+		// Creamos las etiquetas de los slots
+		slot1Label = new FileLabel(" ");
+		slot2Label = new FileLabel(" ");
+		slot3Label = new FileLabel(" ");
+		slot4Label = new FileLabel(" ");
 		// Creamos los botones de cargar partida
 		slot1LoadGameButton = new LoadGameButton(1);
 		slot2LoadGameButton = new LoadGameButton(2);

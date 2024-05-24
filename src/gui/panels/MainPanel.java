@@ -1,6 +1,7 @@
 package gui.panels;
 
 import enemies.Enemy;
+import gui.labels.PlayerSpriteLabel;
 import player.Player;
 import gui.labels.SpriteLabel;
 
@@ -19,6 +20,8 @@ public class MainPanel extends BackGroundPanel {
 	private JPanel dialogPanel;
 	private JLabel enemySprite;
 	private JLabel playerSprite;
+	private JPanel playerSpritePanel;
+	private JPanel enemySpritePanel;
 
 	public static MainPanel getInstance(Enemy enemy, Player player) {
 
@@ -33,6 +36,9 @@ public class MainPanel extends BackGroundPanel {
 		this.enemy = enemy;
 		this.player = player;
 		add(mainPanel);
+		Dimension spritePanelSize = new Dimension(getPreferredSize().width / 2, getPreferredSize().height/2);
+		playerSpritePanel.setPreferredSize(spritePanelSize);
+		enemySpritePanel.setPreferredSize(spritePanelSize);
 	}
 
 	public void update(Enemy enemy) {
@@ -44,7 +50,7 @@ public class MainPanel extends BackGroundPanel {
 	private void createUIComponents() {
 
 		dialogPanel = DialogPanel.getInstance();
-		playerSprite = new SpriteLabel(player.getImage());
+		playerSprite = new PlayerSpriteLabel(player.getImage());
 		enemySprite = new SpriteLabel(enemy.getImage());
 	}
 

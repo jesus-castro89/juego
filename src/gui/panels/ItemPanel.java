@@ -4,8 +4,10 @@ import items.Item;
 import items.ItemType;
 import player.Inventory;
 import player.Player;
+import util.interfaces.Dimensions;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class ItemPanel extends BackGroundPanel {
@@ -19,6 +21,7 @@ public class ItemPanel extends BackGroundPanel {
 	public ItemPanel(ItemType type, Player player) {
 
 		super();
+		mainPanel.setPreferredSize(getPreferredSize());
 		this.player = player;
 		this.type = type;
 		add(mainPanel);
@@ -28,14 +31,16 @@ public class ItemPanel extends BackGroundPanel {
 	public void initComponents() {
 
 		GridBagLayout layout = new GridBagLayout();
-		layout.columnWidths = new int[]{400, 400, 400};
+		setBorder(BorderFactory.createEmptyBorder(6, 8, 8, 8));
+		layout.columnWidths = new int[]{Dimensions.ITEM_DETAIL_SIZE.width};
+		layout.rowHeights = new int[]{Dimensions.ITEM_DETAIL_SIZE.height};
 		displayPanel.removeAll();
 		displayPanel.setLayout(layout);
 		displayPanel.setOpaque(false);
-		displayPanel.setBorder(BorderFactory.createEmptyBorder());
-		scrollPanel.setBorder(BorderFactory.createEmptyBorder());
 		scrollPanel.setOpaque(false);
+		scrollPanel.setBorder(BorderFactory.createEmptyBorder());
 		scrollPanel.getViewport().setOpaque(false);
+		scrollPanel.getVerticalScrollBar().setOpaque(false);
 		scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		Inventory inventory = player.getInventory();
@@ -63,7 +68,6 @@ public class ItemPanel extends BackGroundPanel {
 		c.anchor = GridBagConstraints.CENTER;
 		c.weightx = 1;
 		c.weighty = 1;
-		c.insets = new Insets(0, 0, 5, 0);
 		displayPanel.add(new ItemDetail(item), c);
 		displayPanel.revalidate();
 		displayPanel.repaint();

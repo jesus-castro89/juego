@@ -10,6 +10,7 @@ import player.Player;
 import util.interfaces.Dimensions;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class BattlePanel extends BackGroundPanel {
@@ -49,11 +50,7 @@ public class BattlePanel extends BackGroundPanel {
 		this.player = player;
 		this.tabIndex = tabIndex;
 		this.actionsPanel = ActionsPanel.getInstance();
-		Dimension size = Dimensions.TAB_SIZE;
-		setPreferredSize(size);
-		setMinimumSize(size);
-		setMaximumSize(size);
-		setSize(size);
+		mainPanel.setPreferredSize(getPreferredSize());
 		add(mainPanel);
 		setOpaque(false);
 		setBackground(null);

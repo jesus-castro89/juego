@@ -18,7 +18,6 @@ public class ButtonCursorAdapter extends MouseAdapter {
 	public void mouseEntered(java.awt.event.MouseEvent evt) {
 
 		button.setImage(ImageManager.getInstance().getImage("buttonHover"));
-		button.setTopPadding(2); // Establecemos el padding superior en 0
 		button.repaint();
 	}
 
@@ -26,7 +25,6 @@ public class ButtonCursorAdapter extends MouseAdapter {
 	public void mouseExited(java.awt.event.MouseEvent evt) {
 
 		button.setImage(ImageManager.getInstance().getImage("button"));
-		button.setTopPadding(0); // Establecemos el padding superior en 2
 		button.repaint();
 	}
 }

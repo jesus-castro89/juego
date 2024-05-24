@@ -115,6 +115,8 @@ public class ImageManager {
 				new ImageIcon("img/ui/holders/equipHolder.png").getImage());
 		imageCache.addImage("itemHolder",
 				new ImageIcon("img/ui/holders/itemHolder.png").getImage());
+		imageCache.addImage("fileHolder",
+				new ImageIcon("img/ui/holders/fileHolder.png").getImage());
 	}
 
 	private void addPanels() {

@@ -1,5 +1,6 @@
 package gui.ui;
 
+import util.interfaces.Dimensions;
 import util.managers.FontManager;
 import util.managers.ImageManager;
 
@@ -14,24 +15,26 @@ public class GameTabUI extends BasicTabbedPaneUI {
 
 	public GameTabUI() {
 
-		tabFont = FontManager.getInstance().getFont("Standard");
+		tabFont = FontManager.getInstance().getFont("Player");
 		tabMetrics = new JLabel().getFontMetrics(tabFont);
 	}
 
 	@Override
 	protected int calculateTabWidth(int tabPlacement, int tabIndex, FontMetrics metrics) {
 
-		return 100;
+		return Math.max(tabMetrics.stringWidth(tabPane.getComponentAt(tabIndex).getName()) + 32,
+				Dimensions.TAB_LABEL_SIZE.width+16);
 	}
 
 	@Override
 	protected int calculateTabHeight(int tabPlacement, int tabIndex, int fontHeight) {
 
-		return 32;
+		return Math.min(fontHeight + 16, Dimensions.TAB_LABEL_SIZE.height);
 	}
 
 	@Override
-	protected void paintTab(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex, Rectangle iconRect, Rectangle textRect) {
+	protected void paintTab(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex,
+	                        Rectangle iconRect, Rectangle textRect) {
 
 		Image img;
 		String title = tabPane.getComponentAt(tabIndex).getName();
@@ -43,24 +46,20 @@ public class GameTabUI extends BasicTabbedPaneUI {
 		g2d.setFont(tabFont);
 		g2d.setColor(Color.BLACK);
 		if (tabIndex == tabPane.getSelectedIndex()) {
-
 			img = ImageManager.getInstance().getImage("inactiveTab");
 		} else {
-
 			img = ImageManager.getInstance().getImage("activeTab");
 		}
-		int imgX = rects[tabIndex].x + (rects[tabIndex].width - img.getWidth(null)) / 2;
-		int imgY = rects[tabIndex].y + (rects[tabIndex].height - img.getHeight(null)) / 2;
-		g2d.drawImage(img, imgX, imgY, img.getWidth(null), img.getHeight(null), null);
-		int textX = rects[tabIndex].x + (rects[tabIndex].width - tabMetrics.stringWidth(title)) / 2;
-		int textY;
-		if (tabIndex == tabPane.getSelectedIndex()) {
-
-			textY = rects[tabIndex].y + rects[tabIndex].height / 2 + tabMetrics.getHeight() / 4 + 2;
-		} else {
-
-			textY = rects[tabIndex].y + rects[tabIndex].height / 2 + tabMetrics.getHeight() / 4;
-		}
+		int imgWidth = calculateTabWidth(tabPlacement, tabIndex, g2d.getFontMetrics()) - 5;
+		int imgHeight = calculateTabHeight(tabPlacement, tabIndex, g2d.getFontMetrics().getHeight());
+		int imgX = rects[tabIndex].x + (rects[tabIndex].width - imgWidth) / 2;
+		int imgY = rects[tabIndex].y + (rects[tabIndex].height - imgHeight) / 2;
+		g2d.drawImage(img, imgX, imgY, imgWidth, imgHeight, null);
+		int titleWidth = g2d.getFontMetrics().stringWidth(title);
+		int titleHeight = g2d.getFontMetrics().getHeight();
+		int titleAscent = g2d.getFontMetrics().getAscent();
+		int textX = imgX + (imgWidth - titleWidth) / 2;
+		int textY = imgY + (imgHeight - titleHeight) / 2 + titleAscent;
 		g2d.drawString(title, textX, textY);
 	}
 

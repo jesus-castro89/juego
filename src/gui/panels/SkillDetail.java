@@ -5,6 +5,9 @@ import player.skills.Skill;
 import util.managers.FontManager;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 
 public class SkillDetail extends BackGroundPanel {
 
@@ -18,16 +21,18 @@ public class SkillDetail extends BackGroundPanel {
 
 	public SkillDetail(Skill skill) {
 
-		super(
-		);
+		super();
 		this.skill = skill;
+		mainPanel.setPreferredSize(getPreferredSize());
+		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		add(mainPanel);
 		skillNameLabel.setText(skill.getName());
-		skillNameLabel.setFont(FontManager.getInstance().getFont("Standard"));
+		skillNameLabel.setFont(FontManager.getInstance().getFont("Player"));
 		manaCostLabel.setText(String.format("(MP: %d)", skill.getManaCost()));
-		manaCostLabel.setFont(FontManager.getInstance().getFont("Standard"));
+		manaCostLabel.setFont(FontManager.getInstance().getFont("Player"));
+		manaCostLabel.setForeground(Color.BLUE);
 		skillDetailLabel.setText(skill.getDescription());
-		skillDetailLabel.setFont(FontManager.getInstance().getFont("Standard"));
+		skillDetailLabel.setFont(FontManager.getInstance().getFont("Player"));
 	}
 
 	private void createUIComponents() {

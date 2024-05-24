@@ -1,6 +1,8 @@
 package gui.ui;
 
 import gui.buttons.ActionButton;
+import gui.events.ButtonCursorAdapter;
+import gui.events.HandCursorListener;
 import util.interfaces.Dimensions;
 import util.managers.FontManager;
 import util.managers.ImageManager;
@@ -12,7 +14,27 @@ import java.awt.*;
 
 public class ActionButtonUI extends BasicButtonUI {
 
-	private final Image backgroundImage = ImageManager.getInstance().getImage("button");
+	@Override
+	protected void installDefaults(AbstractButton b) {
+
+		ImageManager manager = ImageManager.getInstance();
+		b.setIcon(new ImageIcon(manager.getImage("button")));
+		b.setRolloverIcon(new ImageIcon(manager.getImage("buttonHover")));
+		b.setFont(FontManager.getInstance().getFont("Player"));
+		b.setForeground(Color.BLACK);
+		b.setHorizontalTextPosition(SwingConstants.CENTER);
+		b.setVerticalTextPosition(SwingConstants.CENTER);
+		b.setHorizontalAlignment(SwingConstants.CENTER);
+		b.setVerticalAlignment(SwingConstants.CENTER);
+		b.setBorder(BorderFactory.createEmptyBorder());
+		b.setOpaque(false);
+		b.setContentAreaFilled(false);
+		b.setFocusPainted(false);
+		b.setBorderPainted(false);
+		b.setMargin(new Insets(0, 0, 0, 0));
+		b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		b.addMouseListener(new ButtonCursorAdapter((ActionButton) b));
+	}
 
 	@Override
 	public Dimension getPreferredSize(JComponent c) {
@@ -20,10 +42,9 @@ public class ActionButtonUI extends BasicButtonUI {
 		FontMetrics fm = c.getFontMetrics(c.getFont());
 		int textWidth = fm.stringWidth(((JButton) c).getText());
 		int textHeight = fm.getHeight();
-		int imageWidth = backgroundImage.getWidth(c);
-		int minWidth = Math.max(textWidth, imageWidth);
-		int minHeight = Math.max(textHeight, Dimensions.BUTTON_SIZE.height);
-		return new Dimension(minWidth + 10, minHeight + 10); // Agregar un margen de 10 pixeles
+		int minWidth = Math.max(textWidth + 20, Dimensions.BUTTON_SIZE.width);
+		int minHeight = Math.max(textHeight + 10, Dimensions.BUTTON_SIZE.height);
+		return new Dimension(minWidth, minHeight); // Agregar un margen de 10 pixeles
 	}
 
 	@Override
@@ -65,7 +86,6 @@ public class ActionButtonUI extends BasicButtonUI {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		//Modificamos la fuente y el color de la fuente
-		g2d.setFont(FontManager.getInstance().getFont("Standard"));
 		g2d.setColor(Color.BLACK);
 		//Pintamos el icono y el texto
 		paintIcon(g2d, c, new Rectangle(0, 0, getPreferredSize(c).width, getPreferredSize(c).height));

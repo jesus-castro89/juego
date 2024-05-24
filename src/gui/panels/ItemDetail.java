@@ -8,6 +8,8 @@ import util.interfaces.Dimensions;
 import util.managers.FontManager;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class ItemDetail extends BackGroundPanel {
@@ -16,37 +18,40 @@ public class ItemDetail extends BackGroundPanel {
 	private JButton equipButton;
 	private JButton sellButton;
 	private JButton throwButton;
-	private JLabel itemName;
-	private JTextArea itemDescription;
+	private JTextPane itemDescription;
 	private final Item item;
 
 	public ItemDetail(Item item) {
 
 		super();
 		this.item = item;
-		Dimension size = Dimensions.ITEM_DETAIL_SIZE;
-		mainPanel.setSize(size);
-		mainPanel.setPreferredSize(size);
-		mainPanel.setMinimumSize(size);
-		mainPanel.setMaximumSize(size);
 		add(mainPanel);
-		itemName.setFont(FontManager.getInstance().getFont("Standard"));
-		itemDescription.setFont(FontManager.getInstance().getFont("Standard"));
-		itemDescription.setText(item.getDescription());
+		mainPanel.setPreferredSize(getPreferredSize());
+		mainPanel.setMaximumSize(getPreferredSize());
+		mainPanel.setMinimumSize(getPreferredSize());
+		mainPanel.setBorder(new EmptyBorder(12, 15, 12, 15));
+		//mainPanel.setBorder(new LineBorder(Color.BLACK, 5));
+		itemDescription.setFont(FontManager.getInstance().getFont("Player"));
+		String description;
 		switch (item.getType()) {
 			case WEAPON, ARMOR -> {
-				itemName.setText(String.format("%s (%s - $%d)", item.getName(), item.getRarity(), item.getPrice()));
+
+				description = String.format("%s (%s - $%d)", item.getName(), item.getRarity(), item.getPrice());
+				((CenteredTextPane) itemDescription).appendText(description, true);
 				equipButton.setVisible(true);
 				sellButton.setVisible(true);
 				throwButton.setVisible(false);
 			}
 			case MISC -> {
-				itemName.setText(String.format("%s ($%d)", item.getName(), item.getPrice()));
+
+				description = String.format("%s (%s)", item.getName(), item.getRarity());
+				((CenteredTextPane) itemDescription).appendText(description, true);
 				equipButton.setVisible(false);
 				sellButton.setVisible(true);
 				throwButton.setVisible(true);
 			}
 		}
+		((CenteredTextPane) itemDescription).appendText(item.getDescription(), false);
 	}
 
 	private void createUIComponents() {
@@ -54,5 +59,6 @@ public class ItemDetail extends BackGroundPanel {
 		equipButton = new EquipButton(item);
 		sellButton = new SellButton(item);
 		throwButton = new ThrowButton(item);
+		itemDescription = new CenteredTextPane();
 	}
 }

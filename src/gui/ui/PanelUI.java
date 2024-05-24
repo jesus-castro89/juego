@@ -15,7 +15,12 @@ public class PanelUI extends BasicPanelUI {
 	@Override
 	protected void installDefaults(JPanel p) {
 
-
+		GridLayout layout = new GridLayout(1, 1);
+		layout.setHgap(0);
+		layout.setVgap(0);
+		p.getInsets(new Insets(0, 0, 0, 0));
+		p.setLayout(layout);
+		p.setOpaque(false);
 	}
 
 	@Override

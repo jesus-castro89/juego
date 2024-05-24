@@ -86,7 +86,7 @@ public class ActionButtonUI extends BasicButtonUI {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		//Modificamos la fuente y el color de la fuente
-		g2d.setColor(Color.BLACK);
+		g2d.setColor(c.getForeground());
 		//Pintamos el icono y el texto
 		paintIcon(g2d, c, new Rectangle(0, 0, getPreferredSize(c).width, getPreferredSize(c).height));
 		paintText(g2d, c, new Rectangle(0, 0, getPreferredSize(c).width, getPreferredSize(c).height),

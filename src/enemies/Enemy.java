@@ -4,15 +4,17 @@ import characters.BasicCharacter;
 
 import gui.exceptions.EnemyDeadException;
 import gui.panels.DialogPanel;
+import org.reflections.serializers.Serializer;
 import player.Player;
 import player.Stats;
 import util.interfaces.Randomized;
 import util.managers.ImageManager;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.HashMap;
 
-public abstract class Enemy extends BasicCharacter {
+public abstract class Enemy extends BasicCharacter implements Serializable {
 
 	protected final int adjustmentFactor = 3;
 	protected final String name;

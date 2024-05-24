@@ -1,43 +1,40 @@
 package player.skills;
 
-import enemies.Enemy;
 import gui.exceptions.EnemyDeadException;
-import gui.windows.GameWindow;
 import gui.panels.DialogPanel;
+import gui.windows.GameWindow;
 import org.jetbrains.annotations.NotNull;
 import player.Player;
-import player.Stats;
 
 import java.io.Serializable;
 
 public class BasicHeal extends Skill implements Serializable {
 
-	private static final BasicHeal instance = new BasicHeal();
+	private static BasicHeal instance;
 	public static final String NAME = "Curación Básica";
 
-	public static BasicHeal getInstance() {
+	public static BasicHeal getInstance(Player player) {
 
 		if (instance == null) {
 
-			return new BasicHeal();
+			return new BasicHeal(player);
 		} else {
 			return instance;
 		}
 	}
 
-	private BasicHeal() {
+	private BasicHeal(Player player) {
 
-		super(NAME, "Cura al jugador 8 puntos de vida", 3, 5);
+		super(NAME, "Cura al jugador 8 puntos de vida", 3, 5,
+				player, player.getEnemy());
 	}
 
 	@Override
 	public void skillAction() {
 
 		//Primero debo determinar quien es más rápido
-		Player player = Player.getInstance();
-		Enemy enemy = GameWindow.getInstance().getEnemy();
 		//Si el jugador es más rápido, entonces se cura y el enemigo ataca
-		if (player.getSpeed() >= enemy.getStats().get(Stats.SPEED)) {
+		if (player.getSpeed() >= enemy.getAdjustedSpeed()) {
 
 			heal(player);
 			try {
@@ -45,7 +42,7 @@ public class BasicHeal extends Skill implements Serializable {
 			} catch (EnemyDeadException e) {
 				throw new RuntimeException(e);
 			}
-			updatePanels(player);
+			updatePanels();
 		} else {
 			//Si el enemigo es más rápido, entonces el enemigo ataca y el jugador se cura
 			try {
@@ -54,7 +51,7 @@ public class BasicHeal extends Skill implements Serializable {
 				throw new RuntimeException(e);
 			}
 			heal(player);
-			updatePanels(player);
+			updatePanels();
 		}
 	}
 

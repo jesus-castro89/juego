@@ -1,8 +1,7 @@
 package gui.buttons;
 
-import gui.panels.DialogPanel;
+import gui.events.SaveButtonListener;
 import player.Player;
-import util.managers.FileManager;
 
 public class SaveButton extends ActionButton {
 
@@ -10,15 +9,6 @@ public class SaveButton extends ActionButton {
 
 		super("Guardar");
 		// Asignar la acción de guardar el avance del jugador en el archivo correspondiente
-		addActionListener(e -> {
-			// Save the game
-			FileManager.saveGame(slot, player);
-			// Agregamos un texto al panel de diálogo para indicar que la partida se guardó correctamente
-			DialogPanel.getInstance().addText("""
-					------------------------------------------------
-					¡Partida guardada correctamente!
-					------------------------------------------------
-					""");
-		});
+		addActionListener(new SaveButtonListener(player, slot));
 	}
 }

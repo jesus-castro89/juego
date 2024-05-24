@@ -10,6 +10,7 @@ import util.annotations.RegularEnemy;
 import util.interfaces.Randomized;
 
 import javax.swing.*;
+import java.io.Serializable;
 
 /**
  * La clase AloneWolf es una subclase de la clase Enemy. Es un enemigo básico que el jugador puede encontrar en el juego.
@@ -19,7 +20,7 @@ import javax.swing.*;
  * El método bite permite que AloneWolf muerda al jugador provocando una cantidad determinada de daño.
  */
 @RegularEnemy
-public class AloneWolf extends Enemy {
+public class AloneWolf extends Enemy implements Serializable {
 
 	/**
 	 * Constructor de la clase Lobo solitario.

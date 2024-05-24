@@ -35,8 +35,6 @@ public class SkillPanel extends BackGroundPanel {
 		skillList.setOpaque(false);
 		scrollPanel.setBorder(null);
 		player.getSkillMap().forEach((k, v) -> addSkill(v));
-		player.getSkillMap().forEach((k, v) -> addSkill(v));
-		player.getSkillMap().forEach((k, v) -> addSkill(v));
 	}
 
 	private void addSkill(Skill skill) {

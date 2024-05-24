@@ -1,13 +1,12 @@
 package gui.windows;
 
 import enemies.Enemy;
+import gui.panels.*;
 import player.Player;
 import util.enemies.EnemyFactory;
-import gui.panels.*;
 import util.interfaces.Dimensions;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Clase que representa la ventana principal del juego
@@ -101,7 +100,8 @@ public class GameWindow extends JFrame {
 
 		DialogPanel.getInstance().addText("¡Bienvenido a la aventura!\n");
 		playerPanel = PlayerPanel.getInstance(player);
-		enemy = EnemyFactory.generateRegularEnemy(player);
+		player.setEnemy(EnemyFactory.generateRegularEnemy(player));
+		enemy = player.getEnemy();
 		mainPanel = MainPanel.getInstance(enemy, player);
 		enemyPanel = EnemyPanel.getInstance(enemy);
 		//Agregamos las pestañas

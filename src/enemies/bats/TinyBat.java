@@ -10,9 +10,10 @@ import util.annotations.RegularEnemy;
 import util.interfaces.Randomized;
 
 import javax.swing.*;
+import java.io.Serializable;
 
 @RegularEnemy
-public class TinyBat extends Enemy {
+public class TinyBat extends Enemy implements Serializable {
 
 	public TinyBat(Player player) {
 

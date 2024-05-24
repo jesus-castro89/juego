@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import player.skills.BasicHeal;
 import player.skills.FuryAttack;
 import player.skills.Skill;
+import util.enemies.EnemyFactory;
 import util.interfaces.Randomized;
 import util.managers.ImageManager;
 
@@ -52,6 +53,7 @@ public class Player extends BasicCharacter implements Serializable {
 	private int experience;
 	private int level;
 	private int gold;
+	private Enemy enemy;
 	private Weapon weapon;
 	private Armor headArmor;
 	private Armor chestArmor;
@@ -107,8 +109,9 @@ public class Player extends BasicCharacter implements Serializable {
 		randomizeStats(25);
 		inventory = new Inventory();
 		skillMap = new HashMap<>();
-		skillMap.put(BasicHeal.NAME, BasicHeal.getInstance());
-		skillMap.put(FuryAttack.NAME, FuryAttack.getInstance());
+		skillMap.put(BasicHeal.NAME, BasicHeal.getInstance(this));
+		skillMap.put(FuryAttack.NAME, FuryAttack.getInstance(this));
+		enemy = EnemyFactory.generateRegularEnemy(this);
 	}
 
 	/**
@@ -578,5 +581,15 @@ public class Player extends BasicCharacter implements Serializable {
 	public Map<String, Skill> getSkillMap() {
 
 		return skillMap;
+	}
+
+	public Enemy getEnemy() {
+
+		return enemy;
+	}
+
+	public void setEnemy(Enemy enemy) {
+
+		this.enemy = enemy;
 	}
 }

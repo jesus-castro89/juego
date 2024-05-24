@@ -37,7 +37,7 @@ public class SkillDetail extends BackGroundPanel {
 
 	private void createUIComponents() {
 
-		useSkillButton = new SkillButton(skill);
+		useSkillButton = new SkillButton(skill, skill.getPlayer(), skill.getEnemy());
 	}
 
 	public JButton getUseSkillButton() {

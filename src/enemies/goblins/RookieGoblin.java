@@ -12,6 +12,7 @@ import util.annotations.RegularEnemy;
 import util.interfaces.Randomized;
 
 import javax.swing.*;
+import java.io.Serializable;
 
 /**
  * La clase RookieGoblin es una subclase de la clase Enemy. Es un enemigo básico que el jugador puede encontrar en el juego.
@@ -21,7 +22,7 @@ import javax.swing.*;
  * El método stealGold permite al RookieGoblin robar una cantidad determinada de oro del jugador.
  */
 @RegularEnemy
-public class RookieGoblin extends Enemy {
+public class RookieGoblin extends Enemy implements Serializable {
 
 	/**
 	 * Constructor de la clase RookieGoblin.

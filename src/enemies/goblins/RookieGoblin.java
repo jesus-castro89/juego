@@ -10,8 +10,10 @@ import player.Player;
 import player.Stats;
 import util.annotations.RegularEnemy;
 import util.interfaces.Randomized;
+import util.managers.ImageManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.Serializable;
 
 /**
@@ -30,8 +32,6 @@ public class RookieGoblin extends Enemy implements Serializable {
 	public RookieGoblin(Player player) {
 
 		super(player, "D. Novato", 5, 5, 5, 2);
-		image = imageManager.getImage("rookieGoblin",
-				new ImageIcon("img\\enemies\\goblins\\rookieGoblin.png").getImage());
 		stats.put(Stats.ATTACK, 7);
 		stats.put(Stats.DEFENSE, 3);
 		stats.put(Stats.LUCK, 3);
@@ -120,5 +120,12 @@ public class RookieGoblin extends Enemy implements Serializable {
 			message += "¡El Duende novato roba todo el oro del jugador!\n";
 		}
 		return message;
+	}
+
+	@Override
+	public Image getImage() {
+
+		return ImageManager.getInstance().getImage("rookieGoblin",
+				new ImageIcon("img\\enemies\\goblins\\rookieGoblin.png").getImage());
 	}
 }

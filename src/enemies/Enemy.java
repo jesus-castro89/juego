@@ -23,8 +23,6 @@ public abstract class Enemy extends BasicCharacter implements Serializable {
 	protected final int experience;
 	protected final int level;
 	protected final int maxLevel;
-	protected Image image;
-	protected final ImageManager imageManager = ImageManager.getInstance();
 	protected final Player player;
 	private static final int BASE_LEVEL = 1;
 
@@ -40,6 +38,8 @@ public abstract class Enemy extends BasicCharacter implements Serializable {
 		this.gold = getGold(gold);
 		this.experience = getExperience(experience);
 	}
+
+	public abstract Image getImage();
 
 	private int getExperience(int experience) {
 
@@ -99,29 +99,9 @@ public abstract class Enemy extends BasicCharacter implements Serializable {
 		return player.getLevel();
 	}
 
-	public int getLuck() {
-
-		return stats.get(Stats.LUCK);
-	}
-
-	public Image getImage() {
-
-		return image;
-	}
-
-	public ImageManager getImageManager() {
-
-		return imageManager;
-	}
-
 	public int getLevel() {
 
 		return level;
-	}
-
-	public int getMaxLevel() {
-
-		return maxLevel;
 	}
 
 	public String getName() {
@@ -144,28 +124,12 @@ public abstract class Enemy extends BasicCharacter implements Serializable {
 		return Math.max(0, (player.getDamage() - getDefense(player)));
 	}
 
-	public int calculateDamage(Player player, int damage) {
-
-		return Math.max(0, (damage - getDefense(player)));
-	}
-
 	public String takeDamage(Player player) {
 
 		int damage = calculateDamage(player);
 		String message = String.format("¡%s ataca con %d punto(s) de daño!\n", player.getName(), player.getDamage());
 		message += String.format("¡%s sufre %d punto(s) de daño!\n", name, damage);
 		hp -= damage;
-		if (isDead())
-			message += String.format("¡%s ha sido derrotado!\n", name);
-		return message;
-	}
-
-	public String takeDamage(Player player, int damage) {
-
-		int finalDamage = calculateDamage(player, damage);
-		hp -= finalDamage;
-		String message = String.format("¡%s sufre %d punto(s) de daño!\n", name, finalDamage);
-		message += String.format("¡%s ataca con %d punto(s) de daño!\n", name, damage);
 		if (isDead())
 			message += String.format("¡%s ha sido derrotado!\n", name);
 		return message;

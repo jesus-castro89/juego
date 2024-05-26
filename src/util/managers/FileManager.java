@@ -31,11 +31,12 @@ public class FileManager {
 			try {
 				oos.close();
 			} catch (IOException e) {
+				e.printStackTrace();
 				JOptionPane.showMessageDialog(GameWindow.getInstance(player, slot),
 						"Error al guardar la partida", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} catch (IOException e) {
-
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(GameWindow.getInstance(Player.getInstance(), slot),
 					"Error al guardar la partida", "Error", JOptionPane.ERROR_MESSAGE);
 		}

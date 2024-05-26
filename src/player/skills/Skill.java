@@ -14,7 +14,6 @@ public abstract class Skill implements Serializable {
 	protected String description;
 	protected int level;
 	protected int manaCost;
-	protected SkillButton button;
 	protected Player player;
 	protected Enemy enemy;
 
@@ -26,7 +25,6 @@ public abstract class Skill implements Serializable {
 		this.manaCost = manaCost;
 		this.player = player;
 		this.enemy = enemy;
-		this.button = new SkillButton(this, player, enemy);
 	}
 
 	protected void updatePanels() {
@@ -68,11 +66,6 @@ public abstract class Skill implements Serializable {
 		return description;
 	}
 
-	public int getLevel() {
-
-		return level;
-	}
-
 	public int getManaCost() {
 
 		return manaCost;
@@ -85,7 +78,7 @@ public abstract class Skill implements Serializable {
 
 	public SkillButton getButton() {
 
-		return button;
+		return new SkillButton(this, player, enemy);
 	}
 
 	public Player getPlayer() {

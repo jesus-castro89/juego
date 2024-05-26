@@ -8,8 +8,10 @@ import player.Player;
 import player.Stats;
 import util.annotations.RegularEnemy;
 import util.interfaces.Randomized;
+import util.managers.ImageManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.Serializable;
 
 /**
@@ -28,8 +30,6 @@ public class AloneWolf extends Enemy implements Serializable {
 	public AloneWolf(Player player) {
 
 		super(player, "Lobo Solitario", 10, 10, 5, 4);
-		image = imageManager.getImage("aloneWolf",
-				new ImageIcon("img\\enemies\\wolfs\\aloneWolf.png").getImage());
 		stats.put(Stats.ATTACK, 8);
 		stats.put(Stats.DEFENSE, 3);
 		stats.put(Stats.LUCK, 3);
@@ -39,7 +39,6 @@ public class AloneWolf extends Enemy implements Serializable {
 
 	/**
 	 * Función que permite al lobo solitario atacar al jugador.
-	 *
 	 */
 	@Override
 	public String getAttack() throws EnemyDeadException {
@@ -115,5 +114,12 @@ public class AloneWolf extends Enemy implements Serializable {
 		int totalDamage = getAdjustedAttack() + 1;
 		String message = String.format("¡%s muerde con %d punto(s) de daño!\n", getName(), totalDamage);
 		return message + player.takeDamage(totalDamage);
+	}
+
+	@Override
+	public Image getImage() {
+
+		return ImageManager.getInstance().getImage("aloneWolf",
+				new ImageIcon("img\\enemies\\wolfs\\aloneWolf.png").getImage());
 	}
 }

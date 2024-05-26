@@ -17,10 +17,9 @@ public class BasicHeal extends Skill implements Serializable {
 
 		if (instance == null) {
 
-			return new BasicHeal(player);
-		} else {
-			return instance;
+			instance = new BasicHeal(player);
 		}
+		return instance;
 	}
 
 	private BasicHeal(Player player) {

@@ -19,10 +19,9 @@ public class FuryAttack extends Skill implements Serializable {
 
 		if (instance == null) {
 
-			return new FuryAttack(player);
-		} else {
-			return instance;
+			instance = new FuryAttack(player);
 		}
+		return instance;
 	}
 
 	public FuryAttack(Player player) {

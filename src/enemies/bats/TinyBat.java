@@ -8,8 +8,10 @@ import player.Player;
 import player.Stats;
 import util.annotations.RegularEnemy;
 import util.interfaces.Randomized;
+import util.managers.ImageManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.Serializable;
 
 @RegularEnemy
@@ -18,8 +20,6 @@ public class TinyBat extends Enemy implements Serializable {
 	public TinyBat(Player player) {
 
 		super(player, "Mur. Diminuto", 5, 5, 5, 3);
-		image = imageManager.getImage("tinyBat",
-				new ImageIcon("img\\enemies\\bats\\tinyBat.png").getImage());
 		stats.put(Stats.ATTACK, 7);
 		stats.put(Stats.DEFENSE, 2);
 		stats.put(Stats.LUCK, 3);
@@ -71,5 +71,12 @@ public class TinyBat extends Enemy implements Serializable {
 				damage);
 		message += player.takeDamage(damage);
 		return message;
+	}
+
+	@Override
+	public Image getImage() {
+
+		return ImageManager.getInstance().getImage("tinyBat",
+				new ImageIcon("img\\enemies\\bats\\tinyBat.png").getImage());
 	}
 }

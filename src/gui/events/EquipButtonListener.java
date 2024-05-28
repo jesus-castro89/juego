@@ -3,6 +3,7 @@ package gui.events;
 import gui.panels.InventoryPanel;
 import gui.panels.PlayerPanel;
 import gui.panels.StatusPanel;
+import gui.windows.GameWindow;
 import items.Item;
 import items.armors.Armor;
 import items.weapons.Weapon;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
 public class EquipButtonListener implements ActionListener {
 
 	private final Item item;
+	private Player player;
 
 	public EquipButtonListener(Item item) {
 
@@ -22,8 +24,8 @@ public class EquipButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-
-		Player player = Player.getInstance();
+		// Recuperamos el jugador
+		player = GameWindow.getInstance().getPlayer();
 		// Equipamos el item
 		switch (item.getType()) {
 			case WEAPON -> equipWeapon((Weapon) item);
@@ -35,7 +37,6 @@ public class EquipButtonListener implements ActionListener {
 
 	private void equipWeapon(Weapon weapon) {
 
-		Player player = Player.getInstance();
 		Weapon equippedWeapon = player.getWeapon();
 		// La eliminamos del inventario
 		player.getInventory().removeItem(weapon);
@@ -50,7 +51,6 @@ public class EquipButtonListener implements ActionListener {
 
 	private void equipArmor(Armor armor) {
 
-		Player player = Player.getInstance();
 		Armor equippedArmor =
 				switch (armor.getArmorType()) {
 					case HEAD -> player.getHeadArmor();
@@ -76,7 +76,6 @@ public class EquipButtonListener implements ActionListener {
 	 */
 	private void updatePanels() {
 
-		Player player = Player.getInstance();
 		// Actualizamos los paneles
 		StatusPanel.getInstance(0, player).update();
 		PlayerPanel.getInstance(player).update();

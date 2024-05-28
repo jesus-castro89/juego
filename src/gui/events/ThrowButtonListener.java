@@ -4,6 +4,7 @@ import gui.panels.DialogPanel;
 import gui.panels.InventoryPanel;
 import gui.panels.PlayerPanel;
 import gui.panels.StatusPanel;
+import gui.windows.GameWindow;
 import items.Item;
 import player.Player;
 
@@ -22,7 +23,7 @@ public class ThrowButtonListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 
-		Player player = Player.getInstance();
+		Player player = GameWindow.getInstance().getPlayer();
 		player.getInventory().removeItem(item);
 		DialogPanel.getInstance().addText(
 				String.format("Tiraste %s.\n", item.getName()));

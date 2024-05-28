@@ -4,6 +4,7 @@ import gui.panels.DialogPanel;
 import gui.panels.InventoryPanel;
 import gui.panels.PlayerPanel;
 import gui.panels.StatusPanel;
+import gui.windows.GameWindow;
 import items.Item;
 import player.Player;
 
@@ -22,7 +23,7 @@ public class SellButtonListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		Player player = Player.getInstance();
+		Player player = GameWindow.getInstance().getPlayer();
 		player.getInventory().removeItem(item);
 		player.setGold(player.getGold() + item.getPrice());
 		DialogPanel.getInstance().addText(

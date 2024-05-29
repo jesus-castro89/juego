@@ -3,6 +3,7 @@ package gui.windows;
 import enemies.Enemy;
 import gui.panels.*;
 import player.Player;
+import player.skills.Slash;
 import util.enemies.EnemyFactory;
 import util.interfaces.Dimensions;
 
@@ -70,6 +71,7 @@ public class GameWindow extends JFrame {
 	private GameWindow(Player player, int slot) {
 
 		this.player = player;
+		//player.getSkillMap().put(Slash.NAME, Slash.getInstance(player));
 		this.slot = slot;
 	}
 

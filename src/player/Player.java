@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import player.skills.BasicHeal;
 import player.skills.FuryAttack;
 import player.skills.Skill;
+import player.skills.Slash;
 import util.enemies.EnemyFactory;
 import util.interfaces.Randomized;
 import util.managers.ImageManager;

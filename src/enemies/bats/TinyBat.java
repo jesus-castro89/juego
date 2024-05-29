@@ -27,7 +27,6 @@ public class TinyBat extends Enemy implements Serializable {
 		stats.put(Stats.DEXTERITY, 4);
 	}
 
-
 	@Override
 	public String getAttack() throws EnemyDeadException {
 

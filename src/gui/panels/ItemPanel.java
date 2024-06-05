@@ -7,7 +7,6 @@ import player.Player;
 import util.interfaces.Dimensions;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.List;
 
@@ -39,10 +38,16 @@ public class ItemPanel extends BackGroundPanel {
 		initComponents(items);
 	}
 
-	public void initComponents(List<Item> items){
+	/**
+	 * La función initComponents se encarga de inicializar los componentes de la tienda con
+	 * una lista de items.
+	 *
+	 * @param items La lista de items que se mostrarán en la tienda.
+	 */
+	public void initComponents(List<Item> items) {
 
 		setLayouts();
-		items.forEach(this::addItem);
+		items.forEach(this::addShopItem);
 		// Colocamos el scroll en la parte superior
 		scrollPanel.getViewport().setViewPosition(new Point(0, 0));
 	}
@@ -85,6 +90,7 @@ public class ItemPanel extends BackGroundPanel {
 
 	protected void addShopItem(Item item) {
 
+		System.out.println("Adding item: " + item.getName());
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = displayPanel.getComponentCount() % 3;
 		c.gridy = displayPanel.getComponentCount() / 3;

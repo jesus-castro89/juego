@@ -2,13 +2,17 @@ package gui.panels;
 
 import gui.events.HandCursorListener;
 import gui.ui.InventoryTabUI;
+import items.Item;
 import items.ItemType;
-import player.Inventory;
+import items.armors.head.IronHelmet;
+import items.armors.head.WoodHelmet;
+import items.weapons.blades.WoodBlade;
 import player.Player;
 import util.interfaces.Dimensions;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ShopPanel extends BackGroundPanel {
 
@@ -16,6 +20,8 @@ public class ShopPanel extends BackGroundPanel {
 	private final Player player;
 	private final ActionsPanel actionsPanel;
 	private final int tabIndex;
+	private static ArrayList<Item> weapons;
+	private static ArrayList<Item> armors;
 	private JTabbedPane itemDisplayPanel;
 	private JPanel weaponsPanel;
 	private JPanel armorsPanel;
@@ -25,6 +31,12 @@ public class ShopPanel extends BackGroundPanel {
 
 		if (instance == null) {
 
+			weapons = new ArrayList<>();
+			weapons.add(new WoodBlade());
+			weapons.add(new WoodBlade());
+			armors = new ArrayList<>();
+			armors.add(new IronHelmet());
+			armors.add(new WoodHelmet());
 			instance = new ShopPanel(tabIndex, player);
 		}
 		return instance;
@@ -50,9 +62,16 @@ public class ShopPanel extends BackGroundPanel {
 		itemDisplayPanel.addMouseMotionListener(new HandCursorListener(itemDisplayPanel));
 	}
 
-	public void initComponents() {
+	private void createUIComponents() {
 
-		weaponsPanel = new ItemPanel(ItemType.WEAPON, player);
-		armorsPanel = new ItemPanel(ItemType.ARMOR, player);
+		//Iniciamos los paneles con las listas de objetos
+		weaponsPanel = new ItemPanel(ItemType.WEAPON, player, weapons);
+		armorsPanel = new ItemPanel(ItemType.ARMOR, player, armors);
+	}
+
+	public void update() {
+
+		((ItemPanel) weaponsPanel).initComponents(weapons);
+		((ItemPanel) armorsPanel).initComponents(armors);
 	}
 }

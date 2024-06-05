@@ -4,6 +4,7 @@ import gui.panels.DialogPanel;
 import gui.panels.InventoryPanel;
 import gui.panels.PlayerPanel;
 import gui.panels.StatusPanel;
+import gui.windows.GameWindow;
 import items.Item;
 import player.Player;
 
@@ -22,13 +23,18 @@ public class BuyButtonListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		Player player = Player.getInstance();
+		Player player = GameWindow.getInstance().getPlayer();
+		//Determinar si el jugador tiene el dinero suficiente para comprar el Item
 		if (player.getGold() >= item.getPrice()) {
+			//Se agrega el item a su inventario
 			player.getInventory().addItem(item);
+			//Reducimos su cantidad en la cantidad de compra
 			player.setGold(player.getGold() - item.getPrice());
+			//Mostramos un mensaje en el panel de que se compró X artículo
 			DialogPanel.getInstance().addText(
 					String.format("Compraste %s por %d.\n", item.getName(), item.getPrice()));
 		} else {
+			//Si no se cuenta en el dinero suficiente se muestra un mensaje en el panel
 			DialogPanel.getInstance().addText("No tienes suficiente oro para comprar este objeto.\n");
 		}
 		updatePanels();
@@ -39,7 +45,7 @@ public class BuyButtonListener implements ActionListener {
 	 */
 	private void updatePanels() {
 
-		Player player = Player.getInstance();
+		Player player = GameWindow.getInstance().getPlayer();
 		// Actualizamos los paneles
 		StatusPanel.getInstance(0, player).update();
 		PlayerPanel.getInstance(player).update();

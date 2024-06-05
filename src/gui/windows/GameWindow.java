@@ -3,7 +3,6 @@ package gui.windows;
 import enemies.Enemy;
 import gui.panels.*;
 import player.Player;
-import player.skills.Slash;
 import util.enemies.EnemyFactory;
 import util.interfaces.Dimensions;
 
@@ -32,6 +31,7 @@ public class GameWindow extends JFrame {
 	private JPanel playerPanel;
 	private JPanel mainPanel;
 	private JPanel enemyPanel;
+	private JPanel shopPanel;
 
 	/**
 	 * Método que devuelve la instancia de la ventana principal
@@ -114,6 +114,8 @@ public class GameWindow extends JFrame {
 		battlePanel = BattlePanel.getInstance(1, enemy, player, slot);
 		//Agregamos el panel de inventario
 		inventoryPanel = InventoryPanel.getInstance(2, player);
+		//Agregamos el panel de la tienda
+		shopPanel = ShopPanel.getInstance(3, player);
 	}
 
 	public Player getPlayer() {

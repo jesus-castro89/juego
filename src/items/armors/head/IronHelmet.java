@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class IronHelmet extends Armor implements Serializable {
 	private int counter;
 
-	public IronHelmet(int str) {
+	public IronHelmet() {
 
 		super("Casco de Hierro",
 				"Un casco de hierro que protege más que el de madera.", 10);

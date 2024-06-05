@@ -1,7 +1,5 @@
 package gui.ui;
 
-import gui.panels.PlayerPanel;
-import gui.panels.StartPanel;
 import org.jetbrains.annotations.Nullable;
 import util.interfaces.Dimensions;
 import util.managers.ImageManager;
@@ -43,11 +41,12 @@ public class PanelUI extends BasicPanelUI {
 			case "DialogPanel" -> manager.getImage("dialogPanel");
 			case "PlayerPanel" -> manager.getImage("playerPanel");
 			case "EnemyPanel" -> manager.getImage("enemyPanel");
-			case "ItemDetail", "SkillDetail" -> manager.getImage("itemHolder");
+			case "ItemDetail", "ShopItemDetail", "SkillDetail" -> manager.getImage("itemHolder");
 			case "InventoryPanel" -> manager.getImage("inventoryPanel");
 			case "MainPanel" -> manager.getImage("charactersPanel");
 			case "BattlePanel" -> manager.getImage("battlePanel");
 			case "StatusPanel" -> manager.getImage("statusPanel");
+			case "ShopPanel" -> manager.getImage("shopPanel");
 			default -> null;
 		};
 	}
@@ -58,12 +57,12 @@ public class PanelUI extends BasicPanelUI {
 		return switch (c.getClass().getSimpleName()) {
 			case "StartPanel" -> Dimensions.START_PANEL_SIZE;
 			case "PlayerPanel", "EnemyPanel" -> Dimensions.SIDE_PANEL_SIZE;
-			case "InventoryPanel", "BattlePanel", "StatusPanel" -> Dimensions.TAB_SIZE;
+			case "InventoryPanel", "BattlePanel", "StatusPanel", "ShopPanel" -> Dimensions.TAB_SIZE;
 			case "MainPanel" -> Dimensions.MAIN_PANEL_SIZE;
 			case "DialogPanel" -> Dimensions.DIALOG_PANEL_SIZE;
 			case "SkillPanel" -> Dimensions.SKILL_PANEL_SIZE;
 			case "ItemPanel" -> Dimensions.ITEM_PANEL_SIZE;
-			case "ItemDetail" -> Dimensions.ITEM_DETAIL_SIZE;
+			case "ItemDetail", "ShopItemDetail" -> Dimensions.ITEM_DETAIL_SIZE;
 			case "SkillDetail" -> Dimensions.SKILL_DETAIL_SIZE;
 			default -> new Dimension(0, 0);
 		};

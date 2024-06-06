@@ -90,21 +90,16 @@ public class ItemPanel extends BackGroundPanel {
 
 	protected void addShopItem(Item item) {
 
-		System.out.println("Adding item: " + item.getName());
-		GridBagConstraints c = new GridBagConstraints();
-		c.gridx = displayPanel.getComponentCount() % 3;
-		c.gridy = displayPanel.getComponentCount() / 3;
-		c.fill = GridBagConstraints.CENTER;
-		c.anchor = GridBagConstraints.CENTER;
-		c.weightx = 1;
-		c.weighty = 1;
-		displayPanel.add(new ShopItemDetail(item), c);
-		displayPanel.revalidate();
-		displayPanel.repaint();
+		addItemComponent(new ShopItemDetail(item));
 	}
 
 	protected void addItem(Item item) {
 
+		addItemComponent(new ItemDetail(item));
+	}
+
+	private void addItemComponent(BackGroundPanel detail) {
+
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = displayPanel.getComponentCount() % 3;
 		c.gridy = displayPanel.getComponentCount() / 3;
@@ -112,7 +107,7 @@ public class ItemPanel extends BackGroundPanel {
 		c.anchor = GridBagConstraints.CENTER;
 		c.weightx = 1;
 		c.weighty = 1;
-		displayPanel.add(new ItemDetail(item), c);
+		displayPanel.add(detail, c);
 		displayPanel.revalidate();
 		displayPanel.repaint();
 	}

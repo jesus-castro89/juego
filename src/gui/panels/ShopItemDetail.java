@@ -1,9 +1,6 @@
 package gui.panels;
 
 import gui.buttons.BuyButton;
-import gui.buttons.EquipButton;
-import gui.buttons.SellButton;
-import gui.buttons.ThrowButton;
 import items.Item;
 import util.managers.FontManager;
 
